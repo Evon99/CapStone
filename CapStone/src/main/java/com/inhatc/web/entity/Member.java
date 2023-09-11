@@ -1,0 +1,43 @@
+package com.inhatc.web.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
+public class Member {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; //기본키
+    private String name; //유저 이름
+    private String password; //유저 비밀번호
+    private String email; //유저 구글 이메일
+    private String role; //유저 권한 (일반 유저, 관리지ㅏ)
+    private String provider; //공급자 (google, facebook ...)
+    @Column(name="providerId")
+    private String providerId; //공급 아이디
+
+    @Builder
+    public Member(String name, String password, String email, String role, String provider, String providerId) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.provider = provider;
+        this.providerId = providerId;
+    }
+
+	
+    
+    
+}
