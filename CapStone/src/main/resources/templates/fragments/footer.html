@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<div th:fragment="footer">
+	
+	
+		<div class="music-play-section music-play-footer" style="display:none">
+	        <div class="music-control-div-block"><img
+	               th:src="@{/static/images/previous_button.png}"
+	              alt="" class="control-previous" />
+	                <img th:src="@{/static/images/play_button.png}"
+	                 alt="play-pause" class="control-play" /><img
+	                th:src="@{/static/images/next_button.png}"
+	                alt="" class="control-next" />
+	            <span class="current">0:00</span>
+	            <div class="music-progress">
+	                <div class="music-progress-bar">
+	                    <audio id="main-audio" src=""></audio>
+	                </div>
+	            </div>
+	            <span class="duration">0:00</span><img
+	                th:src="@{/static/images/speaker_button.png}"
+	                 alt="" class="control-sound" />
+	                <input id="vol" class="control-vol" type="range" max="100" min="0" value="100">
+	                <img 
+	                 alt="" class="current-music-img" />
+	            <div class="control-music-detail">
+        			<div class="current-music-title" th:id="currentTitle">Title</div>
+	                <div class="current-music-uploader" th:id="currentUploader">Uploader</div>
+	            </div>
+	            	<input type="hidden" id="likedMusicIds" th:value="${likedMusicIds}" />
+	            	<img 
+	            	th:attr="data-music-play-id=${id}"
+	                th:src="@{/static/images/black_like.png}"
+	                  alt="" class="control-music-like"/><img
+	                th:src="@{/static/images/follow_button.png}"
+	                 alt="" class="control-music-follow" /><img
+	                th:src="@{/static/images/black_add_song.png}"
+	                 alt="" class="control-music-add" /><img
+	                onclick="toggleMusicList()"
+	                th:src="@{/static/images/black_play_list.png}"
+	                  alt="" class="control-music-list"  />
+	        </div>
+	    </div>
+	   <div class="music-list-section">
+        <div style="display:none" class="music-list-div-block">
+            <div class="music-list-heading"><img
+                    th:src="@{/static/images/black_play_list.png}"
+                    loading="lazy" alt="" class="music-list-heading-img" />
+                <div class="music-list-heading-title">Music List</div>
+            </div>
+            <div class="music-list-column-div-block" onmouseover="showIcons(this)" onmouseout="hideIcons(this)" style="display: none;">
+                <div class="music-list-erase-div-block"><img
+                        th:src="@{/static/images/erase.png}"
+                        loading="lazy" style="display:none" alt="" class="music-list-erase-img" /></div><img
+                    src=""
+                    loading="lazy" alt="" class="music-list-column-img" />
+                <div class="music-list-detail-div-block">
+                	<audio class="liAudio" src=""></audio>
+                    <div class="music-list-column-title">Title</div>
+                    <div class="music-list-column-uploader">Uploader</div>
+                </div>
+                <span class="music-list-duration">3:25</span><img
+                    th:src="@{/static/images/music_play_button.png}"
+                    loading="lazy" style="display:none" alt="" class="music-list-play-button" />
+            </div>
+        </div>
+    </div>	
+    
+	</div>	
+
+   
+</html>

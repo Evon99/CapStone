@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<div th:fragment="followModal">
+	<meta charset="UTF-8">
+	<link th:href="@{/css/followModal.css}" rel="stylesheet" type="text/css" />
+	<!-- 모달 -->
+    <div id="followModalContainer" class="follow-modal-container">
+        <div class="follow-modal">
+            <div class="follow-modal-heading">
+                <div class="follow-modal-heading-first"></div>
+                <div class="follow-modal-heading-text-block">팔로워</div>
+                <img th:src="@{/static/images/black_delete.png}" id="closeFollowModalBtn" class="follow-modal-delete-btn"></img>
+            </div>
+            
+            <div class="follow-list-foreach">
+                <div th:each="follower : ${followerList}"  class="follow-list">
+                	<img th:src="${follower.fromMemberImgUrl}"
+                        loading="lazy" alt="" class="follow-img" />
+                    <div class="follow-nickname" th:text="${follower.fromMemberNickname}">NickName</div>
+					     <!-- 초기 상태에 따라 텍스트와 스타일을 설정 -->
+					     <span id="ModalfollowButton" class="follow-btn"
+				               th:unless="${loginNickname == follower.fromMemberNickname}"    
+				               th:attr="data-nickname=${follower.fromMemberNickname}, data-login-nickname=${loginNickname}" 
+				               onclick="ModaltoggleFollow(this)"
+				               th:text="${followService.isFollow(loginMemberId, follower.fromMemberId) ? '팔로잉' : '팔로우'}"
+				               th:style="${followService.isFollow(loginMemberId, follower.fromMemberId) ? 'background-color: #ccc; border: 1px solid #ccc; color: black;' : 'background-color: #66c; border: 1px solid #6c; color: white;'}">
+				         </span>
+					</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+		
+	</div>
+
+</html>

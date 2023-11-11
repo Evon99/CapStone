@@ -4,9 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.inhatc.web.service.OAuth2MemberService;
+import com.inhatc.web.handler.OAuth2SuccessHandler;
+import com.inhatc.web.service.CustomOAuth2UserService;
+import com.inhatc.web.service.TokenService;
+import com.inhatc.web.util.JwtAuthFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,22 +20,57 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig {
-    private final OAuth2MemberService oAuth2MemberService;
+	
+//    private final OAuth2MemberService oAuth2MemberService;
 
+	private final CustomOAuth2UserService customOAuth2UserService;
+	
+	
+	private final OAuth2SuccessHandler successHandler;
+    private final TokenService tokenService;
+    
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        return httpSecurity
-                .httpBasic().disable()
-                .csrf().disable()
-                .cors().and()
-                .authorizeRequests()
-                .antMatchers("/private/**").authenticated() //private로 시작하는 uri는 로그인 필수
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')") //admin으로 시작하는 uri는 관릴자 계정만 접근 가능
-                .anyRequest().permitAll() //나머지 uri는 모든 접근 허용
-                .and().oauth2Login()
-                .loginPage("/loginForm") //로그인이 필요한데 로그인을 하지 않았다면 이동할 uri 설정
-                .defaultSuccessUrl("/") //OAuth 구글 로그인이 성공하면 이동할 uri 설정
-                .userInfoEndpoint()//로그인 완료 후 회원 정보 받기
-                .userService(oAuth2MemberService).and().and().build(); //
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http                
+        	.cors().and()
+            .httpBasic().disable()
+            .csrf().disable()
+//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//            .and()
+            .headers().frameOptions().disable()
+            .and()
+            .formLogin().disable()
+//            .rememberMe().disable()
+            .authorizeRequests()
+                .antMatchers("/private/**").authenticated()
+//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/images/**", "/css/**", "/js/**", "/token/**").permitAll() // 이미지 폴더 및 SVG 확장자 허용
+                .anyRequest().permitAll()
+            .and()
+                .logout()
+                	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                	.logoutSuccessUrl("/")
+            .and()
+                .oauth2Login()
+//                	.loginPage("/loginForm")
+                	.defaultSuccessUrl("/private/profileSetting")
+//                	.successHandler(successHandler)
+                	.userInfoEndpoint()
+                	.userService(customOAuth2UserService);
+        	
+        	
+        
+//        http.addFilterBefore(new JwtAuthFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+
+//        http.authorizeRequests()
+//        		.antMatchers("/oauth2/**").permitAll()
+//        		.anyRequest().authenticated();
+
+       
+  
+        return http.build();
     }
+    
+    
 }

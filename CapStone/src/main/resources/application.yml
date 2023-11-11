@@ -1,0 +1,89 @@
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/, classpath:/images/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/aicover?serverTimezone=Asia/Seoul
+    username: capstone
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update # create, update, none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  session:
+    store-type: jdbc
+    jdbc.initialize-schema: always
+  
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 824416931960-blijog7l4q8m1nparcupgohqip5h1edo.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
+          facebook:
+            client-id: 347769580916501
+            client-secret: 3a72c1335a8d724f93e83d14d43590c8
+            scope:
+              - email
+              - public_profile
+          naver:
+            client-id: kDR4HQ_HmDMzBlD6Gk1M
+            client-secret: MCp2lPFdEz
+            scope:
+              - name
+              - email
+              - profile_image
+            client-name: Naver
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/naver # 코드를 받는 URI (네이버의 콜백 URI)
+          kakao:
+            client-id: 01233dbff63577546b21e25a451ed1e1
+            client-secret: WjV1nSpT3dUMqD8MYdeKEGDmXwCLtKOd
+            scope: profile_nickname, profile_image, account_email
+              # - profile_nickname
+            client-name: Kakao
+            authorization-grant-type: authorization_code
+            client-authentication-method: POST # 카카오는 필수 파라미터를 POST로 요청해야 함!
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}" # 코드를 받는 URI (카카오의 콜백 URI)
+        provider: # 네이버의 provider는 등록되어 있지 않아 사용자가 등록해야 함
+          naver:
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize # 네이버 로그인 창을 받을 수 있음
+            token-uri: https://nid.naver.com/oauth2.0/token # 토큰을 받는 URI
+            user-info-uri: https://openapi.naver.com/v1/nid/me # 프로필 주소를 받는 URI
+            user-name-attribute: response # 회원 정보를 JSON 형태로 받는데 response라는 키값으로 네이버가 리턴함
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+ 
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 200MB
+
+  thymeleaf:
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+
+# 스프링 OAuth2-client 라이브러리의 provider 에는 구글,페이스북,트위터가 속해있어 redirect-uri , authorization-grant-type 를 적어주지 않아도 자동으로 고정적으로 등록되어 있다.(적어줘도 된다.) ex) /login/oauth2/facebook, google 로 고정
+# 하지만 네이버나 카카오톡은 Provider 가 아니기 때문에 적어주어야된다. 원하는대로 uri 를 지정할수 있다, 고정되어 있지 않다.
+
+memberImgLocation: C:/capstone/member
+musicImgLocation: C:/capstone/music/img
+musicFileLocation: C:/capstone/music/file
+uploadPath: file:///C:/capstone/
+
+jwt:
+  secretKey: jwtPractice
+  expiredMs: 300000

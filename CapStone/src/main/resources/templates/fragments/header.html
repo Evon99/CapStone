@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+	<div th:fragment="header">
+	
+	<!-- И№До -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalBtn">&times;</span>
+            <h3>Sign in</h3>
+            <form action="/oauth2/authorization/google" method="get">
+				<Button type="submit" style="background-color: white; border:none; width:50px;">
+					<img th:src="@{/static/images/btn_google_light_normal_ios.svg}">
+				</button>
+			</form>
+			
+			<form action="/oauth2/authorization/kakao" method="get">
+				<Button type="submit" style="background-color: white; border:none; width:50px;">
+						<img th:src="@{/static/images/Kakao.png}">
+				</button>
+			</form>
+			<form action="/oauth2/authorization/naver" method="get">
+				<Button type="submit" style="background-color: white; border:none; width:50px;">
+						<img th:src="@{/static/images/btnG.png}">
+				</button>
+			</form>
+        </div>
+    </div>
+    
+		<div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease"
+        role="banner" class="navigation w-nav">
+        <div class="w-container"><a onclick="homePageLoad()" class="brand-link w-nav-brand">
+                <div class="logo-text">TrendAI</div>
+            </a>
+            <!-- <nav th:if="${session == null}" role="navigation" class="nav-menu w-nav-menu">
+            		<a href="/oauth2/authorization/google" class="nav-link w-nav-link">Sign Up</a>
+            		<a href="#features" class="nav-link w-nav-link">Login</a>
+            		<a href="#customers" class="nav-link w-nav-link">Community</a>
+           	</nav>
+           	
+           	<nav th:unless="${session == null}" role="navigation" class="nav-menu w-nav-menu">
+            		<a href="#customers" class="nav-link w-nav-link">Community</a>
+            		<a href="#features" class="nav-link w-nav-link">My Page</a>
+            		<img th:src="${pictureUrl}"
+                    width="64" alt="" class="user" />
+                    <a th:if="${memberName != null}" href="#customers" class="nav-link w-nav-link" th:text="${memberName}">exists</a>
+                    
+                    <a th:unless="${memberName != null}" href="#customers" class="nav-link w-nav-link">User</a>
+           	</nav> -->
+           	
+           	<nav role="navigation" class="nav-menu w-nav-menu">
+           			<a data-toggle="modal" href="#myModal"  id="openModalBtn" class="nav-link w-nav-link" sec:authorize="isAnonymous()">Sign Up</a>
+            		<a data-toggle="modal" href="#myModal"  id="openModalBtn2" class="nav-link w-nav-link" sec:authorize="isAnonymous()">Login</a>
+            		<a href="#customers" class="nav-link w-nav-link">Community</a>
+            		<a th:onclick="memberPageLoad(/*[[${loginNickname}]]*/)" class="nav-link w-nav-link" sec:authorize="isAuthenticated()" >My Page</a>
+            		<a onclick="fileUploadLoad()" id="fileUploadPage" class="nav-link w-nav-link" sec:authorize="isAuthenticated()" >Upload</a>
+            		<a th:href="@{/logout}" class="nav-link w-nav-link" sec:authorize="isAuthenticated()">Logout</a>
+            		<img th:src="${loginPictureUrl}" id="loginPicture"
+                    width="64" alt="" class="user"  sec:authorize="isAuthenticated()"/>
+                    
+                    <a href="#customers"  class="nav-link w-nav-link"  th:text="${loginNickname}" sec:authorize="isAuthenticated()">User</a>
+           	</nav>
+            <div class="nav-link menu w-nav-button">
+                <div class="w-icon-nav-menu"></div>
+            </div>
+        </div>
+    </div>
+	</div>
+
+</html>

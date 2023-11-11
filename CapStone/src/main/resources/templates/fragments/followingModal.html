@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<div th:fragment="followingModal">
+	<meta charset="UTF-8">
+	<link th:href="@{/css/followModal.css}" rel="stylesheet" type="text/css" />
+	<!-- 모달 -->
+    <div id="followingModalContainer" class="follow-modal-container">
+        <div class="follow-modal">
+            <div class="follow-modal-heading">
+                <div class="follow-modal-heading-first"></div>
+                <div class="follow-modal-heading-text-block">팔로잉</div>
+                <img th:src="@{/static/images/black_delete.png}" id="closeFollowingModalBtn" class="follow-modal-delete-btn"></img>
+            </div>
+            
+            <div class="follow-list-foreach">
+                <div th:each="follower : ${followingList}"  class="follow-list">
+                	<img th:src="${follower.toMemberImgUrl}"
+                        loading="lazy" alt="" class="follow-img" />
+                    <div class="follow-nickname" th:text="${follower.toMemberNickname}">NickName</div>
+                    <span id="ModalfollowingButton" class="follow-btn"
+				               th:unless="${loginNickname == follower.toMemberNickname}"    
+				               th:attr="data-nickname=${follower.toMemberNickname}, data-login-nickname=${loginNickname}" 
+				               th:text="${followService.isFollow(loginMemberId, follower.toMemberId) ? '팔로잉' : '팔로우'}"
+				               th:style="${followService.isFollow(loginMemberId, follower.toMemberId) ? 'background-color: #ccc; border: 1px solid #ccc; color: black;' : 'background-color: #66c; border: 1px solid #6c; color: white;'}">
+				         </span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+		
+	</div>
+
+</html>

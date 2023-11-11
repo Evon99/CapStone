@@ -1,0 +1,101 @@
+.follow-modal-container {
+  display: none;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .1);
+  position: fixed;
+}
+
+.follow-modal {
+  width: 450px;
+  height: 400px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  margin: auto;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.follow-modal-heading {
+  height: 10%;
+  border-bottom: 1px solid #ced4da;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  display: flex;
+}
+
+.follow-modal-heading-text-block {
+  flex: 0 auto;
+  justify-content: flex-start;
+  align-self: auto;
+  align-items: stretch;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+}
+
+.follow-modal-delete-btn {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  flex: 0 auto;
+  order: 0;
+  justify-content: flex-start;
+  padding: 0;
+  display: block;
+  position: static;
+  left: 5px;
+}
+
+.follow-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  margin-left: 20px;
+}
+
+.follow-list {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15px;
+  display: flex;
+}
+
+.follow-btn {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  background-color: #66c;
+  border: 1px solid #66c;
+  border-radius: 4px;
+  margin-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.follow-nickname {
+  width: 55%;
+  cursor: pointer;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+.follow-list-foreach {
+  width: 100%;
+  height: 85%;
+  overflow-y: scroll; /* y축 스크롤만 허용 */
+  overflow-x: hidden; /* x축 스크롤 감춤 */
+}
