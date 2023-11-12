@@ -24,6 +24,7 @@ import com.inhatc.web.entity.MemberDetail;
 import com.inhatc.web.entity.Music;
 import com.inhatc.web.repository.LikedMusicRepository;
 import com.inhatc.web.repository.MemberDetailRepository;
+import com.inhatc.web.repository.MemberMusicStorageRepository;
 import com.inhatc.web.repository.MemberRepository;
 import com.inhatc.web.service.MemberDetailService;
 import com.inhatc.web.service.MusicService;
@@ -45,6 +46,8 @@ public class HomeController {
 	private final MusicService musicService;
 	
 	private final LikedMusicRepository likedMusicRepository;
+	
+	private final MemberMusicStorageRepository memberMusicStorageRepository;
 	
 	@GetMapping("/")
 	public String home(Model model, @LoginUser SessionUser user, HttpSession session) {
@@ -106,7 +109,14 @@ public class HomeController {
 	                    .stream()
 	                    .map(likedMusic -> likedMusic.getMusic().getId())
 	                    .collect(Collectors.toList());
-
+	            
+	            List<Long> addMusicIds = memberMusicStorageRepository.findByMember_Id(member_id)
+	                    .stream()
+	                    .map(MemberMusicStorage -> MemberMusicStorage.getMusic().getId())
+	                    .collect(Collectors.toList());
+	            
+	            model.addAttribute("addMusicIds", addMusicIds);
+	            System.out.println("addMusicIds" + addMusicIds);
 	            System.out.println("likedMusicIds: " + likedMusicIds);
 	            model.addAttribute("likedMusicIds", likedMusicIds);
 	        } else {

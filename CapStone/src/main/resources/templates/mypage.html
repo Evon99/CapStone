@@ -386,14 +386,14 @@
             </div>
             <div class="columns-tp w-row">
                 <div class="tracks-column active w-col w-col-6">
-                    <div class="text-block-6">Tracks</div>
+                    <div class="text-block-6" onclick="TracksClick()" id="tracks">Tracks</div>
                 </div>
                 <div class="playlist-column w-col w-col-6">
-                    <div class="text-block-7">PlayList</div>
+                    <div class="text-block-7" onclick="PlayListClick()" id="plyaList">PlayList</div>
                 </div>
             </div>
             
-            <div th:each="music : ${uploadMusics}" class="mypage-foreach-div-block">
+            <div th:each="music : ${uploadMusics}" class="mypage-foreach-div-block" id="uploadMusics">
 	            <div class="mypage-music-row w-row">
 	            
 	                <div class="main-top-music-img-column w-col w-col-4">
@@ -407,17 +407,52 @@
 	                    <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
 	                    <div class="current-div-block">
 		                    <img th:src="@{/static/images/like.png}" loading="lazy" width="24" alt="" class="main-top-music-show-like-img" />
-		                    <div class="main-top-music-show-like-text" th:id="likeCount" th:text="${music.like}">55.3k</div>
+		                    <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
 	                    </div>
 	                </div>
 	                <div class="main-top-music-last-column w-col w-col-4">
 	                    <div class="main-top-music-function-columns w-row">
 	                        <div class="main-top-music-function-like-column w-col w-col-4">
-	                            <img th:src="@{/static/images/like.png}" th:onclick="|likeMusic(${music.id})|" loading="lazy"  
-	                            		th:attr="data-music-id=${music.id}" alt="" class="main-top-music-function-like" /></div>
+	                            <img th:src="@{/static/images/like.png}"  loading="lazy"  
+	                            		th:attr="data-like-music-id=${music.id}, data-like-music-ids=${likeMusicIds}" onclick="likeMusic(this)" alt="" class="main-top-music-function-like" /></div>
 	                            <div class="main-top-music-function-addsong-column w-col w-col-4">
 	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt=""
-	                                    class="main-top-music-function-addsong" /></div>
+	                                    th:attr="data-add-music-id=${music.id}, data-add-music-ids=${addMusicIds}" onclick="addMusic(this)" class="main-top-music-function-addsong" /></div>
+	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
+	                                    class="main-report-link-block w-inline-block">
+	                                <img th:src="@{/static/images/report.png}" loading="lazy"  alt=""
+	                                        class="main-top-music-function-report" /></a></div>
+	                    </div>
+	                </div>
+	                
+	            </div>
+            </div>
+            
+            <div th:each="music : ${addMusics}" class="mypage-foreach-div-block" id="addMusics">
+	            <div class="mypage-music-row w-row">
+	            
+	                <div class="main-top-music-img-column w-col w-col-4">
+	                   <img th:src="${music.imgUrl}"
+	                             width="100" height="100"
+	                            alt=""  class="main-top-music-img" />
+	                   <img th:src="@{/static/images/music_play_button.png}" th:onclick="playMusic(/*[[${music.id}]]*/, /*[[${music.musicUrl}]]*/, /*[[${music.imgUrl}]]*/, /*[[${music.aiSinger}]]*/, /*[[${music.title}]]*/, /*[[${music.oriSinger}]]*/, /*[[${music.memberDetail.nickname}]]*/); showFooter()"
+    							loading="lazy" alt="" class="play-button-img" /></div>
+	                <div class="main-top-music-detail-column w-col w-col-4">
+	                    <h4 class="main-top-music-title" th:text="${music.aiSinger + ' - ' + music.title + '(' + music.oriSinger + ')'}">AI 媛��닔 - Title(�썝�옉�옄)</h4>
+	                    <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
+	                    <div class="current-div-block">
+		                    <img th:src="@{/static/images/like.png}" loading="lazy" width="24" alt="" class="main-top-music-show-like-img" />
+		                    <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
+	                    </div>
+	                </div>
+	                <div class="main-top-music-last-column w-col w-col-4">
+	                    <div class="main-top-music-function-columns w-row">
+	                        <div class="main-top-music-function-like-column w-col w-col-4">
+	                            <img th:src="@{/static/images/like.png}"  loading="lazy"  
+	                            		th:attr="data-like-music-id=${music.id}, data-like-music-ids=${likeMusicIds}" onclick="likeMusic(this)" alt="" class="main-top-music-function-like" /></div>
+	                            <div class="main-top-music-function-addsong-column w-col w-col-4">
+	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt=""
+	                                    th:attr="data-add-music-id=${music.id}, data-add-music-ids=${addMusicIds}" onclick="addMusic(this)" class="main-top-music-function-addsong" /></div>
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="main-report-link-block w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" loading="lazy"  alt=""

@@ -1,3 +1,26 @@
+		// tracks-column �겢由� �떆
+		      function TracksClick() {
+		          $('.tracks-column').toggleClass('active'); // �겢�옒�뒪 �넗湲�
+		
+		          // playlist-column 珥덇린�솕
+		          $('.playlist-column').removeClass('active');
+				
+				  $('#addMusics *').hide();
+				  $('#uploadMusics *').show();
+		      }
+		
+		      // playlist-column �겢由� �떆
+		      function PlayListClick() {
+		          $('.playlist-column').toggleClass('active'); // �겢�옒�뒪 �넗湲�
+		
+		          // tracks-column 珥덇린�솕
+		          $('.tracks-column').removeClass('active');
+				
+				   $('#addMusics *').show();
+				   $('#uploadMusics *').hide();
+		      }
+		      
+		
 		function bindDomEvent() {
 			    console.log("bindDomEvent function is called!");
 			    $(".custom-file-input").on("change", function () {

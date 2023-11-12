@@ -184,8 +184,22 @@ public class MusicController {
 		 musicService.updateAddMusic(member, musicId);
 		 
 		 return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+	}
+	
+	@PostMapping("/addMusicCancel/{musicId}")
+	public ResponseEntity<Integer> addMusicDelete(@PathVariable Long musicId, @LoginUser SessionUser user){
+		
+		 if (user == null) {
+	            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 에러 응답을 보낼 수 있습니다.
+	        	System.out.println("세션 에러");
+	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	        }
+
+		 Member member = memberRepository.findMemberByLoginId(user.getLoginId());
 		 
+		 musicService.deleteAddMusic(member, musicId);
 		 
+		 return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
 	}
 
     private boolean hasMemberLikedMusic(Member member, Long musicId) {

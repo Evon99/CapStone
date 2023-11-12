@@ -9,11 +9,14 @@
 	$(document).ready(function() {
         // 서버에서 받은 추천한 음악 ID 목록
         var likedMusicIds = /*[[${likedMusicIds}]]*/ [];
-
+        
+        // 서버에서 받은 보관함 음악 ID 목록
+        var addMusicIds = /*[[${addMusicIds}]]*/ [];
+        
         console.log(likedMusicIds)
 
         // 이미지 클릭 시 동작
-         $('.main-top-music-function-like').click(function() {
+         /* $('.main-top-music-function-like').click(function() {
             var musicId = $(this).data('music-id');
             
             console.log("musicId");
@@ -28,12 +31,65 @@
             $(this).attr('src', '/static/images/like_on.png');
             // likedMusicIds에 추가
             likedMusicIds.push(musicId);
-        });
+        }); */
 
         // 서버에서 받은 추천한 음악 ID 목록에 따라 이미지 변경
         likedMusicIds.forEach(function(musicId) {
-            $('img[data-music-id="' + musicId + '"]').attr('src', '/static/images/like_on.png');
+            $('img[data-like-music-id="' + musicId + '"]').attr('src', '/static/images/like_on.png');
         }); 
+        
+        
+        /* $('.main-top-music-function-addsong').click(function() {
+            var musicId = $(this).data('music-add-id');
+            
+            console.log("musicId:", musicId);
+			// 보관함에 추가되있는 경우 삭제
+            if (addMusicIds.includes(musicId)) {
+	
+				$.ajax({
+				        type: 'POST',
+				        url: '/addMusicCancel/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
+				        success: function(response) {
+				            // 서버로부터 받은 데이터를 변수에 할당
+							$(this).attr('src', '/static/images/add_song.png');
+                			alert('보관함에서 삭제되었습니다.');
+				            
+				        },
+				        error: function(error, xhr) {
+				        	if (xhr.status === 401) {
+					            alert('로그인 후 이용해주십시오');
+					        }
+				        }
+				    });
+                return;
+
+            }
+
+				$.ajax({
+				        type: 'POST',
+				        url: '/addMusic/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
+				        success: function(response) {
+				            // 서버로부터 받은 데이터를 변수에 할당
+							$(this).attr('src', '/static/images/addSong_on.png');
+                			alert('보관함에서 추가되었습니다.');
+				            
+				        },
+				        error: function(error, xhr) {
+				        	if (xhr.status === 401) {
+					            alert('로그인 후 이용해주십시오');
+					        }
+				        }
+				    });
+
+
+            $(this).attr('src', '/static/images/addSong_on.png');
+            // likedMusicIds에 추가
+            addMusicIds.push(musicId);
+        }); */
+
+        addMusicIds.forEach(function(musicId) {
+            $('img[data-add-music-id="' + musicId + '"]').attr('src', '/static/images/addSong_on.png');
+        });
         
     });
 	
@@ -90,6 +146,8 @@
 
 <body>
 <div layout:fragment="content" id="content-container">
+	<input type="hidden" id="likedMusicIds" th:value="${likedMusicIds}">
+	<input type="hidden" id="addMusicIds" th:value="${addMusicIds}">
     <div data-delay="4000" data-animation="slide" class="slider w-slider" data-autoplay="false" data-easing="ease"
         data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3"
         data-duration="500" data-infinite="true">
@@ -152,16 +210,17 @@
 	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
 	                        <div class="current-div-block">
 	                        	<img th:src="@{/static/images/like.png}" loading="lazy" width="24" alt="" class="main-top-music-show-like-img" />
-	                            <div class="main-top-music-show-like-text" th:id="likeCount" th:text="${music.like}">55.3k</div>
+	                            <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
 	                        </div>
 	                    </div>
 	                    <div class="main-top-music-last-column w-col w-col-4">
 	                        <div class="main-top-music-function-columns w-row">
 	                            <div class="main-top-music-function-like-column w-col w-col-4">
-	                            	<img th:src="@{/static/images/like.png}" th:onclick="|likeMusic(${music.id})|" loading="lazy"  
-	                            		th:attr="data-music-id=${music.id}" alt="" class="main-top-music-function-like" /></div>
+	                            	<img th:src="@{/static/images/like.png}" loading="lazy"  
+	                            		th:attr="data-like-music-id=${music.id}, data-like-music-ids=${likeMusicIds}" onclick="likeMusic(this)" alt="" class="main-top-music-function-like" /></div>
 	                            <div class="main-top-music-function-addsong-column w-col w-col-4">
-	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt="" th:onclick="addMusic(/*[[${music.id}]]*/)"
+	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt="" 
+	                            		th:attr="data-add-music-id=${music.id}, data-add-music-ids=${addMusicIds}" onclick="addMusic(this)"
 	                                    class="main-top-music-function-addsong" /></div>
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="main-report-link-block w-inline-block">
@@ -194,17 +253,17 @@
 	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
 	                        <div class="div-block-9">
 	                        	<img th:src="@{/static/images/like.png}" loading="lazy" width="24" alt="" class="main-top-music-show-like-img" />
-	                            <div class="main-top-music-show-like-text" th:id="likeCount" th:text="${music.like}">55.3k</div>
+	                            <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
 	                        </div>
 	                    </div>
 	                    <div class="main-top-music-last-column w-col w-col-4">
 	                        <div class="columns-8 w-row">
 	                            <div class="w-col w-col-4">
-	                            	<img th:src="@{/static/images/like.png}" th:onclick="|likeMusic(${music.id})|" loading="lazy" 
-	                                    th:attr="data-music-id=${music.id}" alt="" class="main-top-music-function-like" /></div>
+	                            	<img th:src="@{/static/images/like.png}"  loading="lazy" 
+	                                    th:attr="data-like-music-id=${music.id}, data-like-music-ids=${likeMusicIds}" onclick="likeMusic(this)" alt="" class="main-top-music-function-like" /></div>
 	                            <div class="w-col w-col-4">
-	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt="" th:onclick="addMusic(/*[[${music.id}]]*/)"
-	                                    class="main-top-music-function-addsong" /></div>
+	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt="" 
+	                                    th:attr="data-add-music-id=${music.id}, data-add-music-ids=${addMusicIds}" onclick="addMusic(this)" class="main-top-music-function-addsong" /></div>
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" loading="lazy"  alt=""

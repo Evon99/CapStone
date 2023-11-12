@@ -2357,11 +2357,15 @@ p {
 }
 
 .main-top-music-function-like {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   margin-right: 10px;
 }
 
 .main-top-music-function-addsong {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   margin-left: 0;
   margin-right: 10px;

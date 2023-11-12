@@ -33,4 +33,6 @@ public interface MusicRepository extends JpaRepository<Music, Long>{
 	List<Music> findByGenre(@Param("keyword") String keyword);
 	
 	List<Music> findByMemberIdOrderByRegTimeDesc(Long memberId);
+	
+	List<Music> findByIdIn(List<Long> addMusicId);
 }

@@ -19,6 +19,7 @@ import com.inhatc.web.entity.MemberDetail;
 import com.inhatc.web.entity.Music;
 import com.inhatc.web.repository.LikedMusicRepository;
 import com.inhatc.web.repository.MemberDetailRepository;
+import com.inhatc.web.repository.MemberMusicStorageRepository;
 import com.inhatc.web.repository.MemberRepository;
 import com.inhatc.web.service.FollowService;
 import com.inhatc.web.service.MemberDetailService;
@@ -44,6 +45,8 @@ public class MyPageController {
 	
 	private final FollowService followService;
 	
+	private final MemberMusicStorageRepository memberMusicStorageRepository;
+	
 	@GetMapping("/private/mypage/{nickname}")
 	public String mypage(@PathVariable String nickname, Model model, @LoginUser SessionUser user, HttpSession session) {
 		
@@ -60,6 +63,11 @@ public class MyPageController {
 		
 		model.addAttribute("uploadMusics", uploadMusics);
 		model.addAttribute("numberOfUpload", numberOfUpload);
+		
+		// 보관함 저장 음악 정보
+		List<Music> addMusics = myPageService.getAddMusic(member.getId());
+		
+		model.addAttribute("addMusics", addMusics);
 		
 		// 팔로워, 팔로잉 리스트
 		List<Follow> followerList = followService.findFollower(member.getId());
@@ -124,6 +132,12 @@ public class MyPageController {
 	                    .map(likedMusic -> likedMusic.getMusic().getId())
 	                    .collect(Collectors.toList());
 
+	            List<Long> addMusicIds = memberMusicStorageRepository.findByMember_Id(member_id)
+	                    .stream()
+	                    .map(MemberMusicStorage -> MemberMusicStorage.getMusic().getId())
+	                    .collect(Collectors.toList());
+	            
+	            System.out.println("addMusicIds" + addMusicIds);
 //	            System.out.println("likedMusicIds: " + likedMusicIds);
 	            model.addAttribute("likedMusicIds", likedMusicIds);
 	            

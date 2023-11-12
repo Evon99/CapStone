@@ -167,17 +167,17 @@
 	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
 	                        <div class="current-div-block">
 	                        	<img th:src="@{/static/images/like.png}" loading="lazy" width="24" alt="" class="main-top-music-show-like-img" />
-	                            <div class="main-top-music-show-like-text" th:id="likeCount" th:text="${music.like}">55.3k</div>
+	                            <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
 	                        </div>
 	                    </div>
 	                    <div class="main-top-music-last-column w-col w-col-4">
 	                        <div class="main-top-music-function-columns w-row">
 	                            <div class="main-top-music-function-like-column w-col w-col-4">
-	                            	<img th:src="@{/static/images/like.png}" th:onclick="|likeMusic(${music.id})|" loading="lazy"  
-	                            		th:attr="data-music-id=${music.id}" alt="" class="main-top-music-function-like" /></div>
+	                            	<img th:src="@{/static/images/like.png}" loading="lazy"  
+	                            		th:attr="data-like-music-id=${music.id}, data-like-music-ids=${likeMusicIds}" onclick="likeMusic(this)" alt="" class="main-top-music-function-like" /></div>
 	                            <div class="main-top-music-function-addsong-column w-col w-col-4">
 	                            	<img th:src="@{/static/images/add_song.png}" loading="lazy"  alt=""
-	                                    class="main-top-music-function-addsong" /></div>
+	                                    th:attr="data-add-music-id=${music.id}, data-add-music-ids=${addMusicIds}" onclick="addMusic(this)" class="main-top-music-function-addsong" /></div>
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="main-report-link-block w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" loading="lazy"  alt=""

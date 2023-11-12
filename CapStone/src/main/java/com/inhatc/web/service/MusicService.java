@@ -180,13 +180,18 @@ public class MusicService {
     	return member.getMemberMusicStorage().stream().anyMatch(memberMusicStorage -> memberMusicStorage.getMusic().getId().equals(musicId));
     }
     
-    // 음악 추가
+    // 음악 보관함 추가
     public void updateAddMusic(Member member, Long musicId) {
     	Music music = getMusicById(musicId);
     	MemberMusicStorage memberMusicStorage = new MemberMusicStorage();
     	memberMusicStorage.setMember(member);
     	memberMusicStorage.setMusic(music);
     	memberMusicStorageRepository.save(memberMusicStorage);
-    	
     }
+    
+    // 음악 보관함 삭제
+    public void deleteAddMusic(Member member, Long musicId) {
+    	memberMusicStorageRepository.deleteByMember_IdAndMusic_Id(member.getId(), musicId);
+    }
+    
 }
