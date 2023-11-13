@@ -17,4 +17,6 @@ public interface MemberMusicStorageRepository extends JpaRepository<MemberMusicS
     
     @Query("SELECT m.music.id FROM MemberMusicStorage m WHERE m.member.id = :memberId")
     List<Long> findMusicIdsByMemberId(@Param("memberId") Long memberId);
+    
+    boolean existsByMusic_IdAndMember_Id(Long musicId, Long memberId);
 }

@@ -3077,7 +3077,6 @@ p {
 
 .current-music-title {
   color: #333;
-  cursor: pointer;
   font-size: 15px;
 }
 
@@ -3103,6 +3102,8 @@ p {
 }
 
 .control-music-add {
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   margin-bottom: 2px;
   margin-right: 5px;
@@ -3444,6 +3445,225 @@ input[type="range"] {
   width: 10%;
 }
 
+.community-page-container {
+  width: 85%;
+  min-height: 700px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-top: 20px;
+  display: flex;
+}
+
+.community-heading-text-block {
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.community-heading-div-block {
+  border: 2px solid #66c;
+  border-left: 2px #000;
+  border-right: 2px #666;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.community-num-div-block {
+  width: 10%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.community-header-div-block {
+  border-bottom: 1px solid #000;
+  flex-direction: row;
+  margin-top: 40px;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+  display: flex;
+}
+
+.commnuity-title-div-block {
+  width: 60%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.community-view-div-block, .community-nickname-div-block {
+  width: 15%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.community-title-text-block, .community-view-text-block, .community-nickname-text-block, .community-num-text-block {
+  font-size: 18px;
+}
+
+.community-post-column-div-block {
+  border-bottom: 1px solid #ced4da;
+  flex-direction: row;
+  margin-top: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+}
+
+.community-post-foreach-divblock {
+  max-height: 655px;
+  min-height: 655px;
+}
+
+.community-post-title-text-block, .community-post-num-text-block, .community-post-view-text-block, .community-post-nickname-text-block {
+  font-size: 15px;
+}
+
+.community-post-create-div-block {
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: 10px;
+  display: flex;
+}
+
+.community-post-create-button {
+  color: #fff;
+  background-color: #66c;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.community-page-div-block {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.community-page-num {
+  color: #444;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.community-page-foreach-div-block {
+  flex-direction: row;
+  display: flex;
+}
+
+.community-page-control-image {
+  width: 14px;
+  height: 14px;
+}
+
+.community-search-form {
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.community-search-submit-button {
+  width: 40px;
+  height: 40px;
+  background-color: #66c;
+  background-image: url("https://assets-global.website-files.com/65085ce06a89f83f850a1961/65520c987cb4c5c40fb9ceb1_community_search.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+.community-search-text-field {
+  width: 35%;
+  height: 40px;
+  border: 2px solid #66c;
+}
+
+.community-search-form-block {
+  margin-top: 15px;
+}
+
+.community-write-title-text-field {
+  width: 70%;
+  color: #000;
+  margin-left: 0;
+}
+
+.write-input {
+  width: 100%;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.42857;
+  display: block;
+}
+
+.community-write-content-text-field {
+  width: 100%;
+  height: 400px;
+  min-height: 400px;
+  color: #000;
+  text-align: left;
+  flex: 0 auto;
+  order: 0;
+  margin-left: 0;
+  resize: none;
+}
+
+.community-write-form {
+  width: 85%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 20px;
+  display: flex;
+}
+
+.community-write-form-block {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.community-write-cancel-button {
+  background-color: #999;
+  align-self: flex-end;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 500;
+}
+
+.community-write-button-div-block {
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  display: flex;
+}
+
+.community-write-sumbit-button {
+  background-color: #66c;
+  align-self: flex-end;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: 500;
+}
 
 @media screen and (max-width: 991px) {
   .nav-link {

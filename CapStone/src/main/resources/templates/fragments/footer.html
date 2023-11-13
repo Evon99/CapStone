@@ -26,17 +26,25 @@
 	                 alt="" class="current-music-img" />
 	            <div class="control-music-detail">
         			<div class="current-music-title" th:id="currentTitle">Title</div>
-	                <div class="current-music-uploader" th:id="currentUploader">Uploader</div>
+	                <div class="current-music-uploader" onclick="memberPageLoad(/*[[@{${nickname}}]]*/)" th:attr="data-music-play-nickname=${nickname}" th:id="currentUploader">Uploader</div>
 	            </div>
 	            	<input type="hidden" id="likedMusicIds" th:value="${likedMusicIds}" />
+	            	<input type="hidden" id="addMusicIds" th:value="${addMusicIds}">
+	            	<input type="hidden" id="loginNickname" th:value="${loginNickname}">
 	            	<img 
 	            	th:attr="data-music-play-id=${id}"
 	                th:src="@{/static/images/black_like.png}"
-	                  alt="" class="control-music-like"/><img
+	                  alt="" class="control-music-like"/>
+	               <img
+	                th:attr="data-music-play-nickname=${nickname}"
+	                th:onclick="PlayBartoggleFollow(this)"
 	                th:src="@{/static/images/follow_button.png}"
-	                 alt="" class="control-music-follow" /><img
+	                 alt="" class="control-music-follow" />
+	               <img 
+	                th:attr="data-music-play-add-id=${id}"
 	                th:src="@{/static/images/black_add_song.png}"
-	                 alt="" class="control-music-add" /><img
+	                 alt="" class="control-music-add" />
+	               <img
 	                onclick="toggleMusicList()"
 	                th:src="@{/static/images/black_play_list.png}"
 	                  alt="" class="control-music-list"  />

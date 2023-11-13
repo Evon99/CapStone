@@ -58,15 +58,18 @@ public class ValueController {
         return response;
     }
 	
-	@GetMapping("/getExistLikedMusic")
+	@GetMapping("/getExistLikedAndAddMusic")
 	@ResponseBody
 	public Map<String, Object> getExistLikedMusic(@RequestParam Long musicId, @LoginUser SessionUser user){
 		Map<String, Object> response = new HashMap<>();
 		
 		Long member_id = memberRepository.findIdByLoginId(user.getLoginId());
-		boolean exist = likedMusicRepository.existsByMusic_IdAndMember_Id(musicId, member_id);
+		boolean likedExist = likedMusicRepository.existsByMusic_IdAndMember_Id(musicId, member_id);
 		
-		response.put("exist", exist);
+		boolean addExist = memberMusicStorageRepository.existsByMusic_IdAndMember_Id(musicId, member_id);
+		
+		response.put("likedExist", likedExist);
+		response.put("addExist", addExist);
 		return response;
 	}
 

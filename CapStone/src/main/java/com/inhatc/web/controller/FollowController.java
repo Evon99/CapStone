@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.inhatc.web.config.auth.LoginUser;
+import com.inhatc.web.dto.SessionUser;
 import com.inhatc.web.entity.Member;
 import com.inhatc.web.entity.MemberDetail;
 import com.inhatc.web.repository.MemberDetailRepository;
@@ -60,6 +62,26 @@ public class FollowController {
 			return "Unfollowed";
 		} else {
 			followService.follow(loginNickname, nickname);
+			return "Followed";
+		}
+	}
+	
+	@PostMapping("/playBartoggleFollow")
+	@ResponseBody
+	public String playbartoggleFollow(@RequestParam String nickname, @LoginUser SessionUser user) {
+		
+		Long login_member_id = memberRepository.findIdByLoginId(user.getLoginId());
+		MemberDetail memberDetail = memberDetailRepository.findByNickname(nickname);
+		
+		Member loginMember = memberRepository.findMemberById(login_member_id);
+		Member member = memberRepository.findMemberById(memberDetail.getMember().getId());
+		
+		MemberDetail loginMemberDetail = memberDetailRepository.findByMember_Id(login_member_id);
+		if(followService.isFollow(loginMember.getId(), member.getId())) {
+			followService.unfollow(loginMember.getId(), member.getId());
+			return "Unfollowed";
+		} else {
+			followService.follow(loginMemberDetail.getNickname(), nickname);
 			return "Followed";
 		}
 	}

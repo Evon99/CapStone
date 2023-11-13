@@ -30,6 +30,7 @@ import com.inhatc.web.entity.MemberDetail;
 import com.inhatc.web.entity.Music;
 import com.inhatc.web.repository.LikedMusicRepository;
 import com.inhatc.web.repository.MemberDetailRepository;
+import com.inhatc.web.repository.MemberMusicStorageRepository;
 import com.inhatc.web.repository.MemberRepository;
 import com.inhatc.web.service.MemberDetailService;
 import com.inhatc.web.service.MemberService;
@@ -54,6 +55,8 @@ public class MusicController {
 	private final MemberService memberService;
 	
 	private final LikedMusicRepository likedMusicRepository;
+	
+	private final MemberMusicStorageRepository memberMusicStorageRepository;
 	
 	@GetMapping(value = "/music/upload/new")
 	public String MusicForm(Model model) {
@@ -83,6 +86,7 @@ public class MusicController {
 
 	            model.addAttribute("session", user);
 	            model.addAttribute("loginNickname", loginMemberDetail.getNickname());
+	            model.addAttribute("loginMemberId", loginMember.getId());
 	            model.addAttribute("musicDto", new MusicDto());
 
 //	            System.out.println("멤버디테일:" + memberDetail.getPictureUrl());
@@ -168,22 +172,34 @@ public class MusicController {
     }
 	
 	@PostMapping("/addMusic/{musicId}")
-	public ResponseEntity<Integer> addMusic(@PathVariable Long musicId, @LoginUser SessionUser user){
+	@ResponseBody
+	public Map<String, Object> addMusic(@PathVariable Long musicId, @LoginUser SessionUser user){
+		
+		Map<String, Object> response = new HashMap<>();
 		
 		 if (user == null) {
 	            // 로그인되어 있지 않으면 로그인 페이지로 리다이렉트 또는 에러 응답을 보낼 수 있습니다.
 	        	System.out.println("세션 에러");
-	            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	        	response.put("sessionError", "sessionError");
 	        }
 
 		 Member member = memberRepository.findMemberByLoginId(user.getLoginId());
-		 if(musicService.hasMemberAddMusic(member, musicId)) {
-			 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		 }
+		 
+			/*
+			 * if(musicService.hasMemberAddMusic(member, musicId)) { return
+			 * ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); }
+			 */
 		 
 		 musicService.updateAddMusic(member, musicId);
 		 
-		 return ResponseEntity.status(HttpStatus.ACCEPTED).body(null);
+		 Long member_id = memberRepository.findIdByLoginId(user.getLoginId());
+		 List<Long> addMusicIds = memberMusicStorageRepository.findByMember_Id(member_id)
+                 .stream()
+                 .map(MemberMusicStorage -> MemberMusicStorage.getMusic().getId())
+                 .collect(Collectors.toList());
+		 
+		 response.put("addMusicIds", addMusicIds);
+		 return response;
 	}
 	
 	@PostMapping("/addMusicCancel/{musicId}")

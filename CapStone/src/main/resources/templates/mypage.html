@@ -360,7 +360,7 @@
                     	  th:unless="${loginNickname == nickname}"
 					      th:attr="data-nickname=${nickname}, data-login-nickname=${loginNickname}" 
 					      onclick="toggleFollow(this)"
-					      th:text="${followService.isFollow(loginMemberId, memberId) ? '팔로잉' : '팔로우2'}"
+					      th:text="${followService.isFollow(loginMemberId, memberId) ? '팔로잉' : '팔로우'}"
 				          th:style="${followService.isFollow(loginMemberId, memberId) ? 'background-color: #ccc; border: 1px solid #ccc; color: black;' : 'background-color: #66c; border: 1px solid #6c; color: white;'}">
 					</span>
 

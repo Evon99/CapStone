@@ -153,7 +153,10 @@
 	    }
 
 	    function memberPageLoad(nickname) {
-	    	
+			if(!nickname) {
+				var currentMusicUploader = document.getElementById('currentUploader');
+				var nickname = currentMusicUploader.getAttribute('data-music-play-nickname');
+			}
 	    	 $.ajax({
 		            type: 'GET',
 		            url: '/private/mypage/' + nickname,
@@ -275,9 +278,6 @@
 						        success: function(response) {
 						            // 서버로부터 받은 데이터를 변수에 할당
 						            
-									console.log("responseLike:", response);
-									initializeLikeMusic(response);
-									
 						            console.log("responseLike:", response.likedMusicIds);
 									initializeLikeMusic(response.likedMusicIds);
 									
@@ -353,3 +353,85 @@
 
 	    }
 
+		function CommunityLoad() {
+	    	
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/requestpost',
+		            success: function (data) {
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function CommunityWriteLoad() {
+	    	
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/private/requestpostwrite',
+		            success: function (data) {
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function CommunityWriteEndLoad() {
+	    	
+			var formValues = $("form[name=request-post-form]").serialize() ;
+			
+	    	 $.ajax({
+		            type: 'POST',
+		            url: '/private/requestpostwrite',
+					data: formValues,
+		            success: function (data) {
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+			event.preventDefault(); // 이벤트의 기본 동작 막기
+    		return false;
+	    }

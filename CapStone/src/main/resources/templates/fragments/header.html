@@ -52,7 +52,7 @@
            	<nav role="navigation" class="nav-menu w-nav-menu">
            			<a data-toggle="modal" href="#myModal"  id="openModalBtn" class="nav-link w-nav-link" sec:authorize="isAnonymous()">Sign Up</a>
             		<a data-toggle="modal" href="#myModal"  id="openModalBtn2" class="nav-link w-nav-link" sec:authorize="isAnonymous()">Login</a>
-            		<a href="#customers" class="nav-link w-nav-link">Community</a>
+            		<a onclick="CommunityLoad()" class="nav-link w-nav-link">Community</a>
             		<a th:onclick="memberPageLoad(/*[[${loginNickname}]]*/)" class="nav-link w-nav-link" sec:authorize="isAuthenticated()" >My Page</a>
             		<a onclick="fileUploadLoad()" id="fileUploadPage" class="nav-link w-nav-link" sec:authorize="isAuthenticated()" >Upload</a>
             		<a th:href="@{/logout}" class="nav-link w-nav-link" sec:authorize="isAuthenticated()">Logout</a>
