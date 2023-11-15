@@ -1,44 +1,185 @@
-/* 모달 스타일 */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
+.login-modal-delete-div-block {
+  height: 10%;
+  border-bottom: 1px #ced4da;
+  flex-direction: row;
+  justify-content: center;
+  align-self: flex-end;
+  align-items: center;
+  margin-bottom: 0;
+  display: flex;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 40%;
-    text-align: center; /* Center the content horizontally */
+.google-login-div-block {
+  width: 350px;
+  height: 50px;
+  cursor: pointer;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+.google-login-text-block {
+  width: 70%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 10px;
+  display: flex;
 }
 
-form {
-    display: flex;
-    justify-content: space-around; /* Change to your preferred alignment */
-    align-items: center;
-    height: 100%;
-    margin: 10px;
+.google-login-img-div-block {
+  width: 30%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 0;
+  display: flex;
 }
 
-button {
-    background-color: white;
-    border: none;
-    width: 50px;
-    margin: 10px; /* Add margin between buttons */
+.google-login-text {
+  color: rgba(0, 0, 0, .54);
+  font-family: "SCDream5";
+  font-size: 14px;
+}
+
+.kakao-login-div-block {
+  width: 350px;
+  height: 50px;
+  cursor: pointer;
+  background-color: #fee500;
+  border: 1px solid #fee500;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+.kakao-login-text {
+  color: rgba(0, 0, 0, .85);
+  margin-left: 0;
+  font-family: "SCDream5";
+  font-size: 14px;
+}
+
+.kakao-login-img-div-block {
+  width: 30%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 0;
+  display: flex;
+}
+
+.kakao-login-text-block {
+  width: 67%;
+  margin-left: 10px;
+}
+
+.naver-login-div-block {
+  width: 350px;
+  height: 50px;
+  cursor: pointer;
+  background-color: #03c75a;
+  border: 1px solid #03c75a;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+  display: flex;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+.naver-logo {
+  width: 35px;
+  height: 35px;
+}
+
+.naver-login-text {
+  color: #fff;
+  margin-left: 0;
+  font-family: "SCDream5";
+  font-size: 14px;
+}
+
+.naver-login-img-div-block {
+  width: 32%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 0;
+  display: flex;
+}
+
+.naver-login-text-block {
+  width: 68%;
+  margin-left: 0;
+}
+
+.login-modal {
+  width: 650px;
+  height: 400px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: auto;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 15%;
+  left: 0%;
+  right: 0%;
+}
+
+.login-modal-delete-btn {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  background-color: #fff;
+  background-image: url("https://assets-global.website-files.com/65085ce06a89f83f850a1961/65450657e3615d927701bbfe_black_delete.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: scroll;
+  flex: 0 auto;
+  order: 0;
+  justify-content: flex-start;
+  padding: 0;
+  display: block;
+  position: static;
+  left: 5px;
+}
+
+.login-modal-heading {
+  align-self: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "SCDream6";
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.kakao-logo, .google-logo {
+  width: 18px;
+  height: 18px;
+}
+
+.login-modal-container {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .1);
+  position: fixed;
+  display: none;
 }

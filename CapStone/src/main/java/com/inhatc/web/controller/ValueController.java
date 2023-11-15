@@ -63,6 +63,10 @@ public class ValueController {
 	public Map<String, Object> getExistLikedMusic(@RequestParam Long musicId, @LoginUser SessionUser user){
 		Map<String, Object> response = new HashMap<>();
 		
+		if (user == null) {
+			response.put("logoutStatus", "logoutStatus");
+			return response;
+		}
 		Long member_id = memberRepository.findIdByLoginId(user.getLoginId());
 		boolean likedExist = likedMusicRepository.existsByMusic_IdAndMember_Id(musicId, member_id);
 		

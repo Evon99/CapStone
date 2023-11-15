@@ -3456,6 +3456,7 @@ input[type="range"] {
 }
 
 .community-heading-text-block {
+  font-family: JalnanOTF;
   font-size: 40px;
   font-weight: 500;
 }
@@ -3663,6 +3664,68 @@ input[type="range"] {
   padding-left: 20px;
   padding-right: 20px;
   font-weight: 500;
+}
+
+.community-menu-tip-div-block {
+  width: 14%;
+  height: 50px;
+  cursor: pointer;
+  background-color: #66c;
+  border: 1px solid #66c;
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10px;
+  display: flex;
+}
+
+.community-menu-div-block {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.community-menu-request-image {
+  width: 50px;
+  height: 50px;
+}
+
+.community-menu-request-text {
+  color: #fff;
+  font-family: "Scdream8", sans-serif;
+}
+
+.community-menu-tip-image, .community-menu-voice-image {
+  width: 40px;
+  height: 40px;
+}
+
+.community-menu-request-div-block, .community-menu-voice-div-block {
+  width: 17%;
+  height: 50px;
+  cursor: pointer;
+  background-color: #66c;
+  border: 1px solid #66c;
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10px;
+  display: flex;
+}
+
+.community-menu-voice-text {
+  color: #fff;
+  margin-left: 5px;
+  font-family: "Scdream8", sans-serif;
+}
+
+.community-menu-tip-text {
+  color: #fff;
+  font-family: "Scdream8", sans-serif;
 }
 
 @media screen and (max-width: 991px) {

@@ -1,0 +1,19 @@
+@font-face {
+	font-family: "SCDream6";
+	src: url('/fonts/SCDream6.woff') format('woff');
+}
+
+@font-face {
+	font-family: "SCDream5";
+	src: url('/fonts/SCDream5.woff') format('woff');
+}
+
+@font-face {
+	font-family: "SCDream8";
+	src: url('/fonts/SCDream8.woff') format('woff');
+}
+
+@font-face {
+	font-family: "JalnanOTF";
+	src: url('/fonts/JalnanOTF.woff') format('woff');
+}

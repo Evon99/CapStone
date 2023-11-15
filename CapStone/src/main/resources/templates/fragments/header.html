@@ -3,9 +3,10 @@
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 	<div th:fragment="header">
+	<meta charset="UTF-8">
 	
-	<!-- ��� -->
-    <div id="myModal" class="modal">
+	<!-- 모달 -->
+    <!-- <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeModalBtn">&times;</span>
             <h3>Sign in</h3>
@@ -25,6 +26,49 @@
 						<img th:src="@{/static/images/btnG.png}">
 				</button>
 			</form>
+        </div>
+    </div> -->
+    <div class="login-modal-container" id="loginModalContainer">
+        <div class="login-modal">
+            <div class="login-modal-delete-div-block">
+            <span href="#" class="login-modal-delete-btn w-button" id="closeModalBtn"></span>
+            </div>
+            <div class="login-modal-heading">소셜 계정으로 이용이 가능합니다.</div>
+            
+            <form action="/oauth2/authorization/google" method="get" id="googleLoginForm">
+            <div class="google-login-div-block" id="googleLogin">
+                <div class="google-login-img-div-block">
+                	<img th:src="@{/static/images/google_logo.png}"
+                        loading="lazy" alt="" class="google-logo" /></div>
+                <div class="google-login-text-block">
+                    <div class="google-login-text">구글 계정으로 이용하기</div>
+                </div>
+            </div>
+            </form>
+            
+            <form action="/oauth2/authorization/kakao" method="get" id="kakaoLoginForm">
+            <div class="kakao-login-div-block" id="kakaoLogin">
+                <div class="kakao-login-img-div-block">
+                	<img th:src="@{/static/images/kakao_logo.png}"
+                         sizes="(max-width: 767px) 18px, (max-width: 991px) 2vw, 18px"
+                        alt="" class="kakao-logo" /></div>
+                <div class="kakao-login-text-block">
+                    <div class="kakao-login-text">카카오 계정으로 이용하기</div>
+                </div>
+            </div>
+            </form>
+            
+            <form action="/oauth2/authorization/naver" method="get" id="naverLoginForm">
+            <div class="naver-login-div-block" id="naverLogin">
+                <div class="naver-login-img-div-block"><img
+                        th:src="@{/static/images/naver_logo.png}"
+                        alt="" class="naver-logo" /></div>
+                <div class="naver-login-text-block">
+                    <div class="naver-login-text">네이버 계정으로 이용하기</div>
+                </div>
+            </div>
+            </form>
+            
         </div>
     </div>
     
