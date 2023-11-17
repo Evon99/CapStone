@@ -3498,7 +3498,7 @@ input[type="range"] {
   display: flex;
 }
 
-.community-view-div-block, .community-nickname-div-block {
+.community-nickname-div-block {
   width: 15%;
   height: 100%;
   flex-direction: column;
@@ -3509,6 +3509,16 @@ input[type="range"] {
 
 .community-title-text-block, .community-view-text-block, .community-nickname-text-block, .community-num-text-block {
   font-size: 18px;
+  font-family: "GmarketSansBold";
+}
+
+.community-date-div-block, .community-view-div-block {
+  width: 10%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
 }
 
 .community-post-column-div-block {
@@ -3525,8 +3535,17 @@ input[type="range"] {
   min-height: 655px;
 }
 
-.community-post-title-text-block, .community-post-num-text-block, .community-post-view-text-block, .community-post-nickname-text-block {
+.community-post-title-text-block, .community-post-num-text-block, .community-post-nickname-text-block {
   font-size: 15px;
+  font-family: "GmarketSansMedium";
+}
+
+.community-post-title-text-block {
+  cursor: pointer;	
+}
+.community-post-view-text-block {
+  font-size: 11px;
+  font-family: "GmarketSansMedium";
 }
 
 .community-post-create-div-block {
@@ -3542,6 +3561,7 @@ input[type="range"] {
   background-color: #66c;
   padding: 5px 10px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .community-page-div-block {
@@ -3555,6 +3575,7 @@ input[type="range"] {
   color: #444;
   padding-left: 5px;
   padding-right: 5px;
+  cursor: pointer;
 }
 
 .community-page-foreach-div-block {
@@ -3565,6 +3586,7 @@ input[type="range"] {
 .community-page-control-image {
   width: 14px;
   height: 14px;
+  cursor: pointer;
 }
 
 .community-search-form {
@@ -3728,6 +3750,134 @@ input[type="range"] {
   font-family: "Scdream8", sans-serif;
 }
 
+.community-post-title {
+  font-family: "Scdream5", sans-serif;
+  font-size: 22px;
+}
+
+.community-post-member-nickname {
+  font-family: "Scdream4", sans-serif;
+}
+
+.community-post-heading-div-block {
+  border-bottom: 1px solid #ced4da;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.community-post-member-detail-div-block {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+  display: flex;
+}
+
+.community-post-member-image {
+  width: 45px;
+  height: 45px;
+  border: 1px #000;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.community-post-content {
+  min-height: 200px;
+  font-family: "Scdream3", sans-serif;
+}
+
+.community-post-comment-div-block {
+  min-height: 100px;
+  border: 2px solid #66c;
+  border-left: 1px #66c;
+  border-right: 1px #66c;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+
+.community-post-comment-member-detail-div-block {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.community-post-comment-text {
+  color: #000;
+  margin-left: 50px;
+  font-family: "Scdream3", sans-serif;
+}
+
+.coummunity-post-comment-foreach-div-block {
+  border-bottom: 1px solid #ced4da;
+  margin-bottom: 5px;
+}
+
+.community-post-comment-nickname {
+  color: #666;
+  margin-top: 5px;
+  font-family: "Scdream4", sans-serif;
+  font-size: 13px;
+}
+
+.community-post-comment-date {
+  color: #777;
+  margin-top: 5px;
+  margin-left: 10px;
+  font-size: 11px;
+}
+
+.community-date-text-block {
+  font-size: 18px;
+}
+
+.community-post-date-text-block {
+  font-size: 11px;
+}
+
+.community-post-comment-member-image {
+  width: 45px;
+  height: 45px;
+  border: 1px #000;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.community-post-comment-write-form-block {
+  flex-direction: column;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.community-post-comment-write-form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.community-post-comment-write-div-block {
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+}
+
+.community-post-comment-write-textarea {
+  min-height: 100px;
+  margin-right: 20px;
+  resize: none;
+}
+
+.community-post-comment-write-submit-button {
+  background-color: #66c;
+  align-self: flex-end;
+  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Scdream 4", sans-serif;
+}
 @media screen and (max-width: 991px) {
   .nav-link {
     color: #fff;

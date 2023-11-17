@@ -1,6 +1,11 @@
 @font-face {
-	font-family: "SCDream6";
-	src: url('/fonts/SCDream6.woff') format('woff');
+	font-family: "SCDream3";
+	src: url('/fonts/SCDream3.woff') format('woff');
+}
+
+@font-face {
+	font-family: "SCDream4";
+	src: url('/fonts/SCDream4.woff') format('woff');
 }
 
 @font-face {
@@ -9,8 +14,29 @@
 }
 
 @font-face {
+	font-family: "SCDream6";
+	src: url('/fonts/SCDream6.woff') format('woff');
+}
+
+
+@font-face {
 	font-family: "SCDream8";
 	src: url('/fonts/SCDream8.woff') format('woff');
+}
+
+@font-face {
+	font-family: "GmarketSansBold";
+	src: url('/fonts/GmarketSansBold.woff') format('woff');
+}
+
+@font-face {
+	font-family: "GmarketSansMedium";
+	src: url('/fonts/GmarketSansMedium.woff') format('woff');
+}
+
+@font-face {
+	font-family: "GmarketSansLight";
+	src: url('/fonts/GmarketSansLight.woff') format('woff');
 }
 
 @font-face {

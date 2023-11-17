@@ -5,29 +5,7 @@
 	<div th:fragment="header">
 	<meta charset="UTF-8">
 	
-	<!-- 모달 -->
-    <!-- <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModalBtn">&times;</span>
-            <h3>Sign in</h3>
-            <form action="/oauth2/authorization/google" method="get">
-				<Button type="submit" style="background-color: white; border:none; width:50px;">
-					<img th:src="@{/static/images/btn_google_light_normal_ios.svg}">
-				</button>
-			</form>
-			
-			<form action="/oauth2/authorization/kakao" method="get">
-				<Button type="submit" style="background-color: white; border:none; width:50px;">
-						<img th:src="@{/static/images/Kakao.png}">
-				</button>
-			</form>
-			<form action="/oauth2/authorization/naver" method="get">
-				<Button type="submit" style="background-color: white; border:none; width:50px;">
-						<img th:src="@{/static/images/btnG.png}">
-				</button>
-			</form>
-        </div>
-    </div> -->
+	<!-- 로그인 모달 -->
     <div class="login-modal-container" id="loginModalContainer">
         <div class="login-modal">
             <div class="login-modal-delete-div-block">
@@ -96,7 +74,7 @@
            	<nav role="navigation" class="nav-menu w-nav-menu">
            			<a data-toggle="modal" href="#myModal"  id="openModalBtn" class="nav-link w-nav-link" sec:authorize="isAnonymous()">Sign Up</a>
             		<a data-toggle="modal" href="#myModal"  id="openModalBtn2" class="nav-link w-nav-link" sec:authorize="isAnonymous()">Login</a>
-            		<a onclick="CommunityLoad()" class="nav-link w-nav-link">Community</a>
+            		<a onclick="CommunityLoad(0)" class="nav-link w-nav-link">Community</a>
             		<a th:onclick="memberPageLoad(/*[[${loginNickname}]]*/)" class="nav-link w-nav-link" sec:authorize="isAuthenticated()" >My Page</a>
             		<a onclick="fileUploadLoad()" id="fileUploadPage" class="nav-link w-nav-link" sec:authorize="isAuthenticated()" >Upload</a>
             		<a th:href="@{/logout}" class="nav-link w-nav-link" sec:authorize="isAuthenticated()">Logout</a>
