@@ -3471,6 +3471,11 @@ input[type="range"] {
   display: flex;
 }
 
+.community-heading-img{
+	width: 100px;
+	height: 100px;
+}
+
 .community-num-div-block {
   width: 10%;
   height: 100%;
@@ -3540,6 +3545,9 @@ input[type="range"] {
   font-family: "GmarketSansMedium";
 }
 
+.community-post-nickname-text-block{
+	cursor: pointer;
+}
 .community-post-title-text-block {
   cursor: pointer;	
 }
@@ -3757,6 +3765,7 @@ input[type="range"] {
 
 .community-post-member-nickname {
   font-family: "Scdream4", sans-serif;
+  cursor: pointer;
 }
 
 .community-post-heading-div-block {
@@ -3820,6 +3829,7 @@ input[type="range"] {
   margin-top: 5px;
   font-family: "Scdream4", sans-serif;
   font-size: 13px;
+  cursor: pointer;
 }
 
 .community-post-comment-date {
@@ -3878,6 +3888,267 @@ input[type="range"] {
   padding-right: 20px;
   font-family: "Scdream 4", sans-serif;
 }
+
+.community-voice-post-divblock {
+  max-height: 655px;
+  min-height: 655px;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+}
+
+.community-voice-post-div-block {
+  width: 30%;
+  height: 280px;
+  background-color: rgba(206, 212, 218, .2);
+  border-radius: 9px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+  display: flex;
+}
+
+.community-voice-post-title {
+  width: 95%;
+  align-self: flex-start;
+  margin-bottom: 10px;
+  margin-left: 2.5%;
+  font-family: "Scdream 7", sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.community-voice-post-nickname {
+  width: 85%;
+  align-self: flex-start;
+  margin-left: 0%;
+  padding-top: 10px;
+  font-family: "Scdream 4", sans-serif;
+  display: block;
+}
+
+.community-voice-post-image {
+  width: 95%;
+  height: 180px;
+}
+
+.community-voice-post-foreach-divblock {
+  flex-direction: row;
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.community-voice-post-view-div-block {
+  width: 95%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 5px;
+  display: flex;
+}
+
+.community-voice-post-view-image {
+  width: 13px;
+  height: 13px;
+}
+
+.community-voice-post-view {
+  margin-left: 3px;
+  font-family: "Scdream 5", sans-serif;
+  font-size: 11px;
+}
+
+.community-voice-post-heading {
+  width: 95%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.community-voice-post-date {
+  padding-top: 10px;
+  font-family: "Scdream 2", sans-serif;
+  font-size: 11px;
+}
+
+.voice-upload-file-div-block {
+  width: 100%;
+  height: 100px;
+  background-color: rgba(206, 212, 218, .3);
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.voice-upload-file-name-text-block {
+  margin-right: 20px;
+  font-family: "Scdream 6", sans-serif;
+}
+
+.voice-upload-file-name {
+  width: 100%;
+  background-color: #fff;
+  font-family: "Scdream 6", sans-serif;
+  font-size: 22px;
+}
+
+.voice-upload-file-name-div-block {
+  width: 55%;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 6px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+}
+
+.voice-upload-form {
+  min-height: 655px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 100px;
+  display: flex;
+}
+
+.voice-image-upload-button {
+  background-color: #66c;
+  border-radius: 6px;
+  align-self: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: "Scdream 6", sans-serif;
+}
+
+.voice-upload-detail-div-block {
+  width: 100%;
+  height: 320px;
+  background-color: rgba(206, 212, 218, .3);
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.voice-upload-image-div-block {
+  width: 220px;
+  height: 260px;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-left: 40px;
+  display: flex;
+}
+
+.voice-upload-image {
+  width: 100%;
+  height: 180px;
+  background-color: #ced4da;
+}
+
+.voice-upload-explain-div-block {
+  width: 65%;
+  height: 260px;
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+.voice-explain-heading {
+  margin-bottom: 5px;
+  margin-right: 20px;
+  font-family: "Scdream 6", sans-serif;
+}
+
+.voice-upload-explain-textarea {
+  min-height: 230px;
+  border: 1px #000;
+  border-radius: 5px;
+}
+
+.voice-upload-submit-button {
+  background-color: #66c;
+  border-radius: 6px;
+  align-self: center;
+  margin-left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Scdream 5", sans-serif;
+}
+
+.voice-upload-button-div-block {
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  display: flex;
+}
+
+.voice-upload-cancel-button {
+  color: #000;
+  background-color: #ced5da;
+  border-radius: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Scdream 5", sans-serif;
+}
+
+.community-voice-post-content-image {
+  width: 260px;
+  height: 180px;
+  background-color: #ced4da;
+  align-self: auto;
+  margin-bottom: 20px;
+}
+
+.voice-download-div-block {
+  width: 45%;
+  background-color: #f0f0f0;
+  border: 2px solid silver;
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-self: center;
+  align-items: center;
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.voice-download-image {
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.voice-download-text-block {
+  width: 100%;
+  height: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.voice-download-file-name {
+  font-family: "Scdream 6", sans-serif;
+}
+
+.voice-download-file-size {
+  font-family: "Scdream 4", sans-serif;
+}
+
 @media screen and (max-width: 991px) {
   .nav-link {
     color: #fff;

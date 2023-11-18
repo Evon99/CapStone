@@ -47,40 +47,51 @@
         <div class="w-layout-blockcontainer community-page-container w-container">
             <div class="community-menu-div-block">
                 <div class="community-menu-request-div-block" onclick="CommunityLoad(0)"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551b72c09318e5ad39a5493_ai_post_mike.png"
+                        th:src="@{/static/images/ai_post_mike.png}"
                         loading="lazy" alt="" class="community-menu-request-image" />
                     <div class="community-menu-request-text">신청곡 게시판</div>
                 </div>
                 <div class="community-menu-voice-div-block" onclick="VoiceCommunityLoad(0)"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/655507fd6c13baf72af07476_voice_download.png"
+                        th:src="@{/static/images/voice_download.png}"
                         loading="lazy" alt="" class="community-menu-voice-image" />
                     <div class="community-menu-voice-text">목소리 게시판</div>
                 </div>
                 <div class="community-menu-tip-div-block" onclick="TipCommunityLoad(0)"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6554fe9f2a23195a4cd5e2dd_tip.png"
+                        th:src="@{/static/images/tip.png}"
                         loading="lazy" alt="" class="community-menu-tip-image" />
                     <div class="community-menu-tip-text">팁 게시판</div>
                 </div>
             </div>
             <div class="community-heading-div-block"><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551b72c09318e5ad39a5493_ai_post_mike.png"
+                    th:src="@{/static/images/tip.png}"
                     loading="lazy" alt="" class="community-heading-img" />
-                <div class="community-heading-text-block">AI 신청곡 게시판</div>
+                <div class="community-heading-text-block">목소리 게시판</div>
             </div>
             <div class="community-post-heading-div-block">
-                <div class="community-post-title" th:text="${requestPost.title}">테스트제목</div>
+                <div class="community-post-title" th:text="${tipPost.title}">테스트제목</div>
                 <div class="community-post-member-detail-div-block">
-                	<img th:src="${requestPost.uploaderImg}"
+                	<img th:src="${tipPost.uploaderImg}"
                         loading="lazy" alt="" class="community-post-member-image" />
-                    <div class="community-post-member-nickname" th:text="${requestPost.uploaderNickname}" th:onclick="memberPageLoad(/*[[${requestPost.uploaderNickname}]]*/)">닉네임</div>
+                    <div class="community-post-member-nickname" th:text="${tipPost.uploaderNickname}" th:onclick="memberPageLoad(/*[[${tipPost.uploaderNickname}]]*/)">닉네임</div>
                 </div>
             </div>
-            <div class="community-post-content" th:text="${requestPost.content}">이 곡 제발 만들어주세요 ㅠㅠ</div>
+            <img
+                src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6558f076f4d3d4dd56fea948_none_image.svg"
+                loading="lazy" alt="" class="community-voice-post-content-image" />
+            <div class="community-post-content" th:text="${tipPost.content}">이 곡 제발 만들어주세요 ㅠㅠ</div>
+            <div class="voice-download-div-block"><img
+                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6558f25b694472e66894a082_file_download.png"
+                    loading="lazy" alt="" class="voice-download-image" />
+                <div class="voice-download-text-block">
+                    <div class="voice-download-file-name">Sample.wav</div>
+                    <div class="voice-download-file-size">1.30 MB</div>
+                </div>
+            </div>
             <div class="community-post-comment-div-block">
                 <div class="coummunity-post-comment-foreach-div-block" th:each="comment : ${comment}">
                     <div class="community-post-comment-member-detail-div-block">
                     	<img th:src="${comment.uploaderImg}" loading="lazy" alt="" class="community-post-comment-member-image" />
-                        <div th:text="${comment.uploaderNickname}" th:onclick="memberPageLoad(/*[[${comment.uploaderNickname}]]*/)" class="community-post-comment-nickname">닉네임</div>
+                        <div th:text="${comment.uploaderNickname}"  th:onclick="memberPageLoad(/*[[${comment.uploaderNickname}]]*/)" class="community-post-comment-nickname">닉네임</div>
                         <div th:text="${#temporals.format(comment.regTime, 'MM.dd HH:mm')}" class="community-post-comment-date">11.17 01:42:43</div>
                     </div>
                     <div th:text="${comment.comment}" class="community-post-comment-text">ㅇㅈㅇㅈ 꼭 만들어주셈</div>
@@ -93,15 +104,15 @@
                     	<img th:src="${loginPictureUrl}" loading="lazy" alt="" class="community-post-comment-member-image" />
                     	<textarea placeholder="댓글 추가.." maxlength="5000" id="field" name="comment"
                             class="community-post-comment-write-textarea w-input"></textarea>
-                        <input type="hidden" name="postId" th:value="${requestPost.id}">
+                        <input type="hidden" name="postId" th:value="${tipPost.id}">
                     </div>
-                        <input type="submit" value="등록" onclick="CommunityPostCommentWrite()" class="community-post-comment-write-submit-button w-button" />
+                        <input type="submit" value="등록" onclick="TipCommunityCommentWrite()" class="community-post-comment-write-submit-button w-button" />
                 </form>
             </div>
             <div class="community-page-div-block"><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551ca4acc6ac22c1b3df5d5_left_double_arrows.png"
+                    th:src="@{/static/images/left_double_arrows.png}"
                     loading="lazy" alt="" class="community-page-control-image" /><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551ca4aecb33593494255aa_left_arrows.png"
+                    th:src="@{/static/images/left_arrows.png}"
                     loading="lazy" alt="" class="community-page-control-image" />
                 <div class="community-page-foreach-div-block">
                     <div class="community-page-num">1</div>
@@ -115,9 +126,9 @@
                     <div class="community-page-num">1</div>
                     <div class="community-page-num">1</div>
                 </div><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551ca4a75979089cb24baf4_right_arrows.png"
+                    th:src="@{/static/images/right_arrows.png}"
                     loading="lazy" alt="" class="community-page-control-image" /><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551c9b74daf65b5d41e8de6_right_double_arrow.png"
+                    th:src="@{static/images/right_double_arrow.png}"
                     loading="lazy" alt="" class="community-page-control-image" />
             </div>
             <div class="community-search-form-block w-form">

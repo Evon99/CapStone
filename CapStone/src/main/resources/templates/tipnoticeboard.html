@@ -63,9 +63,9 @@
                 </div>
             </div>
             <div class="community-heading-div-block"><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551b72c09318e5ad39a5493_ai_post_mike.png"
+                    th:src="@{/static/images/tip.png}"
                     loading="lazy" alt="" class="community-heading-img" />
-                <div class="community-heading-text-block">AI 신청곡 게시판</div>
+                <div class="community-heading-text-block">팁 게시판</div>
             </div>
             <div class="community-header-div-block">
                 <div class="community-num-div-block">
@@ -90,7 +90,7 @@
                         <div class="community-post-num-text-block" th:text="${post.id}">1</div>
                     </div>
                     <div class="commnuity-title-div-block">
-                        <div class="community-post-title-text-block" th:text="${post.title}" th:onclick="'CommunityPostLoad(' + ${post.id} + ')'">이 곡도 만들어주셈</div>
+                        <div class="community-post-title-text-block" th:text="${post.title}" th:onclick="'TipCommunityPostLoad(' + ${post.id} + ')'">이 곡도 만들어주셈</div>
                     </div>
                     <div class="community-date-div-block">
                         <div class="community-post-date-text-block" th:text="${#temporals.format(post.regTime, 'MM.dd')}">11.11</div>
@@ -99,12 +99,12 @@
                         <div class="community-post-view-text-block" th:text="${post.view}">312</div>
                     </div>
                     <div class="community-nickname-div-block">
-                        <div class="community-post-nickname-text-block" th:text="${post.uploaderNickname}" th:onclick="memberPageLoad(/*[[${post.uploaderNickname}]]*/)"  >testUser</div>
+                        <div class="community-post-nickname-text-block" th:text="${post.uploaderNickname}" th:onclick="memberPageLoad(/*[[${post.uploaderNickname}]]*/)" >testUser</div>
                     </div>
                 </div>
             </div>
             <div class="community-post-create-div-block">
-                <div class="community-post-create-button" onclick="CommunityWriteLoad()">글쓰기</div>
+                <div class="community-post-create-button" onclick="TipCommunityWriteLoad()">글쓰기</div>
             </div>
             <div class="community-page-div-block">
             	<img th:src="@{/static/images/left_double_arrows.png}"

@@ -63,20 +63,34 @@
                 </div>
             </div>
             <div class="community-heading-div-block"><img
-                    th:src="@{/static/images/ai_post_mike.png}"
+                    th:src="@{/static/images/tip.png}"
                     loading="lazy" alt="" class="community-heading-img" />
-                <div class="community-heading-text-block">AI 신청곡 게시판</div>
+                <div class="community-heading-text-block">목소리 게시판</div>
             </div>
-            <div class="community-write-form-block w-form">
-            
-                <form  id="email-form" name="request-post-form"  method="post" class="community-write-form">
-                		<input type="text"  class="community-write-title-text-field w-input" name="title"
-                        		placeholder="제목" id="title" />
-                        <textarea maxlength="5000" id="content"
-                        		name="content" class="community-write-content-text-field w-input"></textarea>
-                    <div class="community-write-button-div-block">
-                    	<a href="#" class="community-write-cancel-button w-button">취소</a>
-                    	<input type="submit" onclick="CommunityWriteEndLoad()" value="작성" class="community-write-sumbit-button w-button" /></div>
+            <div class="w-form">
+                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
+                    class="voice-upload-form" data-wf-page-id="6558d174378415d1dbdf1edb"
+                    data-wf-element-id="72d81358-d3b9-c63a-883b-8ad2dccfbaa7">
+                    <div class="voice-upload-file-div-block">
+                        <div class="voice-upload-file-name-text-block">파일명</div>
+                        <div class="voice-upload-file-name-div-block">
+                            <div class="voice-upload-file-name">sample.wav</div>
+                        </div>
+                    </div><a href="#" class="voice-image-upload-button w-button">목소리 파일 업로드</a>
+                    <div class="voice-upload-detail-div-block">
+                        <div class="voice-upload-image-div-block"><img
+                                src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6558f076f4d3d4dd56fea948_none_image.svg"
+                                loading="lazy" alt="" class="voice-upload-image" /><a href="#"
+                                class="voice-image-upload-button w-button">대표 이미지 업로드</a></div>
+                        <div class="voice-upload-explain-div-block">
+                            <div class="voice-explain-heading">목소리 설명</div><textarea placeholder="설명 입력.."
+                                maxlength="5000" id="field" name="field" data-name="Field"
+                                class="voice-upload-explain-textarea w-input"></textarea>
+                        </div>
+                    </div>
+                    <div class="voice-upload-button-div-block"><a href="#"
+                            class="voice-upload-cancel-button w-button">취소</a><input type="submit" value="등록"
+                            data-wait="Please wait..." class="voice-upload-submit-button w-button" /></div>
                 </form>
             </div>
         </div>

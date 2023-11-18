@@ -63,20 +63,20 @@
                 </div>
             </div>
             <div class="community-heading-div-block"><img
-                    th:src="@{/static/images/ai_post_mike.png}"
+                    th:src="@{/static/images/tip.png}"
                     loading="lazy" alt="" class="community-heading-img" />
-                <div class="community-heading-text-block">AI 신청곡 게시판</div>
+                <div class="community-heading-text-block">팁 게시판</div>
             </div>
             <div class="community-write-form-block w-form">
             
-                <form  id="email-form" name="request-post-form"  method="post" class="community-write-form">
+                <form  id="email-form" name="tip-post-form"  method="post" class="community-write-form">
                 		<input type="text"  class="community-write-title-text-field w-input" name="title"
                         		placeholder="제목" id="title" />
                         <textarea maxlength="5000" id="content"
                         		name="content" class="community-write-content-text-field w-input"></textarea>
                     <div class="community-write-button-div-block">
                     	<a href="#" class="community-write-cancel-button w-button">취소</a>
-                    	<input type="submit" onclick="CommunityWriteEndLoad()" value="작성" class="community-write-sumbit-button w-button" /></div>
+                    	<input type="submit" onclick="TipCommunityWriteEndLoad()" value="작성" class="community-write-sumbit-button w-button" /></div>
                 </form>
             </div>
         </div>

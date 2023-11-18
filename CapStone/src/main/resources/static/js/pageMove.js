@@ -380,11 +380,12 @@
 		        });
 	    }
 
-		function CommunityWriteLoad() {
+		function TipCommunityLoad(page) {
 	    	
 	    	 $.ajax({
 		            type: 'GET',
-		            url: '/private/requestpostwrite',
+		            url: '/tipnoticeboard',
+					data: { page: page },
 		            success: function (data) {
 		            	// data를 DOM 객체로 변환
 		                var parser = new DOMParser();
@@ -406,6 +407,130 @@
 		        });
 	    }
 
+		function VoiceCommunityLoad(page) {
+	    	
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/voicenoticeboard',
+					data: { page: page },
+		            success: function (data) {
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function CommunityWriteLoad() {
+	    	loginCheck();
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/private/requestpostwrite',
+		            success: function (data) {
+			
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function TipCommunityWriteLoad() {
+	    	loginCheck();
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/private/tippostwrite',
+		            success: function (data) {
+			
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function VoiceCommunityWriteLoad() {
+			 loginCheck();
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/private/voicepostwrite',
+		            success: function (data) {
+			
+						
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function loginCheck() {
+			
+			fetch('/api/auth/check')
+                .then(response => response.json())
+                .then(data => {
+                    // 응답에서 isAuthenticated 값을 확인하여 alert 띄우기
+                    if (!data.isAuthenticated) {
+                        alert("로그인이 필요합니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error checking authentication:", error);
+                });
+		}
+		
 		function CommunityWriteEndLoad() {
 	    	
 			var formValues = $("form[name=request-post-form]").serialize() ;
@@ -415,6 +540,108 @@
 		            url: '/private/requestpostwrite',
 					data: formValues,
 		            success: function (data) {
+						console.log("data", data);
+						if(data.trim() === 'titleEmpty') {
+							console.log("titleEmpty");
+							alert("제목을 입력해주세요");
+							return;
+						}
+						
+						
+						if(data.trim() === 'contentEmpty') {
+							console.log("contentEmpty");
+							alert("내용을 입력해주세요");
+							return;
+						}
+						
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+			event.preventDefault(); // 이벤트의 기본 동작 막기
+    		return false;
+	    }
+
+		function TipCommunityWriteEndLoad() {
+	    	
+			var formValues = $("form[name=tip-post-form]").serialize() ;
+			
+	    	 $.ajax({
+		            type: 'POST',
+		            url: '/private/tippostwrite',
+					data: formValues,
+		            success: function (data) {
+						console.log("data", data);
+						if(data.trim() === 'titleEmpty') {
+							console.log("titleEmpty");
+							alert("제목을 입력해주세요");
+							return;
+						}
+						
+						if(data.trim() === 'contentEmpty') {
+							console.log("contentEmpty");
+							alert("내용을 입력해주세요");
+							return;
+						}
+						
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+			event.preventDefault(); // 이벤트의 기본 동작 막기
+    		return false;
+	    }
+
+		function VoiceCommunityWriteEndLoad() {
+	    	
+			var formValues = $("form[name=voice-post-form]").serialize() ;
+			
+	    	 $.ajax({
+		            type: 'POST',
+		            url: '/private/voicepostwrite',
+					data: formValues,
+		            success: function (data) {
+						console.log("data", data);
+						if(data.trim() === 'titleEmpty') {
+							console.log("titleEmpty");
+							alert("제목을 입력해주세요");
+							return;
+						}
+						
+						if(data.trim() === 'contentEmpty') {
+							console.log("contentEmpty");
+							alert("내용을 입력해주세요");
+							return;
+						}
+						
 		            	// data를 DOM 객체로 변환
 		                var parser = new DOMParser();
 		                var doc = parser.parseFromString(data, 'text/html');
@@ -463,6 +690,58 @@
 		        });
 	    }
 
+		function TipCommunityPostLoad(postId) {
+	    	
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/tippost/' + postId,
+		            success: function (data) {
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
+		function VoiceCommunityPostLoad(postId) {
+	    	
+	    	 $.ajax({
+		            type: 'GET',
+		            url: '/voicepost/' + postId,
+		            success: function (data) {
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    }
+
 		function CommunityPostCommentWrite() {
 	    	
 			var formValues = $("form[name=community-post-comment-write-form]").serialize() ;
@@ -472,6 +751,89 @@
 		            url: '/private/requestcommentwrite',
 					data: formValues,
 		            success: function (data) {
+			
+						if(data.trim() === 'commentEmpty') {
+							console.log("commentEmpty");
+							alert("댓글	을 입력해주세요");
+							return;
+						}
+						
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+			event.preventDefault(); // 이벤트의 기본 동작 막기
+    		return false;
+	    }
+
+		function TipCommunityCommentWrite() {
+	    	
+			var formValues = $("form[name=community-post-comment-write-form]").serialize() ;
+			
+	    	 $.ajax({
+		            type: 'POST',
+		            url: '/private/tipcommentwrite',
+					data: formValues,
+		            success: function (data) {
+			
+						if(data.trim() === 'commentEmpty') {
+							console.log("commentEmpty");
+							alert("댓글	을 입력해주세요");
+							return;
+						}
+						
+		            	// data를 DOM 객체로 변환
+		                var parser = new DOMParser();
+		                var doc = parser.parseFromString(data, 'text/html');
+
+		                // 특정 템플릿에서 content-container를 찾음
+		                var contentContainerInTemplate = doc.querySelector("#content-container");
+
+		                // 만약 템플릿에서 content-container를 찾았다면 현재 페이지의 content-container를 업데이트
+		                if (contentContainerInTemplate) {
+		                    var currentContent = document.querySelector("#content-container");
+		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
+		                }
+				
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+			event.preventDefault(); // 이벤트의 기본 동작 막기
+    		return false;
+	    }
+
+		function VoiceCommunityCommentWrite() {
+	    	
+			var formValues = $("form[name=community-post-comment-write-form]").serialize() ;
+			
+	    	 $.ajax({
+		            type: 'POST',
+		            url: '/private/tipcommentwrite',
+					data: formValues,
+		            success: function (data) {
+			
+						if(data.trim() === 'commentEmpty') {
+							console.log("commentEmpty");
+							alert("댓글	을 입력해주세요");
+							return;
+						}
+						
 		            	// data를 DOM 객체로 변환
 		                var parser = new DOMParser();
 		                var doc = parser.parseFromString(data, 'text/html');
