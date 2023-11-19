@@ -3886,7 +3886,7 @@ input[type="range"] {
   margin-right: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  font-family: "Scdream 4", sans-serif;
+  font-family: "Scdream4", sans-serif;
 }
 
 .community-voice-post-divblock {
@@ -3918,7 +3918,7 @@ input[type="range"] {
   align-self: flex-start;
   margin-bottom: 10px;
   margin-left: 2.5%;
-  font-family: "Scdream 7", sans-serif;
+  font-family: "Scdream7", sans-serif;
   font-size: 19px;
   font-weight: 500;
 }
@@ -3928,7 +3928,7 @@ input[type="range"] {
   align-self: flex-start;
   margin-left: 0%;
   padding-top: 10px;
-  font-family: "Scdream 4", sans-serif;
+  font-family: "Scdream4", sans-serif;
   display: block;
 }
 
@@ -3959,7 +3959,7 @@ input[type="range"] {
 
 .community-voice-post-view {
   margin-left: 3px;
-  font-family: "Scdream 5", sans-serif;
+  font-family: "Scdream5", sans-serif;
   font-size: 11px;
 }
 
@@ -3973,7 +3973,7 @@ input[type="range"] {
 
 .community-voice-post-date {
   padding-top: 10px;
-  font-family: "Scdream 2", sans-serif;
+  font-family: "Scdream2", sans-serif;
   font-size: 11px;
 }
 
@@ -3990,13 +3990,13 @@ input[type="range"] {
 
 .voice-upload-file-name-text-block {
   margin-right: 20px;
-  font-family: "Scdream 6", sans-serif;
+  font-family: "Scdream6", sans-serif;
 }
 
 .voice-upload-file-name {
   width: 100%;
   background-color: #fff;
-  font-family: "Scdream 6", sans-serif;
+  font-family: "Scdream6", sans-serif;
   font-size: 22px;
 }
 
@@ -4028,7 +4028,7 @@ input[type="range"] {
   align-self: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  font-family: "Scdream 6", sans-serif;
+  font-family: "Scdream6", sans-serif;
 }
 
 .voice-upload-detail-div-block {
@@ -4067,7 +4067,7 @@ input[type="range"] {
 .voice-explain-heading {
   margin-bottom: 5px;
   margin-right: 20px;
-  font-family: "Scdream 6", sans-serif;
+  font-family: "Scdream6", sans-serif;
 }
 
 .voice-upload-explain-textarea {
@@ -4083,7 +4083,7 @@ input[type="range"] {
   margin-left: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  font-family: "Scdream 5", sans-serif;
+  font-family: "Scdream5", sans-serif;
 }
 
 .voice-upload-button-div-block {
@@ -4101,7 +4101,7 @@ input[type="range"] {
   border-radius: 6px;
   padding-left: 20px;
   padding-right: 20px;
-  font-family: "Scdream 5", sans-serif;
+  font-family: "Scdream5", sans-serif;
 }
 
 .community-voice-post-content-image {
@@ -4142,11 +4142,53 @@ input[type="range"] {
 }
 
 .voice-download-file-name {
-  font-family: "Scdream 6", sans-serif;
+  font-family: "Scdream6", sans-serif;
 }
 
 .voice-download-file-size {
-  font-family: "Scdream 4", sans-serif;
+  font-family: "Scdream4", sans-serif;
+}
+
+.voice-title-div-block {
+  width: 100%;
+  height: 100px;
+  background-color: rgba(206, 212, 218, .3);
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  display: flex;
+}
+
+.voice-title-text-field {
+  width: 100%;
+  height: 50px;
+  color: #000;
+  border: 1px #000;
+  border-radius: 6px;
+  align-self: flex-start;
+  font-family: "Scdream5", sans-serif;
+  font-size: 17px;
+}
+
+.voice-title-text-block {
+  margin-right: 20px;
+  font-family: "Scdream6", sans-serif;
+}
+
+.voice-title-input-div-block {
+  width: 55%;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 6px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
 }
 
 @media screen and (max-width: 991px) {

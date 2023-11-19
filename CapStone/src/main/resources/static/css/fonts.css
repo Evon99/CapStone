@@ -18,6 +18,10 @@
 	src: url('/fonts/SCDream6.woff') format('woff');
 }
 
+@font-face {
+	font-family: "SCDream7";
+	src: url('/fonts/SCDream7.woff') format('woff');
+}
 
 @font-face {
 	font-family: "SCDream8";

@@ -68,29 +68,35 @@
                 <div class="community-heading-text-block">목소리 게시판</div>
             </div>
             <div class="w-form">
-                <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get"
-                    class="voice-upload-form" data-wf-page-id="6558d174378415d1dbdf1edb"
-                    data-wf-element-id="72d81358-d3b9-c63a-883b-8ad2dccfbaa7">
+                <form id="voice-post-form" name="voice-post-form" method="post" class="voice-upload-form" enctype="multipart/form-data">
                     <div class="voice-upload-file-div-block">
                         <div class="voice-upload-file-name-text-block">파일명</div>
                         <div class="voice-upload-file-name-div-block">
-                            <div class="voice-upload-file-name">sample.wav</div>
+                            <label class="voice-upload-file-name" id="voiceFileName"></label>
                         </div>
-                    </div><a href="#" class="voice-image-upload-button w-button">목소리 파일 업로드</a>
+                    </div><label class="voice-image-upload-button w-button" th:onclick="voiceFileUpload.click()">목소리 파일 업로드</label>
+                    	  <input type="file" name="voiceFileUpload" id="voiceFileUpload" class="voice-file-input" style="display: none;">
+                    <div class="voice-title-div-block">
+                        <div class="voice-title-text-block">제목</div>
+                        <div class="voice-title-input-div-block"><input type="text"
+                                class="voice-title-text-field w-input" maxlength="256" name="title"
+                                placeholder="" id="title"/></div>
+                    </div>
                     <div class="voice-upload-detail-div-block">
-                        <div class="voice-upload-image-div-block"><img
-                                src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6558f076f4d3d4dd56fea948_none_image.svg"
-                                loading="lazy" alt="" class="voice-upload-image" /><a href="#"
-                                class="voice-image-upload-button w-button">대표 이미지 업로드</a></div>
+                        <div class="voice-upload-image-div-block">
+                        		<img id="voiceImage" th:src="@{/static/images/none_image.svg}"
+                                loading="lazy" alt="" class="voice-upload-image" th:data-default-src="@{/static/images/none_image.svg}"/>
+                                <label class="voice-image-upload-button w-button" th:onclick="voiceImageInput.click()">대표 이미지 업로드</label></div>
+                                <input type="file" name="voiceImgFile" id="voiceImageInput" class="voice-Image-input" style="display: none;" th:onchange="displaySelectedVoiceFileImage()">
                         <div class="voice-upload-explain-div-block">
                             <div class="voice-explain-heading">목소리 설명</div><textarea placeholder="설명 입력.."
-                                maxlength="5000" id="field" name="field" data-name="Field"
+                                maxlength="5000" id="content" name="content" 
                                 class="voice-upload-explain-textarea w-input"></textarea>
                         </div>
                     </div>
-                    <div class="voice-upload-button-div-block"><a href="#"
-                            class="voice-upload-cancel-button w-button">취소</a><input type="submit" value="등록"
-                            data-wait="Please wait..." class="voice-upload-submit-button w-button" /></div>
+                    <div class="voice-upload-button-div-block">
+                    		<label href="#" class="voice-upload-cancel-button w-button">취소</label>
+                            <input type="submit" value="등록" onclick="VoiceCommunityWriteEndLoad()" class="voice-upload-submit-button w-button" /></div>
                 </form>
             </div>
         </div>

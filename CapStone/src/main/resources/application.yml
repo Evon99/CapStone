@@ -82,6 +82,8 @@ spring:
 memberImgLocation: C:/capstone/member
 musicImgLocation: C:/capstone/music/img
 musicFileLocation: C:/capstone/music/file
+voiceImgLocation: C:/capstone/voice/img
+voiceFileLocation: C:/capstone/voice/file
 uploadPath: file:///C:/capstone/
 
 jwt:

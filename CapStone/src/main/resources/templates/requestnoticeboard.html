@@ -115,6 +115,7 @@
                 <div class="community-page-foreach-div-block" 	th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}">
                     <div class="community-page-num" th:if="${page >= paging.number-2 and page <= paging.number+2}" th:text="${page + 1}"  th:style="${page == paging.number} ? 'color: #3333FF;' : ''" th:onclick="'CommunityLoad(' + ${page} + ')'">1</div>
                 </div>
+                
                 <img th:src="@{static/images/right_arrows.png}" th:onclick="'CommunityLoad(' + ${paging.number + 1} + ')'"
                     loading="lazy" alt="" class="community-page-control-image"  th:style="${!paging.hasNext} ? 'display: none;' : ''"/>
                 <img

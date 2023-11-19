@@ -49,6 +49,32 @@ public class MusicCheckController {
 
 	    return response;
 	}
+	
+	@PostMapping("/checkVoice")
+	@ResponseBody
+	public Map<String, Object> checkVoice(@RequestParam("file") MultipartFile file) throws IOException {
+	    Map<String, Object> response = new HashMap<>();
+
+	    // 파일이 오디오인지 여부를 확인하는 로직
+	    AudioFileType isAudio = getAudioFileType(file.getBytes());
+	    if (isAudio != AudioFileType.UNKNOWN) {
+	        // 오디오 파일일 경우에는 Base64로 인코딩하여 클라이언트에 전달
+	        System.out.println("음악 파일입니다. 형식: " + isAudio.name());
+	        String encodedAudio = Base64.getEncoder().encodeToString(file.getBytes());
+	        response.put("encodedAudio", encodedAudio);
+	        
+	        String originalFilename = file.getOriginalFilename();
+	        response.put("musicTitle", originalFilename);
+	    } else {
+	        // 오디오 파일이 아닌 경우 기본 이미지 전달
+	        System.out.println("오디오 파일이 아닙니다.");
+	        // 기본 이미지 경로로 수정 (설정해야 하는 이미지 경로로 변경하세요)
+	        response.put("defaultImage", "/static/images/profile_image.svg");
+	    }
+	    response.put("isAudio", isAudio);
+
+	    return response;
+	}
 
 	// 오디오 파일 형식을 나타내는 열거형
     public enum AudioFileType {

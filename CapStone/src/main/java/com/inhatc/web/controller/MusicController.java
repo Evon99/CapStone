@@ -110,8 +110,6 @@ public class MusicController {
 	public String musicNew(@Valid MusicDto musicDto, BindingResult bindingResult, Model model, @RequestParam("musicImgFile")MultipartFile musicImgFile,
 			@RequestParam("musicUploadFile")MultipartFile musicUploadFile) {
 		
-		System.out.println("postMapping");
-		
 		if(bindingResult.hasErrors()) { 
             return "musicUpload";
         }

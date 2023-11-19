@@ -509,6 +509,8 @@
 		                    currentContent.innerHTML = contentContainerInTemplate.innerHTML;
 		                }
 				
+						voiceFileEvent();
+		    			voiceImageEvent();
 		            },
 		            error: function (xhr, status, error) {
 		            	   console.error("Error loading content:", error);
@@ -622,12 +624,14 @@
 
 		function VoiceCommunityWriteEndLoad() {
 	    	
-			var formValues = $("form[name=voice-post-form]").serialize() ;
+			var formValues = new FormData($("#voice-post-form")[0]);
 			
 	    	 $.ajax({
 		            type: 'POST',
 		            url: '/private/voicepostwrite',
 					data: formValues,
+					processData: false,
+   				    contentType: false,
 		            success: function (data) {
 						console.log("data", data);
 						if(data.trim() === 'titleEmpty') {
@@ -664,11 +668,12 @@
     		return false;
 	    }
 
-		function CommunityPostLoad(postId) {
+		function CommunityPostLoad(postId, page) {
 	    	
 	    	 $.ajax({
 		            type: 'GET',
 		            url: '/requestpost/' + postId,
+					data: { page: page },
 		            success: function (data) {
 		            	// data를 DOM 객체로 변환
 		                var parser = new DOMParser();

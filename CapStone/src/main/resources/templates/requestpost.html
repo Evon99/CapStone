@@ -77,7 +77,7 @@
             </div>
             <div class="community-post-content" th:text="${requestPost.content}">이 곡 제발 만들어주세요 ㅠㅠ</div>
             <div class="community-post-comment-div-block">
-                <div class="coummunity-post-comment-foreach-div-block" th:each="comment : ${comment}">
+                <div class="coummunity-post-comment-foreach-div-block" th:each="comment : ${comment.content}">
                     <div class="community-post-comment-member-detail-div-block">
                     	<img th:src="${comment.uploaderImg}" loading="lazy" alt="" class="community-post-comment-member-image" />
                         <div th:text="${comment.uploaderNickname}" th:onclick="memberPageLoad(/*[[${comment.uploaderNickname}]]*/)" class="community-post-comment-nickname">닉네임</div>
@@ -98,27 +98,21 @@
                         <input type="submit" value="등록" onclick="CommunityPostCommentWrite()" class="community-post-comment-write-submit-button w-button" />
                 </form>
             </div>
-            <div class="community-page-div-block"><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551ca4acc6ac22c1b3df5d5_left_double_arrows.png"
-                    loading="lazy" alt="" class="community-page-control-image" /><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551ca4aecb33593494255aa_left_arrows.png"
-                    loading="lazy" alt="" class="community-page-control-image" />
-                <div class="community-page-foreach-div-block">
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                </div><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551ca4a75979089cb24baf4_right_arrows.png"
-                    loading="lazy" alt="" class="community-page-control-image" /><img
-                    src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/6551c9b74daf65b5d41e8de6_right_double_arrow.png"
-                    loading="lazy" alt="" class="community-page-control-image" />
+            <div class="community-page-div-block">
+            	<img th:src="@{/static/images/left_double_arrows.png}"
+                    loading="lazy" alt="" class="community-page-control-image" th:onclick="'CommunityPostLoad(' + ${requestPost.id} + ', 0)'"/>
+                <img th:src="@{/static/images/left_arrows.png}" th:onclick="'CommunityPostLoad(' + ${requestPost.id} + ', ' + ${comment.number - 1} + ')'"
+                    loading="lazy" alt="" class="community-page-control-image" th:style="${!comment.hasPrevious} ? 'display: none;' : ''" />
+                    
+                <div class="community-page-foreach-div-block" 	th:each="page: ${#numbers.sequence(0, comment.totalPages-1)}">
+                    <div class="community-page-num" th:if="${page >= comment.number-2 and page <= comment.number+2}" th:text="${page + 1}"  th:style="${page == comment.number} ? 'color: #3333FF;' : ''" th:onclick="'CommunityPostLoad(' + ${requestPost.id} + ', ' + ${page} + ')'">1</div>
+                </div>
+                
+                <img th:src="@{static/images/right_arrows.png}" th:onclick="'CommunityPostLoad(' + ${requestPost.id} + ', ' + ${comment.number + 1} + ')'"
+                    loading="lazy" alt="" class="community-page-control-image"  th:style="${!comment.hasNext} ? 'display: none;' : ''"/>
+                <img
+                    th:src="@{static/images/right_double_arrow.png}"
+                    loading="lazy" alt="" class="community-page-control-image" th:onclick="'CommunityPostLoad(' + ${requestPost.id} + ', ' + (${comment.totalPages} - 1) + ')'" />
             </div>
             <div class="community-search-form-block w-form">
                 <form id="email-form" name="email-form" method="get"

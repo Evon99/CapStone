@@ -1,6 +1,7 @@
 package com.inhatc.web.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.inhatc.web.config.auth.LoginUser;
 import com.inhatc.web.dto.RequestPostDto;
 import com.inhatc.web.dto.SessionUser;
+import com.inhatc.web.entity.AiPost;
 import com.inhatc.web.entity.Member;
 import com.inhatc.web.entity.MemberDetail;
 import com.inhatc.web.entity.RequestComment;
@@ -133,10 +136,10 @@ public class CommunityController {
 	@GetMapping("/voicenoticeboard")
 	public String voiceNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, Model model, @LoginUser SessionUser user, HttpSession session) {
 		
-		//List<TipPost> tipPost = postService.getTipList(page);
-//		model.addAttribute("post", tipPost);
+		List<AiPost> aiPost = postService.getVoiceList(page);
+		model.addAttribute("post", aiPost);
 		
-		Page<TipPost> paging = postService.tipPaging(page);
+		Page<AiPost> paging = postService.aiPostPaging(page);
 		model.addAttribute("paging", paging);
 		
 		if (user != null) {
@@ -357,8 +360,10 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/private/voicepostwrite")
-	public String voicePostWrite(@RequestParam("title") String title, @RequestParam("content") String content, @LoginUser SessionUser user, Model model) {
+	public String voicePostWrite(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("voiceImgFile")MultipartFile voiceImgFile,
+			@RequestParam("voiceFileUpload")MultipartFile voiceFileUpload, @LoginUser SessionUser user, Model model) {
 		
+		System.out.println("title:" + title);
 		if(title.isBlank()) {
 			System.out.println("titleEmpty");
 			return "titleEmpty";
@@ -370,17 +375,17 @@ public class CommunityController {
 		}
 		
 		try {
-			  postService.saveTipPost(user, title, content);
+			  postService.saveVoice(user, voiceImgFile, voiceFileUpload, title, content);
       } catch (Exception e) {
           model.addAttribute("errorMessage", e.getMessage());
           return "voicepostwrite";
       }
 		
-//		List<TipPost> tipPost = postService.getTipList(0);
-//		model.addAttribute("post", tipPost);
+		List<AiPost> aiPost = postService.getVoiceList(0);
+		model.addAttribute("post", aiPost);
 		
-//		Page<TipPost> paging = postService.tipPaging(0);
-//		model.addAttribute("paging", paging);
+		Page<AiPost> paging = postService.aiPostPaging(0);
+		model.addAttribute("paging", paging);
 		
 		return "voicenoticeboard";
 	}
@@ -393,7 +398,9 @@ public class CommunityController {
 		
 		model.addAttribute("requestPost", requestPost);
 		
-		List<RequestComment> requestCommentList = postService.getRequestComment(postId, page);
+//		List<RequestComment> requestCommentList = postService.getRequestComment(postId, page);
+		
+		Page<RequestComment> requestCommentList = postService.getRequestComment(postId, page);
 		
 		model.addAttribute("comment", requestCommentList);
 		
@@ -590,7 +597,9 @@ public class CommunityController {
 		
 		model.addAttribute("requestPost", requestPost);
 		
-		List<RequestComment> requestCommentList = postService.getRequestComment(postId, 0);
+//		List<RequestComment> requestCommentList = postService.getRequestComment(postId, 0);
+		
+		Page<RequestComment> requestCommentList = postService.getRequestComment(postId, 0);
 		
 		model.addAttribute("comment", requestCommentList);
 		
