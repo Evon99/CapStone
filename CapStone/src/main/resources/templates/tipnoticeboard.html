@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="community-post-foreach-divblock">
-                <div class="community-post-column-div-block" th:each="post : ${post}">
+                <div class="community-post-column-div-block" th:each="post : ${paging.content}">
                     <div class="community-num-div-block">
                         <div class="community-post-num-text-block" th:text="${post.id}">1</div>
                     </div>
@@ -108,25 +108,31 @@
             </div>
             <div class="community-page-div-block">
             	<img th:src="@{/static/images/left_double_arrows.png}"
-                    loading="lazy" alt="" class="community-page-control-image" onclick="CommunityLoad(0)"/>
-                <img th:src="@{/static/images/left_arrows.png}" th:onclick="'CommunityLoad(' + ${paging.number - 1} + ')'"
+                    loading="lazy" alt="" class="community-page-control-image" onclick="TipCommunityLoad(0)"/>
+                <img th:src="@{/static/images/left_arrows.png}" th:onclick="'TipCommunityLoad(' + ${paging.number - 1} + ')'"
                     loading="lazy" alt="" class="community-page-control-image" th:style="${!paging.hasPrevious} ? 'display: none;' : ''" />
                     
-                <div class="community-page-foreach-div-block" 	th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}">
-                    <div class="community-page-num" th:if="${page >= paging.number-2 and page <= paging.number+2}" th:text="${page + 1}"  th:style="${page == paging.number} ? 'color: #3333FF;' : ''" th:onclick="'CommunityLoad(' + ${page} + ')'">1</div>
+                <div class="community-page-foreach-div-block" th:if="${paging != null and paging.totalPages > 0}" th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}">
+                    <div class="community-page-num" th:if="${page >= paging.number-2 and page <= paging.number+2}" th:text="${page + 1}"  th:style="${page == paging.number} ? 'color: #3333FF;' : ''" th:onclick="'TipCommunityLoad(' + ${page} + ')'">1</div>
                 </div>
-                <img th:src="@{static/images/right_arrows.png}" th:onclick="'CommunityLoad(' + ${paging.number + 1} + ')'"
+                <img th:src="@{static/images/right_arrows.png}" th:onclick="'TipCommunityLoad(' + ${paging.number + 1} + ')'"
                     loading="lazy" alt="" class="community-page-control-image"  th:style="${!paging.hasNext} ? 'display: none;' : ''"/>
                 <img
                     th:src="@{static/images/right_double_arrow.png}"
-                    loading="lazy" alt="" class="community-page-control-image" th:onclick="'CommunityLoad(' + (${paging.totalPages} - 1) + ')'" />
+                    loading="lazy" alt="" class="community-page-control-image" th:onclick="'TipCommunityLoad(' + (${paging.totalPages} - 1) + ')'" />
             </div>
             <div class="community-search-form-block w-form">
-                <form id="email-form" name="email-form"  method="get"
+                <form id="tip-search-form" name="tip-search-form" method="post"
                     class="community-search-form">
+                    <div class="community-search-select-div-block"><select id="filter" name="filter"
+                            class="community-search-search-select-field">
+                            <option value="title">제목</option>
+                            <option value="nickname">업로더</option>
+                    </select></div>
                     <input type="text"
-                        class="community-search-text-field w-input" maxlength="256" name="name" data-name="Name"
-                        placeholder="" id="name" /><input type="submit" value="" data-wait="Please wait..."
+                        class="community-search-text-field w-input" maxlength="256" name="keyword" 
+                        placeholder="" id="keyword" />
+                    <input type="submit" value="" onclick="TipCommunitySearchLoad()"
                         class="community-search-submit-button w-button" /></form>
             
             </div>

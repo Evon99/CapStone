@@ -1,7 +1,7 @@
 package com.inhatc.web.controller;
 
+import java.io.IOException;
 import java.util.List;
-
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.inhatc.web.config.auth.LoginUser;
 import com.inhatc.web.dto.RequestPostDto;
 import com.inhatc.web.dto.SessionUser;
+import com.inhatc.web.entity.AiComment;
 import com.inhatc.web.entity.AiPost;
 import com.inhatc.web.entity.Member;
 import com.inhatc.web.entity.MemberDetail;
@@ -44,178 +45,68 @@ public class CommunityController {
 	@GetMapping("/requestnoticeboard")
 	public String requestNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, Model model, @LoginUser SessionUser user, HttpSession session) {
 		
-		List<RequestPost> requestPost = postService.getRequestList(page);
-		model.addAttribute("post", requestPost);
+		Page<RequestPost> paging = postService.requestPostPaging(page, "", "");
 		
-		Page<RequestPost> paging = postService.requestPaging(page);
 		model.addAttribute("paging", paging);
 		
-		if (user != null) {
-	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
-
-	        if (optionalMember.isPresent()) {
-	        	// 로그인 유저 정보
-	            Member loginMember = optionalMember.get();
-	            MemberDetail loginMemberDetail = memberDetailRepository.findByMember_Id(loginMember.getId());
-	            
-	            
-	            // Check if memberDetail is null
-	            if (loginMemberDetail == null || loginMemberDetail.getNickname() == null) {
-	                // Clear the session
-	                session.invalidate();
-	                // Redirect to the home page
-	                return "redirect:/";
-	            }
-
-	            model.addAttribute("session", user);
-	            model.addAttribute("loginNickname", loginMemberDetail.getNickname());
-	            model.addAttribute("loginMemberId", loginMember.getId());
-//	            System.out.println("멤버디테일:" + memberDetail.getPictureUrl());
-
-	         // 로그인유저 프로필 이미지 가져오기
-	            if (loginMemberDetail.getPictureUrl().isEmpty()) {
-	                model.addAttribute("loginPictureUrl", loginMember.getPictureUrl());
-//	                System.out.println("url: " + member.getPictureUrl());
-	            } else {
-	                model.addAttribute("loginPictureUrl", loginMemberDetail.getPictureUrl());
-	            }
-	            
-	        } else {
-	            // Optional이 비어 있다면 처리할 로직 추가
-	        }
-	    }
+		System.out.println("요청곡 페이지로 이동");
 		return "requestnoticeboard";
 	}
+	
+	@PostMapping("/requestnoticeboard")
+	public String requestSearchNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, @RequestParam("keyword") String keyword, @RequestParam("filter") String filter, Model model, @LoginUser SessionUser user, HttpSession session) {
+		
+		Page<RequestPost> paging = postService.requestPostPaging(page, filter, keyword);
+		
+		model.addAttribute("paging", paging);
+		
+		return "requestnoticeboard";
+	}
+	
 	
 	@GetMapping("/tipnoticeboard")
 	public String tipNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, Model model, @LoginUser SessionUser user, HttpSession session) {
 		
-		List<TipPost> tipPost = postService.getTipList(page);
-		model.addAttribute("post", tipPost);
+		Page<TipPost> paging = postService.tipPostPaging(page, "", "");
 		
-		Page<TipPost> paging = postService.tipPaging(page);
 		model.addAttribute("paging", paging);
 		
-		if (user != null) {
-	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
-
-	        if (optionalMember.isPresent()) {
-	        	// 로그인 유저 정보
-	            Member loginMember = optionalMember.get();
-	            MemberDetail loginMemberDetail = memberDetailRepository.findByMember_Id(loginMember.getId());
-	            
-	            
-	            // Check if memberDetail is null
-	            if (loginMemberDetail == null || loginMemberDetail.getNickname() == null) {
-	                // Clear the session
-	                session.invalidate();
-	                // Redirect to the home page
-	                return "redirect:/";
-	            }
-
-	            model.addAttribute("session", user);
-	            model.addAttribute("loginNickname", loginMemberDetail.getNickname());
-	            model.addAttribute("loginMemberId", loginMember.getId());
-//	            System.out.println("멤버디테일:" + memberDetail.getPictureUrl());
-
-	         // 로그인유저 프로필 이미지 가져오기
-	            if (loginMemberDetail.getPictureUrl().isEmpty()) {
-	                model.addAttribute("loginPictureUrl", loginMember.getPictureUrl());
-//	                System.out.println("url: " + member.getPictureUrl());
-	            } else {
-	                model.addAttribute("loginPictureUrl", loginMemberDetail.getPictureUrl());
-	            }
-	            
-	        } else {
-	            // Optional이 비어 있다면 처리할 로직 추가
-	        }
-	    }
+		return "tipnoticeboard";
+	}
+	
+	@PostMapping("/tipnoticeboard")
+	public String tipSearchNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, @RequestParam("keyword") String keyword, @RequestParam("filter") String filter, Model model, @LoginUser SessionUser user, HttpSession session) {
+		
+		Page<TipPost> paging = postService.tipPostPaging(page, filter, keyword);
+		
+		model.addAttribute("paging", paging);
+		
 		return "tipnoticeboard";
 	}
 	
 	@GetMapping("/voicenoticeboard")
 	public String voiceNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, Model model, @LoginUser SessionUser user, HttpSession session) {
 		
-		List<AiPost> aiPost = postService.getVoiceList(page);
-		model.addAttribute("post", aiPost);
+		Page<AiPost> paging = postService.aiPostPaging(page, "", "");
 		
-		Page<AiPost> paging = postService.aiPostPaging(page);
 		model.addAttribute("paging", paging);
 		
-		if (user != null) {
-	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
-
-	        if (optionalMember.isPresent()) {
-	        	// 로그인 유저 정보
-	            Member loginMember = optionalMember.get();
-	            MemberDetail loginMemberDetail = memberDetailRepository.findByMember_Id(loginMember.getId());
-	            
-	            
-	            // Check if memberDetail is null
-	            if (loginMemberDetail == null || loginMemberDetail.getNickname() == null) {
-	                // Clear the session
-	                session.invalidate();
-	                // Redirect to the home page
-	                return "redirect:/";
-	            }
-
-	            model.addAttribute("session", user);
-	            model.addAttribute("loginNickname", loginMemberDetail.getNickname());
-	            model.addAttribute("loginMemberId", loginMember.getId());
-//	            System.out.println("멤버디테일:" + memberDetail.getPictureUrl());
-
-	         // 로그인유저 프로필 이미지 가져오기
-	            if (loginMemberDetail.getPictureUrl().isEmpty()) {
-	                model.addAttribute("loginPictureUrl", loginMember.getPictureUrl());
-//	                System.out.println("url: " + member.getPictureUrl());
-	            } else {
-	                model.addAttribute("loginPictureUrl", loginMemberDetail.getPictureUrl());
-	            }
-	            
-	        } else {
-	            // Optional이 비어 있다면 처리할 로직 추가
-	        }
-	    }
 		return "voicenoticeboard";
 	}
+	
+	@PostMapping("/voicenoticeboard")
+	public String voiceSearchNoticeBoard(@RequestParam(value="page", defaultValue="0") int page, @RequestParam("keyword") String keyword, @RequestParam("filter") String filter, Model model, @LoginUser SessionUser user, HttpSession session) {
+		
+		Page<AiPost> paging = postService.aiPostPaging(page, filter, keyword);
+		
+		model.addAttribute("paging", paging);
+		
+		return "voicenoticeboard";
+	}
+	
 	@GetMapping("/private/requestpostwrite")
 	public String requestPostWrite(Model model, @LoginUser SessionUser user, HttpSession session) {
 		
-		if (user != null) {
-	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
-
-	        if (optionalMember.isPresent()) {
-	        	// 로그인 유저 정보
-	            Member loginMember = optionalMember.get();
-	            MemberDetail loginMemberDetail = memberDetailRepository.findByMember_Id(loginMember.getId());
-	            
-	            
-	            // Check if memberDetail is null
-	            if (loginMemberDetail == null || loginMemberDetail.getNickname() == null) {
-	                // Clear the session
-	                session.invalidate();
-	                // Redirect to the home page
-	                return "redirect:/";
-	            }
-
-	            model.addAttribute("session", user);
-	            model.addAttribute("loginNickname", loginMemberDetail.getNickname());
-	            model.addAttribute("loginMemberId", loginMember.getId());
-	            model.addAttribute("requestPostDto", new RequestPostDto());
-//	            System.out.println("멤버디테일:" + memberDetail.getPictureUrl());
-
-	         // 로그인유저 프로필 이미지 가져오기
-	            if (loginMemberDetail.getPictureUrl().isEmpty()) {
-	                model.addAttribute("loginPictureUrl", loginMember.getPictureUrl());
-//	                System.out.println("url: " + member.getPictureUrl());
-	            } else {
-	                model.addAttribute("loginPictureUrl", loginMemberDetail.getPictureUrl());
-	            }
-	            
-	        } else {
-	            // Optional이 비어 있다면 처리할 로직 추가
-	        }
-	    }
 		return "requestpostwrite";
 	}
 	
@@ -321,10 +212,10 @@ public class CommunityController {
           return "requestpostwrite";
       }
 		
-		List<RequestPost> requestPost = postService.getRequestList(0);
-		model.addAttribute("post", requestPost);
+//		Page<RequestPost> requestPost = postService.getRequestList(0, "");
+//		model.addAttribute("post", requestPost);
 		
-		Page<RequestPost> paging = postService.requestPaging(0);
+		Page<RequestPost> paging = postService.requestPostPaging(0, "", "");
 		model.addAttribute("paging", paging);
 		
 		return "requestnoticeboard";
@@ -350,10 +241,10 @@ public class CommunityController {
           return "tippostwrite";
       }
 		
-		List<TipPost> tipPost = postService.getTipList(0);
-		model.addAttribute("post", tipPost);
+//		List<TipPost> tipPost = postService.getTipList(0);
+//		model.addAttribute("post", tipPost);
 		
-		Page<TipPost> paging = postService.tipPaging(0);
+		Page<TipPost> paging = postService.tipPostPaging(0, "", "");
 		model.addAttribute("paging", paging);
 		
 		return "tipnoticeboard";
@@ -381,10 +272,10 @@ public class CommunityController {
           return "voicepostwrite";
       }
 		
-		List<AiPost> aiPost = postService.getVoiceList(0);
-		model.addAttribute("post", aiPost);
+//		List<AiPost> aiPost = postService.getVoiceList(0);
+//		model.addAttribute("post", aiPost);
 		
-		Page<AiPost> paging = postService.aiPostPaging(0);
+		Page<AiPost> paging = postService.aiPostPaging(0, "", "");
 		model.addAttribute("paging", paging);
 		
 		return "voicenoticeboard";
@@ -450,7 +341,9 @@ public class CommunityController {
 		
 		model.addAttribute("tipPost", tipPost);
 		
-		List<TipComment> tipCommentList = postService.getTipComment(postId, page);
+//		List<TipComment> tipCommentList = postService.getTipComment(postId, page);
+		
+		Page<TipComment> tipCommentList = postService.getTipComment(postId, page);
 		
 		model.addAttribute("comment", tipCommentList);
 		
@@ -494,17 +387,19 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/voicepost/{postId}")
-	public String voicePost(@RequestParam(value="page", defaultValue="0") int page, @PathVariable long postId, Model model, @LoginUser SessionUser user, HttpSession session) {
+	public String voicePost(@RequestParam(value="page", defaultValue="0") int page, @PathVariable long postId, Model model, @LoginUser SessionUser user, HttpSession session) throws IOException {
 		
-//		TipPost tipPost = postService.getTipPost(postId);
+		AiPost aiPost = postService.getVoicePost(postId);
 		
-//		model.addAttribute("tipPost", tipPost);
+		model.addAttribute("aiPost", aiPost);
 		
-//		List<TipComment> tipCommentList = postService.getTipComment(postId, page);
+//		List<TipComment> tipCommentList = postService.getTipComment(postId, 0);
 		
-//		model.addAttribute("comment", tipCommentList);
+		Page<AiComment> VoiceCommentList = postService.getVoiceComment(postId, page);
 		
-//		postService.updateTipView(postId); // 게시글 조회수 증가
+		model.addAttribute("comment", VoiceCommentList);
+		
+		postService.updateAiPostView(postId); // 게시글 조회수 증가
 		
 		if (user != null) {
 	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
@@ -660,7 +555,9 @@ public class CommunityController {
 		
 		model.addAttribute("tipPost", tipPost);
 		
-		List<TipComment> tipCommentList = postService.getTipComment(postId, 0);
+//		List<TipComment> tipCommentList = postService.getTipComment(postId, 0);
+		
+		Page<TipComment> tipCommentList = postService.getTipComment(postId, 0);
 		
 		model.addAttribute("comment", tipCommentList);
 		
@@ -668,7 +565,7 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/private/voicecommentwrite")
-	public String voiceCommentWrite(@RequestParam("postId") long postId, @RequestParam("comment") String comment, @LoginUser SessionUser user, Model model, HttpSession session) {
+	public String voiceCommentWrite(@RequestParam("postId") long postId, @RequestParam("comment") String comment, @LoginUser SessionUser user, Model model, HttpSession session) throws IOException {
 		
 		if(comment.isBlank()) {
 			System.out.println("commentEmpty");
@@ -717,13 +614,15 @@ public class CommunityController {
 	        }
 	    }
 		
-//		TipPost tipPost = postService.getTipPost(postId);
+		AiPost aiPost = postService.getVoicePost(postId);
 		
-//		model.addAttribute("tipPost", tipPost);
+		model.addAttribute("tipPost", aiPost);
 		
 //		List<TipComment> tipCommentList = postService.getTipComment(postId, 0);
 		
-//		model.addAttribute("comment", tipCommentList);
+		Page<AiComment> VoiceCommentList = postService.getVoiceComment(postId, 0);
+		
+		model.addAttribute("comment", VoiceCommentList);
 		
 		return "voicepost";
 	}

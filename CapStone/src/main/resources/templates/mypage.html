@@ -326,29 +326,7 @@
             
         </div>
     </div>
-    <div data-delay="4000" data-animation="slide" class="slider w-slider" data-autoplay="false" data-easing="ease"
-        data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3"
-        data-duration="500" data-infinite="true">
-        <div class="w-slider-mask">
-            <div class="slide _1 w-slide">
-                <div class="w-container"></div>
-            </div>
-            <div class="slide _2 w-slide">
-                <div class="w-container"></div>
-            </div>
-            <div class="slide _3 w-slide">
-                <div class="w-container"></div>
-            </div>
-        </div>
-        <div class="w-slider-arrow-left">
-            <div class="w-icon-slider-left"></div>
-        </div>
-        <div class="w-slider-arrow-right">
-            <div class="w-icon-slider-right"></div>
-        </div>
-        <div class="w-slider-nav w-round"></div>
-    </div>
-    <div id="features" data-w-id="62e437ac-c9a3-3226-3092-d9ad5af8c296" class="main-section">
+    <div id="features" class="main-section">
         <div class="w-layout-blockcontainer profile-container w-container">
             <div class="div-userprofile">
                 <div class="w-layout-blockcontainer container-3 w-container">
@@ -403,7 +381,7 @@
 	                   <img th:src="@{/static/images/music_play_button.png}" th:onclick="playMusic(/*[[${music.id}]]*/, /*[[${music.musicUrl}]]*/, /*[[${music.imgUrl}]]*/, /*[[${music.aiSinger}]]*/, /*[[${music.title}]]*/, /*[[${music.oriSinger}]]*/, /*[[${music.memberDetail.nickname}]]*/); showFooter()"
     							loading="lazy" alt="" class="play-button-img" /></div>
 	                <div class="main-top-music-detail-column w-col w-col-4">
-	                    <h4 class="main-top-music-title" th:text="${music.aiSinger + ' - ' + music.title + '(' + music.oriSinger + ')'}">AI 媛��닔 - Title(�썝�옉�옄)</h4>
+	                    <h4 class="main-top-music-title" th:text="${music.aiSinger + ' - ' + music.title + '(' + music.oriSinger + ')'}"></h4>
 	                    <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
 	                    <div class="current-div-block">
 		                    <img th:src="@{/static/images/like.png}" loading="lazy" width="24" alt="" class="main-top-music-show-like-img" />
@@ -421,7 +399,7 @@
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="main-report-link-block w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" loading="lazy"  alt=""
-	                                        class="main-top-music-function-report" /></a></div>
+	                                        class="main-top-music-function-report" th:onclick="openReportModal(/*[[${music.id}]]*/, /*[[${music.aiSinger}]]*/, /*[[${music.title}]]*/, /*[[${music.oriSinger}]]*/, /*[[${music.memberDetail.nickname}]]*/)"/></a></div>
 	                    </div>
 	                </div>
 	                
@@ -456,7 +434,7 @@
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="main-report-link-block w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" loading="lazy"  alt=""
-	                                        class="main-top-music-function-report" /></a></div>
+	                                        class="main-top-music-function-report" th:onclick="openReportModal(/*[[${music.id}]]*/, /*[[${music.aiSinger}]]*/, /*[[${music.title}]]*/, /*[[${music.oriSinger}]]*/, /*[[${music.memberDetail.nickname}]]*/)"/></a></div>
 	                    </div>
 	                </div>
 	                

@@ -90,7 +90,8 @@
                 <form id="community-post-comment-write-form" name="community-post-comment-write-form" method="post"
                     class="community-post-comment-write-form">
                     <div class="community-post-comment-write-div-block">
-                    	<img th:src="${loginPictureUrl}" loading="lazy" alt="" class="community-post-comment-member-image" />
+                    	<img th:if="${not #strings.isEmpty(loginPictureUrl)}" th:src="${loginPictureUrl}" loading="lazy" alt="" class="community-post-comment-member-image" />
+						<img th:unless="${not #strings.isEmpty(loginPictureUrl)}" th:src="@{/static/images/profile_image.svg}" loading="lazy" alt="" class="community-post-comment-member-image"/>
                     	<textarea placeholder="댓글 추가.." maxlength="5000" id="field" name="comment"
                             class="community-post-comment-write-textarea w-input"></textarea>
                         <input type="hidden" name="postId" th:value="${tipPost.id}">
@@ -98,27 +99,20 @@
                         <input type="submit" value="등록" onclick="TipCommunityCommentWrite()" class="community-post-comment-write-submit-button w-button" />
                 </form>
             </div>
-            <div class="community-page-div-block"><img
-                    th:src="@{/static/images/left_double_arrows.png}"
-                    loading="lazy" alt="" class="community-page-control-image" /><img
-                    th:src="@{/static/images/left_arrows.png}"
-                    loading="lazy" alt="" class="community-page-control-image" />
-                <div class="community-page-foreach-div-block">
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                    <div class="community-page-num">1</div>
-                </div><img
-                    th:src="@{/static/images/right_arrows.png}"
-                    loading="lazy" alt="" class="community-page-control-image" /><img
+            <div class="community-page-div-block"><img th:src="@{/static/images/left_double_arrows.png}"
+                    loading="lazy" alt="" class="community-page-control-image" th:onclick="'TIpCommunityPostLoad(' + ${tipPost.id} + ', 0)'"/>
+                <img th:src="@{/static/images/left_arrows.png}" th:onclick="'TipCommunityPostLoad(' + ${tipPost.id} + ', ' + ${comment.number - 1} + ')'"
+                    loading="lazy" alt="" class="community-page-control-image" th:style="${!comment.hasPrevious} ? 'display: none;' : ''" />
+                    
+                <div class="community-page-foreach-div-block" th:if="${comment != null and comment.totalPages > 0}" th:each="page: ${#numbers.sequence(0, comment.totalPages-1)}">
+				    <div class="community-page-num" th:if="${page >= comment.number-2 and page <= comment.number+2}" th:text="${page + 1}" th:style="${page == comment.number} ? 'color: #3333FF;' : ''" th:onclick="'TipCommunityPostLoad(' + ${tipPost.id} + ', ' + ${page} + ')'"></div>
+				</div>
+                
+                <img th:src="@{static/images/right_arrows.png}" th:onclick="'TipCommunityPostLoad(' + ${tipPost.id} + ', ' + ${comment.number + 1} + ')'"
+                    loading="lazy" alt="" class="community-page-control-image"  th:style="${!comment.hasNext} ? 'display: none;' : ''"/>
+                <img
                     th:src="@{static/images/right_double_arrow.png}"
-                    loading="lazy" alt="" class="community-page-control-image" />
+                    loading="lazy" alt="" class="community-page-control-image" th:onclick="'TipCommunityPostLoad(' + ${tipPost.id} + ', ' + (${comment.totalPages} - 1) + ')'" />
             </div>
             <div class="community-search-form-block w-form">
                 <form id="email-form" name="email-form" method="get"

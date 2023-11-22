@@ -58,6 +58,9 @@ public class AiPost extends BasePostEntity{
 	@Transient // DB에 매핑하지 않음
     private String uploaderImg;
 	
+	@Transient // DB에 매핑하지 않음
+    private String voiceFileSize;
+	
 	public void setUploaderNickname() {
 		if(member.getMemberDetail() != null) {
 			this.uploaderNickname = member.getMemberDetail().getNickname();

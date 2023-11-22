@@ -173,7 +173,7 @@
             <div class="music-search-form-block w-form">
                 <form id="music-search-form" name="music-search-form" method="post" class="music-search-form">
                 <input type="text" class="music-search-text-field w-input" name="search-keyword"
-                        placeholder="Search..." id="search-keyword" requ-buired="" />
+                        placeholder="Search..." id="search-keyword"  />
                 <input type="submit" value="" class="music-search-submit-button w-button" onclick="searchLoad()"/></form>
             </div>
             <div class="w-layout-blockcontainer main-top-music-container w-container">
@@ -191,7 +191,7 @@
     							 alt="" class="play-button-img" /></div>
 	                    <div class="main-top-music-detail-column w-col w-col-4">
 	                        <h4 class="main-top-music-title" th:text="${music.aiSinger + ' - ' + music.title + '(' + music.oriSinger + ')'}">AI 가수 - Title(원작자)</h4>
-	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
+	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}" th:onclick="memberPageLoad(/*[[${music.uploaderNickname}]]*/)">Uploader</p>
 	                        <div class="current-div-block">
 	                        	<img th:src="@{/static/images/like.png}"  width="24" alt="" class="main-top-music-show-like-img" />
 	                            <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
@@ -209,7 +209,7 @@
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="main-report-link-block w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" alt=""
-	                                        class="main-top-music-function-report" /></a></div>
+	                                        class="main-top-music-function-report" th:onclick="openReportModal(/*[[${music.id}]]*/, /*[[${music.aiSinger}]]*/, /*[[${music.title}]]*/, /*[[${music.oriSinger}]]*/, /*[[${music.memberDetail.nickname}]]*/)" /></a></div>
 	                        </div>
 	                    </div>
 	                    
@@ -234,7 +234,7 @@
     						 alt="" class="play-button-img" /></div>
 	                    <div class="main-top-music-detail-column w-col w-col-4">
 	                        <h4 class="main-top-music-title" th:text="${music.aiSinger + ' - ' + music.title + '(' + music.oriSinger + ')'}">AI 가수 - Title(원작자)</h4>
-	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}">Uploader</p>
+	                        <p class="main-top-music-uploader" th:text="${music.uploaderNickname}" th:onclick="memberPageLoad(/*[[${music.uploaderNickname}]]*/)">Uploader</p>
 	                        <div class="div-block-9">
 	                        	<img th:src="@{/static/images/like.png}" width="24" alt="" class="main-top-music-show-like-img" />
 	                            <div class="main-top-music-show-like-text" th:id="'likeCount' + ${music.id}" th:text="${music.like}">55.3k</div>
@@ -251,7 +251,7 @@
 	                            <div class="main-top-music-function-report-column w-col w-col-4"><a href="#"
 	                                    class="w-inline-block">
 	                                <img th:src="@{/static/images/report.png}" alt=""
-	                                        class="main-top-music-function-report" /></a></div>
+	                                        class="main-top-music-function-report" th:onclick="openReportModal(/*[[${music.id}]]*/, /*[[${music.aiSinger}]]*/, /*[[${music.title}]]*/, /*[[${music.oriSinger}]]*/, /*[[${music.memberDetail.nickname}]]*/)"/></a></div>
 	                        </div>
 	                    </div>
 	                </div>
@@ -260,8 +260,9 @@
             </div>
             <h2 class="genre-heading">By Genre</h2>
             <div class="main-genre-first-column w-row">
-                <div class="main-genre-column-1 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650da7ff73fce003d57f1178_Starboy.jpg"
+                <div class="main-genre-column-1 w-col w-col-2">
+                	<img
+                        th:src="@{/static/images/Starboy.jpg}" th:onclick="genreFilterLoad('HipHop', '/static/images/Starboy.jpg')"
                         loading="lazy"
                         sizes="(max-width: 479px) 100vw, (max-width: 767px) 97vw, (max-width: 991px) 14vw, 140px"
                         srcset="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650da7ff73fce003d57f1178_Starboy-p-500.jpg 500w, https://assets-global.website-files.com/65085ce06a89f83f850a1961/650da7ff73fce003d57f1178_Starboy.jpg 640w"
@@ -269,59 +270,59 @@
                     <div class="main-genre-text">HipHop</div>
                 </div>
                 <div class="main-genre-column-2 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650da94e421c2e6778085129_WildFlower.jpg"
+                        th:src="@{/static/images/WildFlower.jpg}" th:onclick="genreFilterLoad('Ballad', '/static/images/WildFlower.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Ballad</div>
                 </div>
                 <div class="main-genre-column-3 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650daa2c4c5a7e60b80e0ccb_Back%20To%20The%20Soul%20Flight.jpg"
+                        th:src="@{/static/images/Back To The Soul Flight.jpg}" th:onclick="genreFilterLoad('R&B', '/static/images/Back To The Soul Flight.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">R&amp;B</div>
                 </div>
                 <div class="main-genre-column-4 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650daa9f4e7d43ee5f76d543_25.jpg"
+                        th:src="@{/static/images/25.jpg}" th:onclick="genreFilterLoad('Pop', '/static/images/25.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Pop</div>
                 </div>
                 <div class="main-genre-column-5 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650daae6131bac7d928b0e8b_505.jpg"
+                        th:src="@{/static/images/505.jpg}" th:onclick="genreFilterLoad('Rock&Metal', '/static/images/505.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Rock &amp; Metal</div>
                 </div>
                 <div class="main-genre-column-6 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650dab62231d04fafb780604_L-O-V-E.jpg"
+                        th:src="@{/static/images/L-O-V-E.jpg}" th:onclick="genreFilterLoad('Jazz', '/static/images/L-O-V-E.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Jazz</div>
                 </div>
             </div>
             <div class="main-genre-second-column w-row">
                 <div class="main-genre-column-1 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650ef4ef299a53936d098dd5_Night%20Dancer.jpg"
+                        th:src="@{/static/images/Night Dancer.jpg}" th:onclick="genreFilterLoad('J-Pop', '/static/images/Night Dancer.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">J-Pop</div>
                 </div>
                 <div class="main-genre-column-2 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650ef59a9aad1a83c3d5a3e4_troat.jpg"
+                        th:src="@{/static/images/troat.jpg}" th:onclick="genreFilterLoad('Trot', '/static/images/troat.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Trot</div>
                 </div>
                 <div class="main-genre-column-3 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650ef62b6a90b88c67ae4d8e_LALA.jpg"
+                        th:src="@{/static/images/LALA.jpg}" th:onclick="genreFilterLoad('Latin', '/static/images/LALA.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Latin</div>
                 </div>
                 <div class="main-genre-column-4 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650ef689ea23e1c17a59f2f4_Indie.jpg"
+                        th:src="@{/static/images/Indie.jpg}" th:onclick="genreFilterLoad('Indie', '/static/images/Indie.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Indie</div>
                 </div>
                 <div class="main-genre-column-5 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650ef7f15050c9cddfa04209_10cm.jpg"
+                        th:src="@{/static/images/10cm.jpg}" th:onclick="genreFilterLoad('Acoustic', '/static/images/10cm.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Acoustic</div>
                 </div>
                 <div class="main-genre-column-6 w-col w-col-2"><img
-                        src="https://assets-global.website-files.com/65085ce06a89f83f850a1961/650ef770e788a656013f5f71_Dance.jpg"
+                        th:src="@{/static/images/Dance.jpg}" th:onclick="genreFilterLoad('Dance&Electronic', '/static/images/Dance.jpg')"
                         loading="lazy" alt="" class="main-genre-img" />
                     <div class="main-genre-text">Dance &amp; Electronic</div>
                 </div>

@@ -15,12 +15,17 @@
 	<link th:href="@{/css/styles.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/followModal.css}" rel="stylesheet" type="text/css" />
 	<link th:href="@{/css/modal.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/reportModal.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	
+
 	<div th:replace="fragments/header::header"></div>
 	
+    <div th:replace="fragments/reportModal::reportModal"></div>
+
 	<div layout:fragment="content"></div>
+	
 	
 	<div th:replace="fragments/footer::footer"></div>
 	

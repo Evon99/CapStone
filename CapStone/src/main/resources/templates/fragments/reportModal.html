@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+	<div th:fragment="reportModal">
+	<meta charset="UTF-8">
+	
+	<!-- 신고 모달 -->
+    <div id="reportModalContainer" class="report-modal-container">
+        <div class="report-modal">
+            <div class="login-modal-delete-div-block">
+            <img th:src="@{/static/images/black_delete.png}" class="login-modal-delete-btn w-button" id="closeReportModalBtn"></img></div>
+            <div class="report-modal-heading">AI 커버가 아닌가요?</div>
+            <div class="report-music-info-div-block">
+                <div id="reportMusicTitle" class="report-music-title">노래: AI 가수 - 제목(원래가수)</div>
+                <div id="reportMusicUploader" class="report-music-uploader">업로더: 테스트유저</div>
+            </div>
+            <div class="report-form-block w-form">
+                <form id="report-music-form" name="report-music-form" method="post" class="report-form">
+                	<textarea placeholder="자세한 내용을 적어주세요."
+                        maxlength="5000" id="reportContent" name="reportContent"
+                        class="report-textarea w-input"></textarea>
+                    <input type="submit" id="reportMusicBtn" value="제출" class="report-submit-button w-button" />
+                </form>
+            </div>
+        </div>
+    </div>
+    
+	</div>
+
+</html>

@@ -1,5 +1,10 @@
 package com.inhatc.web.service;
 
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -58,40 +63,68 @@ public class PostService {
 	
 	private final FileService fileService;
 	
-	public Page<RequestPost> requestPaging(int page) {
+	public Page<RequestPost> requestPostPaging(int page, String filter, String keyword) {
 		Pageable pageable = PageRequest.of(page, 20);
-		Page<RequestPost> requestPost = requestPostRepository.findAll(pageable);
 		
-		for (RequestPost post : requestPost) {
-			Hibernate.initialize(post.getMemberDetail());
+		Page<RequestPost> requestPostList;
+		
+		if (filter.equals("title")) {
+			 System.out.println("키워드 필터");
+	         requestPostList = requestPostRepository.findAllByTitleOrderByRegTimeDescAndIdAsc(keyword, pageable);
+	    } else if(filter.equals("nickname")) {
+	    	 requestPostList = requestPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    } else {
+	    	requestPostList = requestPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    }
+		
+		
+		for (RequestPost post : requestPostList) {
 			post.setUploaderNickname();
 		}
 		
-		return this.requestPostRepository.findAll(pageable);
+		return requestPostList;
 	}
 	
-	public Page<TipPost> tipPaging(int page) {
+	public Page<TipPost> tipPostPaging(int page, String filter, String keyword) {
 		Pageable pageable = PageRequest.of(page, 20);
-		Page<TipPost> tipPost = tipPostRepository.findAll(pageable);
 		
-		for (TipPost post : tipPost) {
-			Hibernate.initialize(post.getMemberDetail());
+		Page<TipPost> tipPostList;
+		
+		if (filter.equals("title")) {
+			 System.out.println("키워드 필터");
+	         tipPostList = tipPostRepository.findAllByTitleOrderByRegTimeDescAndIdAsc(keyword, pageable);
+	    } else if(filter.equals("nickname")) {
+	    	 tipPostList = tipPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    } else {
+	    	 tipPostList = tipPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    }
+		
+		for (TipPost post : tipPostList) {
 			post.setUploaderNickname();
 		}
 		
-		return this.tipPostRepository.findAll(pageable);
+		return tipPostList;
 	}
 	
-	public Page<AiPost> aiPostPaging(int page) {
+	public Page<AiPost> aiPostPaging(int page, String filter, String keyword) {
 		Pageable pageable = PageRequest.of(page, 6);
-		Page<AiPost> aiPost = aiPostRepository.findAll(pageable);
 		
-		for (AiPost post : aiPost) {
-			Hibernate.initialize(post.getMemberDetail());
+		Page<AiPost> aiPostList;
+		
+		if (filter.equals("title")) {
+			 System.out.println("키워드 필터");
+	         aiPostList = aiPostRepository.findAllByTitleOrderByRegTimeDescAndIdAsc(keyword, pageable);
+	    } else if(filter.equals("nickname")) {
+	    	 aiPostList = aiPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    } else {
+	    	 aiPostList = aiPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    }
+		
+		for (AiPost post : aiPostList) {
 			post.setUploaderNickname();
 		}
 		
-		return this.aiPostRepository.findAll(pageable);
+		return aiPostList;
 	}
 	
 	
@@ -140,12 +173,12 @@ public class PostService {
 		
 		if(!StringUtils.isEmpty(oriVoiceName)){
             voiceName = fileService.uploadFile(voiceFileLocation, oriVoiceName, voiceFile.getBytes());
-            voiceUrl = "/images/voice/file/" + voiceName; // 파일 저장 장소
+            voiceUrl = "/voice/file/" + voiceName; // 파일 저장 장소
         }
 		
 		if(!StringUtils.isEmpty(oriImgName)){
             imgName = fileService.uploadFile(voiceImgLocation, oriImgName, voiceImgFile.getBytes());
-            imgUrl = "/images/voice/img/" + imgName; // 파일 저장 장소
+            imgUrl = "/voice/img/" + imgName; // 파일 저장 장소
         }
 		
 		aiPost.updateVoice(voiceName, oriVoiceName, voiceUrl, imgName, oriImgName, imgUrl);
@@ -153,10 +186,16 @@ public class PostService {
 		
 	}
 	
-	public List<RequestPost> getRequestList(int page) {
+	public Page<RequestPost> getRequestList(int page, String title) {
 		Pageable pageable = PageRequest.of(page, 20);
 		
-		List<RequestPost> requestPostList = requestPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+		Page<RequestPost> requestPostList;
+		if (title != null && !title.isEmpty()) {
+			 System.out.println("키워드 필터");
+	         requestPostList = requestPostRepository.findAllByTitleOrderByRegTimeDescAndIdAsc(title, pageable);
+	    } else {
+	    	 requestPostList = requestPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+	    }
 		
 		for (RequestPost post : requestPostList) {
 			//Hibernate.initialize(post.getMemberDetail());
@@ -166,31 +205,31 @@ public class PostService {
 		return requestPostList;
 	}
 	
-	public List<TipPost> getTipList(int page) {
-		Pageable pageable = PageRequest.of(page, 20);
-		
-		List<TipPost> tipPostList = tipPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
-		
-		for (TipPost post : tipPostList) {
-			Hibernate.initialize(post.getMemberDetail());
-			post.setUploaderNickname();
-		}
-		
-		return tipPostList;
-	}
-	
-	public List<AiPost> getVoiceList(int page) {
-		Pageable pageable = PageRequest.of(page, 6);
-		
-		List<AiPost> aiPostList = aiPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
-		
-		for (AiPost post : aiPostList) {
-			Hibernate.initialize(post.getMemberDetail());
-			post.setUploaderNickname();
-		}
-		
-		return aiPostList;
-	}
+//	public List<TipPost> getTipList(int page) {
+//		Pageable pageable = PageRequest.of(page, 20);
+//		
+//		List<TipPost> tipPostList = tipPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+//		
+//		for (TipPost post : tipPostList) {
+//			Hibernate.initialize(post.getMemberDetail());
+//			post.setUploaderNickname();
+//		}
+//		
+//		return tipPostList;
+//	}
+//	
+//	public List<AiPost> getVoiceList(int page) {
+//		Pageable pageable = PageRequest.of(page, 6);
+//		
+//		List<AiPost> aiPostList = aiPostRepository.findAllByOrderByRegTimeDescAndIdAsc(pageable);
+//		
+//		for (AiPost post : aiPostList) {
+//			Hibernate.initialize(post.getMemberDetail());
+//			post.setUploaderNickname();
+//		}
+//		
+//		return aiPostList;
+//	}
 	
 	
 	public RequestPost getRequestPost(long postId) {
@@ -211,15 +250,32 @@ public class PostService {
 		return tipPost;
 	}
 	
-	public AiPost getVoicePost(long postId) {
+	public AiPost getVoicePost(long postId) throws IOException {
 		
 		AiPost aiPost = aiPostRepository.findById(postId);
 		
 		aiPost.setUploaderImg();
 		aiPost.setUploaderNickname();
+		aiPost.setVoiceFileSize(getVoiceFileSize(aiPost.getVoiceUrl()));
+		
 		return aiPost;
 	}
 
+	public String getVoiceFileSize(String filePath) throws IOException {
+		
+		String realFilePath = "C:\\capstone" + filePath;
+		
+		Path path = FileSystems.getDefault().getPath(realFilePath);
+
+        // 파일 속성 가져오기
+        BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
+
+        // 파일 크기 가져오기
+        double fileSizeInMB = (double) attributes.size() / (1024 * 1024);
+        String formattedFileSize = String.format("%.3f", fileSizeInMB);
+        return formattedFileSize;
+	}
+	
 	public Page<RequestComment> getRequestComment(long postId, int page) {
 		Pageable pageable = PageRequest.of(page, 30);
 		
@@ -242,10 +298,12 @@ public class PostService {
 		return requestCommentList;
 	}
 	
-	public List<TipComment> getTipComment(long postId, int page) {
+	public Page<TipComment> getTipComment(long postId, int page) {
 		Pageable pageable = PageRequest.of(page, 30);
 		
-		List<TipComment> tipCommentList = tipCommentRepository.findByTipPost_IdOrderByRegTimeAsc(postId, pageable);
+//		List<TipComment> tipCommentList = tipCommentRepository.findByTipPost_IdOrderByRegTimeAsc(postId, pageable);
+		
+		Page<TipComment> tipCommentList = tipCommentRepository.findByTipPost_IdOrderByRegTimeAsc(postId, pageable);
 		
 		for (TipComment comment : tipCommentList) {
 			comment.setUploaderNickname();
@@ -255,10 +313,12 @@ public class PostService {
 		return tipCommentList;
 	}
 	
-	public List<AiComment> getVoiceComment(long postId, int page) {
+	public Page<AiComment> getVoiceComment(long postId, int page) {
 		Pageable pageable = PageRequest.of(page, 30);
 		
-		List<AiComment> aiPostCommentList = aiPostCommentRepository.findByAiPost_IdOrderByRegTimeAsc(postId, pageable);
+//		List<AiComment> aiPostCommentList = aiPostCommentRepository.findByAiPost_IdOrderByRegTimeAsc(postId, pageable);
+		
+		Page<AiComment> aiPostCommentList = aiPostCommentRepository.findByAiPost_IdOrderByRegTimeAsc(postId, pageable);
 		
 		for (AiComment comment : aiPostCommentList) {
 			comment.setUploaderNickname();
@@ -335,5 +395,9 @@ public class PostService {
 		aiPost.setView(aiPost.getView() + 1);
 		
 		aiPostRepository.save(aiPost).getView();
+	}
+	
+	public String getOriVoiceFileName(String voiceName) {
+		return aiPostRepository.findOriVoiceNameByVoiceName(voiceName);
 	}
 }

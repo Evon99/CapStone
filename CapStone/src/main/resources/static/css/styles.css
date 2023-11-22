@@ -2398,6 +2398,7 @@ p {
   margin-bottom: 25px;
   display: block;
   position: static;
+  cursor: pointer;
 }
 
 .main-top-music-show-like-img {
@@ -2862,7 +2863,7 @@ p {
   text-shadow: 0 1px rgba(0, 0, 0, .23);
   -webkit-text-fill-color: inherit;
   background-color: #bd4d70;
-  background-image: url("https://assets-global.website-files.com/65085ce06a89f83f850a1961/650bd6c55ce40418f53becaa_background1.jpg"), linear-gradient(#000, #fff), url("https://assets-global.website-files.com/65085ce06a89f83f850a1961/65085ce06a89f83f850a19fb_analytics-graphic2.png");
+  background-image: url("/static/images/background.jpg"), linear-gradient(#000, #fff), url("https://assets-global.website-files.com/65085ce06a89f83f850a1961/65085ce06a89f83f850a19fb_analytics-graphic2.png");
   background-position: 0 0, 0 0, 0 23%;
   background-size: cover, auto, cover;
   background-clip: border-box;
@@ -3425,6 +3426,7 @@ input[type="range"] {
   font-size: 21px;
   font-weight: 500;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .search-member-img-div-block {
@@ -3613,6 +3615,22 @@ input[type="range"] {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: scroll;
+}
+
+.community-search-select-div-block {
+  width: auto;
+  height: 40px;
+}
+
+.community-search-search-select-field {
+  width: 80px;
+  height: 40px;
+  color: #000;
+  background-color: #fff;
+  border: 2px solid #66c;
+  border-right-style: none;
+  padding-right: 0;
+  font-family: "Scdream4", sans-serif;
 }
 
 .community-search-text-field {
@@ -3921,6 +3939,7 @@ input[type="range"] {
   font-family: "Scdream7", sans-serif;
   font-size: 19px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .community-voice-post-nickname {
@@ -3930,11 +3949,13 @@ input[type="range"] {
   padding-top: 10px;
   font-family: "Scdream4", sans-serif;
   display: block;
+  cursor: pointer;
 }
 
 .community-voice-post-image {
   width: 95%;
   height: 180px;
+  cursor: pointer;
 }
 
 .community-voice-post-foreach-divblock {
@@ -4130,6 +4151,7 @@ input[type="range"] {
   height: 45px;
   margin-left: 10px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .voice-download-text-block {
@@ -4188,6 +4210,210 @@ input[type="range"] {
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
+  display: flex;
+}
+
+.genre-image {
+  width: 225px;
+  height: 225px;
+}
+
+.genre-detail-div-block {
+  border-bottom: 1px solid #ced4da;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+  display: flex;
+}
+
+.genre-name {
+  margin-bottom: 5px;
+  margin-left: 0;
+  margin-right: 0;
+  font-family: "Scdream6", sans-serif;
+  font-size: 28px;
+}
+
+.genre-info-div-block {
+  flex-direction: column;
+  padding-left: 20px;
+  display: flex;
+}
+
+.genre-info {
+  font-family: "Scdream3", sans-serif;
+  font-size: 13px;
+}
+
+.report-list-heading-div-block {
+  height: 60px;
+  border-top: 2px #66c;
+  border-bottom: 2px solid #66c;
+  border-left: 2px #000;
+  border-right: 2px #666;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 20px;
+  display: flex;
+}
+
+.report-list-header-div-block {
+  border-bottom: 1px solid #000;
+  flex-direction: row;
+  margin-top: 40px;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+  display: flex;
+}
+
+.report-list-num-text-block {
+  font-family: "Scdream6", sans-serif;
+  font-size: 18px;
+}
+
+.report-list-num-div-block {
+  width: 10%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.report-list-title-div-block {
+  width: 60%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.report-list-title-text-block {
+  font-family: "Scdream6", sans-serif;
+  font-size: 18px;
+}
+
+.report-list-date-div-block {
+  width: 15%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.report-list-date-text-block {
+  font-size: 18px;
+}
+
+.report-list-uploader-div-block {
+  width: 15%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.report-list-uploader-text-block {
+  font-size: 18px;
+}
+
+.community-num-div-block-copy {
+  width: 10%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.report-list-post-num-text-block, .report-list-post-title-text-block {
+  font-size: 15px;
+}
+
+.report-list-post-title-text-block {
+	cursor: pointer;
+}
+.report-list-post-date-text-block {
+  font-size: 11px;
+}
+
+.report-list-post-uploader-text-block {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.report-list-select-div-block {
+  width: auto;
+  height: 40px;
+}
+
+.report-list-search-select-field {
+  width: 80px;
+  height: 40px;
+  color: #000;
+  background-color: #fff;
+  border: 2px solid #66c;
+  border-right-style: none;
+  padding-right: 0;
+  font-family: "Scdream4", sans-serif;
+}
+
+.report-list-search-form {
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.report-list-search-text-field {
+  width: 35%;
+  height: 40px;
+  color: #000;
+  border: 2px solid #66c;
+  font-family: "Scdream4", sans-serif;
+}
+
+.report-list-search-submit-button {
+  width: 40px;
+  height: 40px;
+  background-color: #66c;
+  background-image: url("https://assets-global.website-files.com/65085ce06a89f83f850a1961/65520c987cb4c5c40fb9ceb1_community_search.png");
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+.report-list-post-divblock {
+  max-height: 655px;
+  min-height: 655px;
+}
+
+.report-list-post-foreach-div-block {
+  border-bottom: 1px solid #ced4da;
+  flex-direction: row;
+  margin-top: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+}
+
+.report-list-page-container {
+  width: 85%;
+  min-height: 700px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-top: 20px;
+  margin-left: auto;
   display: flex;
 }
 

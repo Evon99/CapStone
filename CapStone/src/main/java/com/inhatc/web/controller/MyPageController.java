@@ -47,13 +47,14 @@ public class MyPageController {
 	
 	private final MemberMusicStorageRepository memberMusicStorageRepository;
 	
-	@GetMapping("/private/mypage/{nickname}")
+	@GetMapping("/mypage/{nickname}")
 	public String mypage(@PathVariable String nickname, Model model, @LoginUser SessionUser user, HttpSession session) {
 		
 		// 유저의 정보
 		MemberDetail memberDetail = memberDetailRepository.findByNickname(nickname);
 		Member member = memberRepository.findMemberById(memberDetail.getMember().getId());
 		
+		model.addAttribute("memberId", member.getId());
 		// 업로드 음악 정보
 		List<Music> uploadMusics = myPageService.getUploadMusic(member.getId());
 		int numberOfUpload = uploadMusics.size();
@@ -87,6 +88,9 @@ public class MyPageController {
 			model.addAttribute("pictureUrl", memberDetail.getPictureUrl());
 		}
 
+		long logoutMemberId = 0;
+		model.addAttribute("loginMemberId", logoutMemberId);
+		model.addAttribute("followService", followService);
 		if (user != null) {
 	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
 
@@ -106,7 +110,6 @@ public class MyPageController {
 
 	            model.addAttribute("session", user);
 	            model.addAttribute("nickname", nickname);
-	            model.addAttribute("memberId", member.getId());
 	            model.addAttribute("loginNickname", loginMemberDetail.getNickname());
 	            model.addAttribute("loginMemberId", loginMember.getId());
 

@@ -56,5 +56,54 @@
         document.getElementById('naverLoginForm').submit();
     });
 	
-	
-	
+	function openReportModal(id, aiSinger, title, oriSinger, nickname) {
+	    // 모달 열기
+	    console.log('Open button clicked');
+	    document.getElementById('reportModalContainer').style.display = 'block';
+		document.getElementById('reportMusicTitle').textContent = '노래: ' + aiSinger + ' - ' + title + '(' + oriSinger + ')';
+		document.getElementById('reportMusicUploader').textContent = '업로더: ' + nickname;
+		
+	    // 모달 닫기
+	    document.getElementById('closeReportModalBtn').addEventListener('click', function() {
+	        document.getElementById('reportModalContainer').style.display = 'none';
+	    });
+
+	    // 모달 외부 클릭 시 닫기
+	    window.addEventListener('click', function(event) {
+	        var modal = document.getElementById('reportModalContainer');
+	        if (event.target == modal) {
+	            modal.style.display = 'none';
+	        }
+	    });
+	    
+	    document.getElementById('reportMusicBtn').addEventListener('click', function() {
+	    	
+		    event.preventDefault(); // 폼의 기본 동작 막기
+		    loginCheck().then(function(isAuthenticated) {
+	        if (!isAuthenticated) {
+	            alert("로그인이 필요합니다.");
+	            return;
+	        }
+	        
+	    	var formValues = new FormData($("#report-music-form")[0]);
+	    	
+	    	formValues.append('id', id);
+	    	formValues.append('nickname', nickname);
+	    	console.log("신고 버튼 클릭");
+	    	$.ajax({
+		            type: 'POST',
+		            url: '/reportMusic',
+		            data: formValues,
+		            processData: false,
+   				    contentType: false,
+		            success: function (data) {
+							alert('신고 처리 되었습니다.');
+		            },
+		            error: function (xhr, status, error) {
+		            	   console.error("Error loading content:", error);
+		            	}
+		        });
+	    });
+	    });
+    		
+	}

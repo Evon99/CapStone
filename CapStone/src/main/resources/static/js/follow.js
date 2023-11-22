@@ -1,4 +1,6 @@
  	function toggleFollow(element) {
+ 	
+ 				loginCheck();
 			    var nickname = element.getAttribute('data-nickname');
 			    var loginNickname = element.getAttribute('data-login-nickname');
 
@@ -27,7 +29,11 @@
 			    });
 
 			}
+			
 	function ModaltoggleFollow(element) {
+	
+			loginCheck();
+			
 		    var nickname = element.getAttribute('data-nickname');
 		    var loginNickname = element.getAttribute('data-login-nickname');
 
@@ -54,6 +60,9 @@
 		}
 
 		function FollowingModaltoggleFollow(element) {
+		
+				loginCheck();
+				
 			    var nickname = element.getAttribute('data-nickname');
 			    var loginNickname = element.getAttribute('data-login-nickname');
 
@@ -83,6 +92,7 @@
 			}
 			
 	   function PlayBartoggleFollow(element) {
+	   			loginCheck();
 			    var nickname = element.getAttribute('data-music-play-nickname');
 
 			    // �꽌踰꾩뿉 �뙏濡쒖슦 �삉�뒗 �뼵�뙏濡쒖슦 �슂泥�

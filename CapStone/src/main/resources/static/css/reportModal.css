@@ -1,0 +1,76 @@
+.report-modal {
+  width: 650px;
+  height: 400px;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: auto;
+  padding-left: 40px;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 10%;
+  left: 0%;
+  right: 0%;
+}
+
+.report-modal-heading {
+  align-self: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: "Scdream4", sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.report-form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  display: flex;
+}
+
+.report-form-block {
+  width: 90%;
+}
+
+.report-textarea {
+  margin-top: 10px;
+  min-height: 200px;
+  resize: none;
+}
+
+.report-submit-button {
+  background-color: #66c;
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Scdream5", sans-serif;
+  display: inline-block;
+}
+
+.report-music-info-div-block {
+  flex-direction: row;
+  display: flex;
+}
+
+.report-music-uploader {
+  margin-left: 20px;
+  font-family: "Scdream3", sans-serif;
+}
+
+.report-music-title {
+  font-family: "Scdream3", sans-serif;
+}
+
+.report-modal-container {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .1);
+  position: fixed;
+  display: none;
+}

@@ -1,9 +1,11 @@
 package com.inhatc.web.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -194,4 +196,33 @@ public class MusicService {
     	memberMusicStorageRepository.deleteByMember_IdAndMusic_Id(member.getId(), musicId);
     }
     
+    public List<Music> getByGenreMusic(String genre) {
+    	return musicRepository.findByGenreOrderByLikeDesc(genre);
+    }
+    
+    public long getByGenreMusicDuration(String genre) throws UnsupportedAudioFileException, IOException {
+    	List<Music> genreResults = musicRepository.findByGenreOrderByLikeDesc(genre);
+    	
+    	long totalPlayDuration = 0;
+    	for (Music music : genreResults) {
+            String musicUrl = "C:\\capstone" + music.getMusicUrl();
+            System.out.println(musicUrl);
+            
+            // 음악 파일 객체 생성
+            File musicFile = new File(musicUrl);
+
+            // 파일 크기 가져오기 (단위: 바이트)
+            long fileSize = musicFile.length();
+
+            // 비트레이트 설정 (예: 192 kbps)
+            int bitrate = 192000;
+
+            // 재생 시간 계산
+            int durationInSeconds = (int) (fileSize * 8 / bitrate);
+            
+            totalPlayDuration += durationInSeconds;
+        }
+    	
+    	return totalPlayDuration;
+    }
 }
