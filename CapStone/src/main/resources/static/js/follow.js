@@ -1,6 +1,10 @@
  	function toggleFollow(element) {
  	
- 				loginCheck();
+ 				loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
 			    var nickname = element.getAttribute('data-nickname');
 			    var loginNickname = element.getAttribute('data-login-nickname');
 
@@ -27,12 +31,16 @@
 			            console.error(error);
 			        }
 			    });
-
-			}
+			});
+}
 			
 	function ModaltoggleFollow(element) {
 	
-			loginCheck();
+			loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
 			
 		    var nickname = element.getAttribute('data-nickname');
 		    var loginNickname = element.getAttribute('data-login-nickname');
@@ -57,11 +65,16 @@
 		            console.error(error);
 		        }
 		    });
-		}
+		});
+	}
 
 		function FollowingModaltoggleFollow(element) {
 		
-				loginCheck();
+				loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
 				
 			    var nickname = element.getAttribute('data-nickname');
 			    var loginNickname = element.getAttribute('data-login-nickname');
@@ -89,10 +102,15 @@
 			            console.error(error);
 			        }
 			    });
-			}
+			});
+		}
 			
 	   function PlayBartoggleFollow(element) {
-	   			loginCheck();
+	   			loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
 			    var nickname = element.getAttribute('data-music-play-nickname');
 
 			    // �꽌踰꾩뿉 �뙏濡쒖슦 �삉�뒗 �뼵�뙏濡쒖슦 �슂泥�
@@ -114,4 +132,5 @@
 			            console.error(error);
 			        }
 			    });
+ });
 			}

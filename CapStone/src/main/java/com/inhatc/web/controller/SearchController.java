@@ -142,6 +142,10 @@ public class SearchController {
 			model.addAttribute("keyword", keyword); // 검색어 
 		}
 		
+		long logoutMemberId = 0; // 비로그인 회원의 아이디
+		model.addAttribute("loginMemberId", logoutMemberId); 
+		model.addAttribute("followService", followService);
+		
 		if (user != null) {
 	        Optional<Member> optionalMember = memberRepository.findByLoginId(user.getLoginId());
 
@@ -277,7 +281,7 @@ public class SearchController {
         return ResponseEntity.ok(musicUrls);
 	}
 	
-	@GetMapping("/getMusic/music/file/{filename:.+}")
+	@GetMapping("/getMusic/images/music/file/{filename:.+}")
 	public ResponseEntity<byte[]> getMusic(@PathVariable String filename) throws IOException {
 		 // 파일을 ClassPathResource를 통해 읽어옵니다.
 		File file = new File("C:\\capstone\\music\\file", filename);

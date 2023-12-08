@@ -43,7 +43,27 @@
 
 <body>
 <div layout:fragment="content" id="content-container"> 
-    <div id="features" data-w-id="62e437ac-c9a3-3226-3092-d9ad5af8c296" class="main-page-section">
+	<!-- 신고 목록 모달  -->
+	<div id="reportListModalContainer" class="report-list-modal-container">
+        <div class="report-list-modal">
+            <div class="login-modal-delete-div-block">
+            	<img th:src="@{/static/images/black_delete.png}" id="closeReportListModalBtn" class="login-modal-delete-btn w-button"></img>
+            </div>
+            <div class="report-check-music-info-div-block">
+                <div id="reportListMusicTitle" class="report-check-music-title">노래: AI 가수 - 제목(원래가수)</div>
+                <div id="reportListMusicUploader" class="report-check-music-uploader">업로더: 테스트유저</div>
+            </div>
+            <div class="report-music-content-text-block">내용</div>
+            <div class="report-check-form-block w-form">
+                <form id="email-form" name="email-form" method="post" class="report-check-form">
+                    <div id="reportListMusicContent" class="report-music-content">This is some text inside of a div block.</div>
+                    <input id="reportListMusicDeleteBtn" type="submit" value="음악 삭제" class="music-delete-submit-button w-button" />
+                </form>
+            </div>
+        </div>
+    </div>
+        
+    <div id="features" class="main-page-section">
         <div class="w-layout-blockcontainer report-list-page-container w-container">
             <div class="report-list-heading-div-block">
                 <div class="community-heading-text-block">신고 목록</div>
@@ -68,7 +88,8 @@
                         <div class="report-list-post-num-text-block" th:text="${post.id}">1</div>
                     </div>
                     <div class="report-list-title-div-block">
-                        <div class="report-list-post-title-text-block" th:text="${post.music.aiSinger + ' - ' + post.music.title + '(' + post.music.oriSinger + ')'}" th:onclick="'CommunityPostLoad(' + ${post.id} + ')'">이 곡도 만들어주셈</div>
+                        <div class="report-list-post-title-text-block" th:text="${post.music.aiSinger + ' - ' + post.music.title + '(' + post.music.oriSinger + ')'}" 
+                        th:onclick="openReportListModal(/*[[${post.music.id}]]*/, /*[[${post.music.aiSinger}]]*/, /*[[${post.music.title}]]*/, /*[[${post.music.oriSinger}]]*/, /*[[${post.music.memberDetail.nickname}]]*/, /*[[${post.reportContent}]]*/)"></div>
                     </div>
                     <div class="report-list-date-div-block">
                         <div class="report-list-post-date-text-block" th:text="${#temporals.format(post.regTime, 'MM.dd')}">11.17</div>
@@ -107,6 +128,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

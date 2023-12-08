@@ -136,7 +136,7 @@ public class PostService {
 		requestPost.setMember(member);
 		
 		requestPost.setTitle(title);
-		requestPost.setContent(content);
+		requestPost.setContent(content.replace("\r\n","<br/>"));
 		
 		requestPostRepository.save(requestPost);
 	}
@@ -149,8 +149,7 @@ public class PostService {
 		tipPost.setMember(member);
 		
 		tipPost.setTitle(title);
-		tipPost.setContent(content);
-		
+		tipPost.setContent(content.replace("\r\n","<br/>"));
 		tipPostRepository.save(tipPost);
 	}
 	
@@ -161,7 +160,7 @@ public class PostService {
 		AiPost aiPost = new AiPost();
 		aiPost.setMember(member);
 		aiPost.setTitle(title);
-		aiPost.setContent(content);
+		aiPost.setContent(content.replace("\r\n","<br/>"));
 		
 		String oriVoiceName = voiceFile.getOriginalFilename(); 
 		String voiceName = ""; 
@@ -178,7 +177,7 @@ public class PostService {
 		
 		if(!StringUtils.isEmpty(oriImgName)){
             imgName = fileService.uploadFile(voiceImgLocation, oriImgName, voiceImgFile.getBytes());
-            imgUrl = "/voice/img/" + imgName; // 파일 저장 장소
+            imgUrl = "/images/voice/img/" + imgName; // 파일 저장 장소
         }
 		
 		aiPost.updateVoice(voiceName, oriVoiceName, voiceUrl, imgName, oriImgName, imgUrl);
@@ -336,7 +335,7 @@ public class PostService {
 		RequestComment requestComment = new RequestComment();
 		requestComment.setMember(member);
 		requestComment.setRequestPost(requestPost);
-		requestComment.setComment(comment);
+		requestComment.setComment(comment.replace("\r\n","<br/>"));
 		
 		requestCommentRepository.save(requestComment);
 		
@@ -350,7 +349,7 @@ public class PostService {
 		TipComment tipComment = new TipComment();
 		tipComment.setMember(member);
 		tipComment.setTipPost(tipPost);
-		tipComment.setComment(comment);
+		tipComment.setComment(comment.replace("\r\n","<br/>"));
 		
 		tipCommentRepository.save(tipComment);
 		
@@ -364,8 +363,7 @@ public class PostService {
 		AiComment aiComment = new AiComment();
 		aiComment.setMember(member);
 		aiComment.setAiPost(aiPost);
-		aiComment.setComment(comment);
-		
+		aiComment.setComment(comment.replace("\r\n","<br/>"));
 		aiPostCommentRepository.save(aiComment);
 		
 	}	

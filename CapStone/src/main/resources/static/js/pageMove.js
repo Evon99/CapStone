@@ -638,7 +638,12 @@
 	    }
 
 		function CommunityWriteLoad() {
-	    	loginCheck();
+	    	loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
+			});
 	    	 $.ajax({
 		            type: 'GET',
 		            url: '/private/requestpostwrite',
@@ -665,7 +670,12 @@
 	    }
 
 		function TipCommunityWriteLoad() {
-	    	loginCheck();
+	    	loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
+			});
 	    	 $.ajax({
 		            type: 'GET',
 		            url: '/private/tippostwrite',
@@ -692,7 +702,12 @@
 	    }
 
 		function VoiceCommunityWriteLoad() {
-			 loginCheck();
+			 loginCheck().then(function(isAuthenticated) {
+		        if (!isAuthenticated) {
+		            alert("로그인이 필요합니다.");
+		            return;
+		        }
+			});
 	    	 $.ajax({
 		            type: 'GET',
 		            url: '/private/voicepostwrite',
@@ -1032,13 +1047,13 @@
 			
 	    	 $.ajax({
 		            type: 'POST',
-		            url: '/private/tipcommentwrite',
+		            url: '/private/voicecommentwrite',
 					data: formValues,
 		            success: function (data) {
 			
 						if(data.trim() === 'commentEmpty') {
 							console.log("commentEmpty");
-							alert("댓글	을 입력해주세요");
+							alert("댓글을 입력해주세요");
 							return;
 						}
 						

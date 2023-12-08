@@ -2,15 +2,18 @@ package com.inhatc.web.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.inhatc.web.entity.Music;
 
 public interface MusicRepository extends JpaRepository<Music, Long>{
-	List<Music> findAllByOrderByRegTimeAsc(Pageable pageable);
+	List<Music> findAllByOrderByRegTimeDesc(Pageable pageable);
 	
 	List<Music> findAllByOrderByLikeDesc(Pageable pageable);
 	
@@ -39,4 +42,9 @@ public interface MusicRepository extends JpaRepository<Music, Long>{
 	List<Music> findByGenreOrderByLikeDesc(String genre);
 	
 	Music findById(long id);
+	
+	@Transactional
+    @Modifying
+    @Query("DELETE FROM Music m WHERE m.id = :musicId")
+    void deleteByMusicId(@Param("musicId") Long musicId);
 }

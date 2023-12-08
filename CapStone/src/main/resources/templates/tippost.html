@@ -75,7 +75,7 @@
                     <div class="community-post-member-nickname" th:text="${tipPost.uploaderNickname}" th:onclick="memberPageLoad(/*[[${tipPost.uploaderNickname}]]*/)">닉네임</div>
                 </div>
             </div>
-            <div class="community-post-content" th:text="${tipPost.content}">이 곡 제발 만들어주세요 ㅠㅠ</div>
+            <div class="community-post-content" th:utext="${#strings.replace(tipPost.content, '\n', '<br>')}">이 곡 제발 만들어주세요 ㅠㅠ</div>
             <div class="community-post-comment-div-block">
                 <div class="coummunity-post-comment-foreach-div-block" th:each="comment : ${comment}">
                     <div class="community-post-comment-member-detail-div-block">
@@ -83,7 +83,7 @@
                         <div th:text="${comment.uploaderNickname}"  th:onclick="memberPageLoad(/*[[${comment.uploaderNickname}]]*/)" class="community-post-comment-nickname">닉네임</div>
                         <div th:text="${#temporals.format(comment.regTime, 'MM.dd HH:mm')}" class="community-post-comment-date">11.17 01:42:43</div>
                     </div>
-                    <div th:text="${comment.comment}" class="community-post-comment-text">ㅇㅈㅇㅈ 꼭 만들어주셈</div>
+                    <div th:utext="${#strings.replace(comment.comment, '\n', '<br>')}" class="community-post-comment-text">ㅇㅈㅇㅈ 꼭 만들어주셈</div>
                 </div>
             </div>
             <div class="community-post-comment-write-form-block w-form">

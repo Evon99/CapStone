@@ -18,17 +18,17 @@
 	const currentMusicTitle = document.getElementById('currentTitle');
 	var musicList = document.querySelector('.music-list-column-div-block');
 	let allMusic = JSON.parse(localStorage.getItem('allMusic')) || [];
-	let musicIndex = 1; // 현재 재생되고 있는 음악 구분
+	let musicIndex = JSON.parse(localStorage.getItem('musicIndex')) || 1; // 현재 재생되고 있는 음악 구분
 	var showFooterExecuted = false;
 	let lastMusic = []; // 사용자가 마지막으로 재생한 음악 
 	
-	var globalId;
+	/*var globalId;
 	var globalMusicUrl;
 	var globalImgUrl;
 	var globalAiSinger;
 	var globalTitle;
 	var globalOriSinger;
-	var globalNickname;
+	var globalNickname;*/
 
 	if(document.getElementById('likedMusicIds').value) {
    		var likedMusicIdsStr = document.getElementById('likedMusicIds').value;
@@ -79,31 +79,27 @@
 	});
 
 
+	// 음악 재생 기능
 	function playMusic(id, musicUrl, imgUrl, aiSinger, title, oriSinger, nickname) {
 	
-		globalId = id;
+		/*globalId = id;
 	    globalMusicUrl = musicUrl;
 	    globalImgUrl = imgUrl;
 	    globalAiSinger = aiSinger;
 	    globalTitle = title;
 	    globalOriSinger = oriSinger;
-	    globalNickname = nickname;
+	    globalNickname = nickname;*/
 
         musicAudio.src = musicUrl;  // 음악의 URL을 설정
         musicAudio.play();  // 음악을 재생
 
-
 		musicPlayBtn.src = '/static/images/pause_button.png';
 		
-        // 나머지 이미지 및 음악 정보 업데이트
-        //var currentMusicImg = document.querySelector('.current-music-img');
-       // var uploaderElement = document.getElementById('currentUploader');
-        var titleElement = document.getElementById('currentTitle');
+        var titleElement = document.getElementById('currentTitle');	
         currentMusicImg.src = imgUrl;
         currentMusicUploader.textContent = nickname;
         currentMusicTitle.textContent = aiSinger + ' - ' + title + '(' + oriSinger + ')';
 		
-		console.log("likedMusicIds:",likedMusicIds);
 		musicLike.setAttribute('data-music-play-id', id);
 		musicAdd.setAttribute('data-music-play-add-id', id);
 		currentMusicUploader.setAttribute('data-music-play-nickname', nickname);
@@ -137,73 +133,6 @@
 	            error: function (xhr) {
 	            }
 	        });
-
-		/*musicAdd.addEventListener('click', function () {
-				var musicId = parseInt(musicAdd.getAttribute('data-music-play-add-id'));
-				const ColumnMusicAdd =  document.querySelectorAll('[data-add-music-id="' + musicId + '"]');// 음악 재생 바 추가 버튼 
-				if (ColumnMusicAdd.length > 0) {
-					var ColumnMusicId = parseInt(ColumnMusicAdd[0].getAttribute('data-add-music-id')); // 재생 중인 음악 ID
-				}
-				
-				if (!addMusicIds) {
-					alert("로그인 후 이용 가능합니다.");
-					return;
-				}
-	
-				if (addMusicIds.includes(musicId)) {
-
-					$.ajax({
-						type: 'POST',
-						url: '/addMusicCancel/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
-						success: function(response) {
-							// 서버로부터 받은 데이터를 변수에 할당
-							musicAdd.src = '/static/images/black_add_song.png';
-							var valueToDelete = musicId; // 삭제할 값
-			
-							var indexToDelete = addMusicIds.indexOf(valueToDelete); // 삭제할 값의 인덱스 찾기
-							if (indexToDelete !== -1) {
-								addMusicIds.splice(indexToDelete, 1); // 해당 인덱스에서 1개의 요소 삭제
-							}
-							
-							if(ColumnMusicAdd !== undefined && ColumnMusicId == musicId) {
-								ColumnMusicAdd.forEach(element => {
-									element.src = '/static/images/add_song.png';
-							    });
-							}
-							alert('보관함에서 삭제되었습니다.');
-			
-						},
-						error: function(error, xhr) {
-							if (xhr.status === 401) {
-								alert('로그인 후 이용해주십시오');
-							}
-						}
-					});
-					return;
-			
-				}
-				
-				$.ajax({
-					type: 'POST',
-					url: '/addMusic/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
-					success: function(response) {
-						// 서버로부터 받은 데이터를 변수에 할당
-						musicAdd.src = '/static/images/addSong_on.png';
-						
-						ColumnMusicAdd.forEach(element => {
-									element.src = '/static/images/addSong_on.png';
-					    });
-						addMusicIds.push(parseInt(musicId, 10));
-						alert('보관함에서 추가되었습니다.');
-					},
-					error: function(error, xhr) {
-						if (xhr.status === 401) {
-							alert('로그인 후 이용해주십시오');
-						}
-					}
-				});
-	
-			});*/
 				
 	    localStorage.setItem('musicInfo', JSON.stringify({
 			id: id,
@@ -214,11 +143,13 @@
 	        oriSinger: oriSinger,
 	        nickname: nickname
 	    }));
+	    
 	// 중복 여부 확인
     if (!allMusic.some(existingMusic => existingMusic.musicUrl === musicUrl)) {
 	// 로컬 스토리지에 상태 저장
 	    localStorage.setItem('musicStatus', 'playing');
 
+		
 	// 새로운 음악 데이터를 allMusic 배열에 추가
 	    allMusic.push({
 			id: id,
@@ -233,6 +164,9 @@
 // 로컬 스토리지에 allMusic 저장
         localStorage.setItem('allMusic', JSON.stringify(allMusic));
 
+		// 음악 리스트 배열 최신화
+		localStorage.setItem('musicIndex', allMusic.length);
+		
 		console.log(allMusic);
 		displayMusicList();
 		}
@@ -349,13 +283,13 @@
 			
 
 	function playMusicLoad(id, musicUrl, imgUrl, aiSinger, title, oriSinger, nickname) {
-	        globalId = id;
+	        /*globalId = id;
 		    globalMusicUrl = musicUrl;
 		    globalImgUrl = imgUrl;
 		    globalAiSinger = aiSinger;
 		    globalTitle = title;
 		    globalOriSinger = oriSinger;
-		    globalNickname = nickname;
+		    globalNickname = nickname;*/
 	
 	        musicAudio.src = musicUrl;  // 음악의 URL을 설정
 	        musicAudio.pause();  // 음악을 재생
@@ -412,122 +346,13 @@
 	            error: function (xhr) {
 	            }
 	        });
-
-			/*musicLike.addEventListener('click', function () {
-				var musicId = parseInt(musicLike.getAttribute('data-music-play-id'));
-				
-				if (!likedMusicIds) {
-					alert("로그인 후 이용 가능합니다.");
-					return;
-				}
-				
-				if (likedMusicIds.includes(musicId)) {
-	                alert('이미 추천한 음악입니다.');
-	                return;
-	            }
-	
-				musicLike.setAttribute('src', '/static/images/like_on.png');
-				likedMusicIds.push(musicId);
-				
-					$.ajax({
-		            type: 'POST',
-		            url: '/like/' + musicId,
-		            dataType: 'json',
-		            success: function (response) {
-		                // 성공적으로 업데이트된 좋아요 수를 받아와 화면 갱신
-		                //$('#likeCount').text(updatedLikeCount);
-		                console.log("updatedLikeCount", response.updatedLikeCount);
-						$('#likeCount' + musicId).text(response.updatedLikeCount);
-		                // 로컬 스토리지에 좋아요 눌렀음을 표시
-						musicLike.src = '/static/images/like_on.png';
-						    response.likedMusicIds.forEach(function(musicId) {
-				            $('img[data-like-music-id="' + musicId + '"]').attr('src', '/static/images/like_on.png');
-				        });
-	
-		            },
-		            error: function (xhr) {
-		            }
-		        });
-	
-			
-			});*/
-			
-			/*musicAdd.addEventListener('click', function () {
-				var musicId = parseInt(musicAdd.getAttribute('data-music-play-add-id'));
-				const ColumnMusicAdd =  document.querySelectorAll('[data-add-music-id="' + musicId + '"]');// 음악 재생 바 추가 버튼 
-				if (ColumnMusicAdd.length > 0) {
-					var ColumnMusicId = parseInt(ColumnMusicAdd[0].getAttribute('data-add-music-id')); // 재생 중인 음악 ID
-				}
-				
-				console.log("ColumnMusicId", ColumnMusicAdd);
-				if (!addMusicIds) {
-					alert("로그인 후 이용 가능합니다.");
-					return;
-				}
-	
-				if (addMusicIds.includes(musicId)) {
-
-					$.ajax({
-						type: 'POST',
-						url: '/addMusicCancel/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
-						success: function(response) {
-							// 서버로부터 받은 데이터를 변수에 할당
-							musicAdd.src = '/static/images/black_add_song.png';
-							var valueToDelete = musicId; // 삭제할 값
-			
-							var indexToDelete = addMusicIds.indexOf(valueToDelete); // 삭제할 값의 인덱스 찾기
-							if (indexToDelete !== -1) {
-								addMusicIds.splice(indexToDelete, 1); // 해당 인덱스에서 1개의 요소 삭제
-							}
-							
-							if(ColumnMusicAdd && ColumnMusicId == musicId) {
-								
-								ColumnMusicAdd.forEach(element => {
-									element.src = '/static/images/add_song.png';
-							    });
-							}
-							alert('보관함에서 삭제되었습니다.');
-			
-						},
-						error: function(error, xhr) {
-							if (xhr.status === 401) {
-								alert('로그인 후 이용해주십시오');
-							}
-						}
-					});
-					return;
-			
-				}
-				
-				$.ajax({
-					type: 'POST',
-					url: '/addMusic/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
-					success: function(response) {
-						// 서버로부터 받은 데이터를 변수에 할당
-						musicAdd.src = '/static/images/addSong_on.png';
-						
-						if(ColumnMusicAdd && ColumnMusicId == musicId) {
-								ColumnMusicAdd.forEach(element => {
-									element.src = '/static/images/addSong_on.png';
-							    });
-						}
-						addMusicIds.push(parseInt(musicId, 10));
-						alert('보관함에서 추가되었습니다.');
-					},
-					error: function(error, xhr) {
-						if (xhr.status === 401) {
-							alert('로그인 후 이용해주십시오');
-						}
-					}
-				});
-	
-			});*/
 			
 	    }
 
 	// 모든 allMusic 배열에 있는 음악 항목을 표시합니다.
 	function displayLoadMusicList() {
 	    // allMusic 배열에 있는 모든 항목을 순회합니다.
+		console.log(musicIndex);
 	    allMusic.forEach(function (music) {
 	        // music-list 엘리먼트를 복제합니다.
 	        var newMusicColumn = musicList.cloneNode(true);
@@ -607,6 +432,17 @@
 			        currentMusicTitle.textContent = clickedMusic.aiSinger + ' - ' + clickedMusic.title + '(' + clickedMusic.oriSinger + ')';
 					
 					musicIndex = clickedRowIndex;
+					localStorage.setItem('musicIndex', clickedRowIndex);
+					localStorage.setItem('musicInfo', JSON.stringify({
+						id: clickedMusic.id,
+				        musicUrl: clickedMusic.musicUrl,
+				        imgUrl: clickedMusic.imgUrl,
+				        aiSinger: clickedMusic.aiSinger,
+				        title: clickedMusic.title,
+				        oriSinger: clickedMusic.oriSinger,
+				        nickname: clickedMusic.nickname
+				    }));
+					
 				}
 			});
 		
@@ -640,7 +476,7 @@
 	    }
 	
 	    // 마지막 음악 정보 가져오기
-	    var lastMusic = allMusic[allMusic.length - 1];
+	    var lastMusic = allMusic[musicIndex - 1];
 	
 	    // music-list 엘리먼트 복제
 	    var newMusicColumn = musicList.cloneNode(true);
@@ -711,15 +547,22 @@
 			            error: function (xhr) {
 			            }
 			        });
-		        // 나머지 이미지 및 음악 정보 업데이트
-		        //var imgElement = document.querySelector('.current-music-img');
-		        //var uploaderElement = document.getElementById('currentUploader');
-		        //var titleElement = document.getElementById('currentTitle');
+
 		        currentMusicImg.src = clickedMusic.imgUrl;
 		        currentMusicUploader.textContent = clickedMusic.nickname;
 		        currentMusicTitle.textContent = clickedMusic.aiSinger + ' - ' + clickedMusic.title + '(' + clickedMusic.oriSinger + ')';
 				
 				musicIndex = clickedRowIndex;
+				localStorage.setItem('musicIndex', clickedRowIndex);
+				localStorage.setItem('musicInfo', JSON.stringify({
+					id: clickedMusic.id,
+			        musicUrl: clickedMusic.musicUrl,
+			        imgUrl: clickedMusic.imgUrl,
+			        aiSinger: clickedMusic.aiSinger,
+			        title: clickedMusic.title,
+			        oriSinger: clickedMusic.oriSinger,
+			        nickname: clickedMusic.nickname
+			    }));
 			}
 		});
 		
@@ -786,10 +629,7 @@
 			musicAudio.src = prevMusic.musicUrl;
 			musicAudio.play();
 			musicPlayBtn.src = '/static/images/pause_button.png';
-			// 나머지 이미지 및 음악 정보 업데이트
-			//var imgElement = document.querySelector('.current-music-img');
-			//var uploaderElement = document.getElementById('currentUploader');
-		    //var titleElement = document.getElementById('currentTitle');
+			// 현재 재생 음악 이미지 및 음악 정보 업데이트
 			currentMusicImg.src = prevMusic.imgUrl;
 			currentMusicUploader.textContent = prevMusic.nickname;
 			currentMusicTitle.textContent = prevMusic.aiSinger + ' - ' + prevMusic.title + '(' + prevMusic.oriSinger + ')';
@@ -805,10 +645,7 @@
 			musicAudio.src = nextMusic.musicUrl;
 			musicAudio.play();
 			musicPlayBtn.src = '/static/images/pause_button.png';
-			// 나머지 이미지 및 음악 정보 업데이트
-			//var imgElement = document.querySelector('.current-music-img');
-			//var uploaderElement = document.getElementById('currentUploader');
-		    //var titleElement = document.getElementById('currentTitle');
+			
 			currentMusicImg.src = nextMusic.imgUrl;
 			currentMusicUploader.textContent = nextMusic.nickname;
 			currentMusicTitle.textContent = nextMusic.aiSinger + ' - ' + nextMusic.title + '(' + nextMusic.oriSinger + ')';
@@ -823,10 +660,6 @@
 				musicAudio.src = nextMusic.musicUrl;
 				musicAudio.play();
 				musicPlayBtn.src = '/static/images/pause_button.png';
-				// 나머지 이미지 및 음악 정보 업데이트
-				//var imgElement = document.querySelector('.current-music-img');
-				//var uploaderElement = document.getElementById('currentUploader');
-			    //var titleElement = document.getElementById('currentTitle');
 				currentMusicImg.src = nextMusic.imgUrl;
 				currentMusicUploader.textContent = nextMusic.nickname;
 				currentMusicTitle.textContent = nextMusic.aiSinger + ' - ' + nextMusic.title + '(' + nextMusic.oriSinger + ')';

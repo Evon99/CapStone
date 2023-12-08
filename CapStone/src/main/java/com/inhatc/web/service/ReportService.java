@@ -63,4 +63,8 @@ public class ReportService {
 		
 	}
 	
+	public void deleteMusic(long musicId) {
+		reportRepository.deleteByMusicId(musicId);
+		musicRepository.deleteByMusicId(musicId);
+	}
 }

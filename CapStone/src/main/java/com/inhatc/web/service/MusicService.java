@@ -87,7 +87,7 @@ public class MusicService {
 	
 	public List<Music> getRecentMusics(int count) {
 	    PageRequest pageRequest = PageRequest.of(0, count);
-	    List<Music> recentMusics = musicRepository.findAllByOrderByRegTimeAsc(pageRequest);
+	    List<Music> recentMusics = musicRepository.findAllByOrderByRegTimeDesc(pageRequest);
 
 	    for (Music music : recentMusics) {
 	        music.setUploaderNickname();

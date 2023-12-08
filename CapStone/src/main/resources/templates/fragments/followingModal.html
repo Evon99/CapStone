@@ -17,7 +17,7 @@
                 <div th:each="follower : ${followingList}"  class="follow-list">
                 	<img th:src="${follower.toMemberImgUrl}"
                         loading="lazy" alt="" class="follow-img" />
-                    <div class="follow-nickname" th:text="${follower.toMemberNickname}">NickName</div>
+                    <div class="follow-nickname" id="follow-nickname" th:text="${follower.toMemberNickname}" th:onclick="memberPageLoad(/*[[${follower.toMemberNickname}]]*/)">NickName</div>
                     <span id="ModalfollowingButton" class="follow-btn"
 				               th:unless="${loginNickname == follower.toMemberNickname}"    
 				               th:attr="data-nickname=${follower.toMemberNickname}, data-login-nickname=${loginNickname}" 

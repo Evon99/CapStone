@@ -195,6 +195,7 @@ public class CommunityController {
 	@PostMapping("/private/requestpostwrite")
 	public String requestPostWrite(@RequestParam("title") String title, @RequestParam("content") String content, @LoginUser SessionUser user, Model model) {
 		
+		System.out.println("게시글 내용:" + content);
 		if(title.isBlank()) {
 			System.out.println("titleEmpty");
 			return "titleEmpty";
@@ -572,10 +573,13 @@ public class CommunityController {
 			return "commentEmpty";
 		}
 		
+		System.out.println("목소리 게시글 ID: " + postId);
 		try {
-			  postService.saveTipComment(user, comment, postId);
+			  postService.saveAiPostComment(user, comment, postId);
 	      } catch (Exception e) {
+	    	  System.out.println("댓글 저장 실패");
 	          model.addAttribute("errorMessage", e.getMessage());
+	          e.printStackTrace();
 	          return "voicepost";
 	      }
 		
@@ -614,9 +618,10 @@ public class CommunityController {
 	        }
 	    }
 		
+		System.out.println("aiPost 찾기전 ");
 		AiPost aiPost = postService.getVoicePost(postId);
-		
-		model.addAttribute("tipPost", aiPost);
+		System.out.println("타이틀: "+ aiPost.getTitle());
+		model.addAttribute("aiPost", aiPost);
 		
 //		List<TipComment> tipCommentList = postService.getTipComment(postId, 0);
 		

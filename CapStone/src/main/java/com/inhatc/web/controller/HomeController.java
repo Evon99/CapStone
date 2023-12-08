@@ -148,11 +148,14 @@ public class HomeController {
 	}
 	
 	@PostMapping("/private/profileSetting")
-	public String memberNew(@Valid MemberDetailDto memberDetailDto, BindingResult bindingResult, Model model, @RequestParam("memberImgFile")MultipartFile memberImgFile) {
+	public String memberNew(@Valid MemberDetailDto memberDetailDto, BindingResult bindingResult, Model model, @RequestParam("memberImgFile")MultipartFile memberImgFile, @LoginUser SessionUser user) {
 		
 		System.out.println("postMapping");
 		
 		if(bindingResult.hasErrors()) { 
+			model.addAttribute("memberLoginId", user.getLoginId());
+	        model.addAttribute("memberName", user.getName());
+	        model.addAttribute("memberPicture", user.getPictureUrl());
             return "createMember";
         }
 		
@@ -161,6 +164,9 @@ public class HomeController {
             MemberDetailService.savePictureFile(memberImgFile, memberDetailDto.getNickname());
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("memberLoginId", user.getLoginId());
+            model.addAttribute("memberName", user.getName());
+            model.addAttribute("memberPicture", user.getPictureUrl());
             return "createMember";
         }
 		

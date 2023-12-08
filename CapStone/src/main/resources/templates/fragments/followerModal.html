@@ -17,7 +17,7 @@
                 <div th:each="follower : ${followerList}"  class="follow-list">
                 	<img th:src="${follower.fromMemberImgUrl}"
                         loading="lazy" alt="" class="follow-img" />
-                    <div class="follow-nickname" th:text="${follower.fromMemberNickname}">NickName</div>
+                    <div class="follow-nickname" th:text="${follower.fromMemberNickname}" th:onclick="memberPageLoad(/*[[${follower.fromMemberNickname}]]*/)">NickName</div>
 					     <!-- 초기 상태에 따라 텍스트와 스타일을 설정 -->
 					     <span id="ModalfollowButton" class="follow-btn"
 				               th:unless="${loginNickname == follower.fromMemberNickname}"    

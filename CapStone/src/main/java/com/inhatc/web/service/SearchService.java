@@ -27,7 +27,7 @@ public class SearchService {
 	private final FollowRepository followRepository;
 	
 	public List<MemberDetail> searchMember(String keyword) {
-		 List<MemberDetail> searchMember = (List<MemberDetail>) memberDetailRepository.findAllByNickname(keyword);
+		 List<MemberDetail> searchMember = (List<MemberDetail>) memberDetailRepository.findByNicknameContaining(keyword);
 		 // 검색 결과 멤버마다 팔로워 수 세팅
 		 for (MemberDetail memberDetail : searchMember) {
 			 	if(memberDetail.getPictureUrl().isEmpty()) {

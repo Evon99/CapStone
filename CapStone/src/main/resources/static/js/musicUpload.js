@@ -1,8 +1,20 @@
  		function musicFileEvent() {
 			    console.log("bindDomEvent function is called!");
 			    $(".music-file-input").on("change", function () {
+				
+					var fileName = $(this).val().split("\\").pop(); // 이미지 파일명
+			        var fileExt = fileName.substring(fileName.lastIndexOf(".")+1);
+			        // 확장자 추출
+			     	fileExt = fileExt.toLowerCase(); // 소문자 변환
+			     	
+			     	if(fileExt != "wav" && fileExt != "mp3" && fileExt != "flac" && fileExt != "aiff" && fileExt != "alac" && fileExt != "aac" && fileExt != "aac" && fileExt != "ogg" && fileExt != "mp2" && fileExt != "m4a" && fileExt != "mj2" && fileExt != "amr" && fileExt != "wma") {
+			     		alert("음원 파일만 업로드해주세요.");
+			     		return;
+			     	}
+
+                    $("#originalTitle").val(fileName);
 			        // 서버에 이미지 파일 여부 확인 요청
-			        var formData = new FormData();
+			       /* var formData = new FormData();
 			        formData.append('file', this.files[0]);
 
 			        $.ajax({
@@ -22,7 +34,7 @@
 			            error: function () {
 			                alert("server error");
 			            }
-			        });
+			        });*/
 			    });
 			}
 		  

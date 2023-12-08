@@ -135,54 +135,32 @@
 </div>
 
 <div layout:fragment="content" id="content-container">
-    <div data-delay="4000" data-animation="slide" class="slider w-slider" data-autoplay="false" data-easing="ease"
-        data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3"
-        data-duration="500" data-infinite="true">
-        <div class="w-slider-mask">
-            <div class="slide _1 w-slide">
-                <div class="w-container"></div>
-            </div>
-            <div class="slide _2 w-slide">
-                <div class="w-container"></div>
-            </div>
-            <div class="slide _3 w-slide">
-                <div class="w-container"></div>
-            </div>
-        </div>
-        <div class="w-slider-arrow-left">
-            <div class="w-icon-slider-left"></div>
-        </div>
-        <div class="w-slider-arrow-right">
-            <div class="w-icon-slider-right"></div>
-        </div>
-        <div class="w-slider-nav w-round"></div>
-    </div>
-    <div id="features" data-w-id="62e437ac-c9a3-3226-3092-d9ad5af8c296" class="main-section">
+    <div id="features" class="main-section">
         <div class="music-upload-form-block w-form">
             <form id="music-upload-form" name="music-upload-form"  method="post" class="music-upload-form" enctype="multipart/form-data" th:object="${musicDto}">
-            <label href="#" class="music-file-upload-button w-button" th:onclick="musicFileInput.click()">File Upload</label>
+            <label href="#" class="music-file-upload-button w-button" th:onclick="musicFileInput.click()">파일 업로드</label>
             <input type="file" name="musicUploadFile" id="musicFileInput" class="music-file-input" style="display: none;">
                 <div class="music-upload-div-block">
                     <div class="music-image-upload-div-block">
                     	<img id="musicImage" th:src="@{/static/images/profile_image.svg}" loading="lazy" alt="" class="music-upload-image" th:data-default-src="@{/static/images/profile_image.svg}" />
-                       	<label href="#" class="muisc-image-upload-button w-button" th:onclick="musicImageInput.click()">Upload Image</label>
+                       	<label href="#" class="muisc-image-upload-button w-button" th:onclick="musicImageInput.click()">이미지 업로드</label>
                         <input type="file" name="musicImgFile" id="musicImageInput" class="music-Image-input" style="display: none;" th:onchange="displaySelectedImage()">
                     </div>
 
                     <div class="music-upload-detail-div-block">
-                        <div class="music-upload-detail-text-block-ot">Original Title</div>
+                        <div class="music-upload-detail-text-block-ot">원본 타이틀</div>
                         <input type="text" class="music-upload-detail-text-field-ot w-input" maxlength="256" name="name"
                              placeholder="" id="originalTitle" th:field="*{title}"/>
                              
-                        <div class="music-upload-detail-text-block-os">Original Singer</div>
+                        <div class="music-upload-detail-text-block-os">원본 가수</div>
                         <input type="text" class="music-upload-detail-text-field-os w-input" maxlength="256" name="email"
                              placeholder="" id="email" th:field="*{oriSinger}" />
                              
-                        <div class="music-upload-detail-text-block-as">AI Singer</div>
+                        <div class="music-upload-detail-text-block-as">AI 가수</div>
                         <input type="text" class="music-upload-detail-text-field-as w-input" maxlength="256" name="email-2"
                              placeholder="" id="email-2" required="" th:field="*{aiSinger}"/>
                              
-                        <div class="music-upload-detail-text-field-genre">Genre</div>
+                        <div class="music-upload-detail-text-field-genre">장르</div>
                         <select th:field="*{genre}" id="field" name="field" class="music-upload-genre-select-field w-select">
                             <option value="HipHop">HipHop</option>
                             <option value="Ballad">Ballad</option>
@@ -196,7 +174,7 @@
                             <option value="Indie">Indie</option>
                             <option value="Acoustic">Acoustic</option>
                             <option value="Dance&amp;Electronic">Dance&amp;Electronic</option>
-                        </select><input type="submit" th:formaction="@{/private/musicUpload}" value="Save"
+                        </select><input type="submit" th:formaction="@{/private/musicUpload}" value="등록"
                             class="music-upload-submit-button w-button" />
                     </div>
                 </div>

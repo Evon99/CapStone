@@ -115,7 +115,7 @@
 </head>
 
 <div layout:fragment="content">
-    <div data-delay="4000" data-animation="slide" class="slider w-slider" data-autoplay="false" data-easing="ease"
+    <!-- <div data-delay="4000" data-animation="slide" class="slider w-slider" data-autoplay="false" data-easing="ease"
         data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3"
         data-duration="500" data-infinite="true">
         <div class="w-slider-mask">
@@ -136,7 +136,7 @@
             <div class="w-icon-slider-right"></div>
         </div>
         <div class="w-slider-nav w-round"></div>
-    </div>
+    </div> -->
     <div id="features" class="section">
         <div class="w-layout-blockcontainer container-2 w-container">
             <div class="div-block-2">
@@ -144,7 +144,7 @@
                     <form id="email-form" name="email-form"  
                         method="post" class="form" 
                         enctype="multipart/form-data" th:object="${memberDetailDto}">
-                        <h2 class="heading-2">Setting Profile</h2>
+                        <h2 class="heading-2">프로필 세팅</h2>
                         
                         <img th:if="${memberPicture != null}" id="profile" th:src="${memberPicture}" alt="Select picture" class="image-4" th:onclick="fileInput.click()" th:data-default-src="${memberPicture}" th:onerror="this.onerror=null; this.src=memberPicture;"/>
 						<img th:unless="${memberPicture != null}" id="profile" th:src="@{/static/images/profile_image.svg}" data-default-src="@{/static/images/profile_image.svg}"  alt="Select picture" class="image-4" th:onclick="fileInput.click()" />
@@ -158,10 +158,10 @@
 					    
 					    </script>
                             <label for="name"
-                            class="field-label">Enter your NickName</label><input type="text" th:field="*{nickname}" class="text-field w-input"
+                            class="field-label">닉네임을 설정해주세요</label><input type="text" th:field="*{nickname}" class="text-field w-input"
                             maxlength="256" name="nickName" data-name="Name" th:value="${memberName}" id="nickname" />
                             <div th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="text-block">InCorrect Data</div>
-                            <input type="submit" th:formaction="@{/private/profileSetting}" value="Submit" class="submit-button-2 w-button" />
+                            <input type="submit" th:formaction="@{/private/profileSetting}" value="등록" class="submit-button-2 w-button" />
                     </form>
                     <!-- <div class="w-form-done">
                         <div>Thank you! Your submission has been received!</div>

@@ -16,6 +16,7 @@ public interface MemberDetailRepository extends JpaRepository<MemberDetail, Long
 	
 	public MemberDetail findByMember_Id(Long Id);
 
+	List<MemberDetail> findByNicknameContaining(String keyword);
 	
 	@Query("SELECT md.member.id FROM MemberDetail md WHERE md.nickname = :nickname")
     Long findMemberIdByNickname(@Param("nickname") String nickname);

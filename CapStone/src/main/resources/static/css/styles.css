@@ -541,8 +541,7 @@ label {
   color: #999;
 }
 
-.w-input:focus, .w-select:focus {
-  border-color: #3898ec;
+.w-input:focus {
   outline: 0;
 }
 
@@ -1871,6 +1870,7 @@ textarea.w-input, textarea.w-select {
   display: inline-block;
   position: relative;
   cursor: pointer;
+  font-family: "EASTARJET-Medium";
 }
 
 .w-nav-link.w--current {
@@ -2250,12 +2250,16 @@ p {
   text-decoration: none;
 }
 
+.main-top-music-heading {
+	font-family: 'GongGothicMedium';
+}
 .main-top-music-subtitle {
   text-align: center;
   margin-bottom: 68px;
   font-size: 19px;
   font-weight: 300;
   line-height: 22px;
+  font-family: 'GongGothicMedium';
 }
 
 .main-top-music-row {
@@ -2325,6 +2329,7 @@ p {
   margin-bottom: 10px;
   margin-left: 0;
   text-decoration: none;
+  font-family: 'SUITE-Regular';
 }
 
 .main-top-music-show-like-text {
@@ -2434,9 +2439,13 @@ p {
   margin-top: 30px;
 }
 
+.genre-heading{
+	font-family: 'MICEGothic Bold';
+}
 .heading-2 {
   margin-top: 40px;
   margin-bottom: 60px;
+  font-family: "GmarketSansBold";
 }
 
 .div-block-2 {
@@ -2475,6 +2484,7 @@ p {
   display: flex;
   position: relative;
   right: auto;
+  font-family: "GmarketSansBold";
 }
 
 .submit-button-2 {
@@ -2483,6 +2493,7 @@ p {
   align-self: center;
   margin-top: 20px;
   margin-bottom: 30px;
+  font-family: "GmarketSansMedium";
 }
 
 .container-2 {
@@ -2722,6 +2733,7 @@ p {
 .music-upload-detail-text-block-ot {
   font-size: 15px;
   font-weight: 400;
+  font-family: "GmarketSansMedium";
 }
 
 .music-upload-submit-button {
@@ -2730,6 +2742,7 @@ p {
   align-self: flex-end;
   margin-top: 60px;
   margin-left: 0;
+  font-family: "GmarketSansBold";
 }
 
 .music-upload-detail-div-block {
@@ -2759,6 +2772,7 @@ p {
   border-radius: 7px;
   align-self: flex-end;
   margin-bottom: 40px;
+  font-family: "GmarketSansBold";
 }
 
 .music-upload-form-block {
@@ -2791,10 +2805,12 @@ p {
   position: relative;
   top: auto;
   bottom: auto;
+  font-family: "GmarketSansBold";
 }
 
 .music-upload-detail-text-block-os, .music-upload-detail-text-block-as, .music-upload-detail-text-field-genre {
   font-size: 15px;
+  font-family: "GmarketSansMedium";
 }
 
 .music-upload-detail-text-field-os {
@@ -2876,6 +2892,9 @@ p {
   margin-bottom: 20px;
   font-size: 38px;
   line-height: 44px;
+  font-family: 'LINESeedKR-Bd';
+  font-weight: 700;
+  width: 280px;
 }
 
 .introduce-main-subtitle {
@@ -2883,6 +2902,8 @@ p {
   font-size: 20px;
   font-weight: 300;
   line-height: 26px;
+  font-family: 'LINESeedKR-Bd';
+  font-weight: 400;
 }
 
 .introduce-sing-up-button {
@@ -3074,11 +3095,14 @@ p {
   color: #333;
   cursor: pointer;
   font-size: 12px;
+  font-family: 'MICEGothic Bold';
+  font-weight: 400;
 }
 
 .current-music-title {
   color: #333;
   font-size: 15px;
+  font-family: 'MICEGothic Bold';
 }
 
 .control-music-like {
@@ -3251,11 +3275,14 @@ p {
 .music-list-column-title {
   cursor: pointer;
   font-size: 14px;
+  font-family: 'MICEGothic Bold';
 }
 
 .music-list-column-uploader {
   cursor: pointer;
   font-size: 12px;
+  font-family: 'MICEGothic Bold';
+  font-weight: 400;
 }
 
 .music-list-play-button-div-block {
@@ -3288,7 +3315,7 @@ p {
   border-radius: 8px;
   margin-right: 10px;
   padding: 5px 10px;
-  font-family: Exo, sans-serif;
+  font-family: "EASTARJET-Medium";
 }
 
 .search-music-row {
@@ -3319,6 +3346,7 @@ p {
 .search-keyword-text-block {
   margin-bottom: 25px;
   font-size: 26px;
+  font-family: 'SUITE-Regular';
 }
 
 .music-search-submit-button {
@@ -3364,6 +3392,7 @@ input[type="range"] {
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-bottom: 10px;
 }
 
 .page-follow-btn {

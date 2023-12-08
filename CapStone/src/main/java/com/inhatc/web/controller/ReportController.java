@@ -55,4 +55,9 @@ public class ReportController {
 		return "reportList";
 	}
 	
+	@PostMapping("/deleteMusic")
+	@ResponseBody
+	public void deleteMusic(@RequestParam("musicId") long musicId) {
+		reportService.deleteMusic(musicId);
+	}
 }

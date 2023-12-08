@@ -284,7 +284,7 @@
                 <div th:each="follower : ${followerList}"  class="follow-list">
                 	<img th:src="${follower.fromMemberImgUrl}"
                         loading="lazy" alt="" class="follow-img" />
-                    <div class="follow-nickname" th:text="${follower.fromMemberNickname}">NickName</div>
+                    <div class="follow-nickname" th:text="${follower.fromMemberNickname}" th:onclick="memberPageLoad(/*[[${follower.fromMemberNickname}]]*/)">NickName</div>
 					     <!-- 초기 상태에 따라 텍스트와 스타일을 설정 -->
 					     <span id="ModalfollowButton" class="follow-btn"
 				               th:unless="${loginNickname == follower.fromMemberNickname}"    
@@ -313,7 +313,7 @@
                 <div th:each="follower : ${followingList}"  class="follow-list">
                 	<img th:src="${follower.toMemberImgUrl}"
                         loading="lazy" alt="" class="follow-img" />
-                    <div class="follow-nickname" th:text="${follower.toMemberNickname}">NickName</div>
+                    <div class="follow-nickname" th:text="${follower.toMemberNickname}" th:onclick="memberPageLoad(/*[[${follower.toMemberNickname}]]*/)">NickName</div>
                     <span id="ModalfollowingButton" class="follow-btn"
 				               th:unless="${loginNickname == follower.toMemberNickname}"    
 				               th:attr="data-nickname=${follower.toMemberNickname}, data-login-nickname=${loginNickname}" 
@@ -330,7 +330,8 @@
         <div class="w-layout-blockcontainer profile-container w-container">
             <div class="div-userprofile">
                 <div class="w-layout-blockcontainer container-3 w-container">
-                	<img th:src="${pictureUrl}" id="profile" th:onclick="fileInput.click()" th:data-default-src="${pictureUrl}" th:onerror="this.onerror=null; this.src=${pictureUrl};" loading="lazy" alt="" class="mypage-image" />
+                	<img th:if="${loginMemberId eq memberId}" th:src="${pictureUrl}" id="profile" th:onclick="fileInput.click()" th:data-default-src="${pictureUrl}" th:onerror="this.onerror=null; this.src=${pictureUrl};" loading="lazy" alt="" class="mypage-image" />
+                	<img th:unless="${loginMemberId eq memberId}" th:src="${pictureUrl}" id="profile" th:onerror="this.onerror=null; this.src=${pictureUrl};" loading="lazy" alt="" class="mypage-image" />
                     
                     <input type="file" name="memberImgFile" id="fileInput" class="custom-file-input" style="display: none;" th:onchange="displaySelectedImage()">
                     <div class="username-text-block" id="memberName" th:text="${nickname}">UserName</div>

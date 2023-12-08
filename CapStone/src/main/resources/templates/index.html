@@ -158,11 +158,9 @@
         <div class="w-container">
             <div class="introduce-columns w-row">
                 <div class="introduce-column-1 w-col w-col-6">
-                    <h1 class="introduce-main-heading">Grow Your Business 10x with Metric</h1>
-                    <p class="introduce-main-subtitle">The Metric Dashboard brings all of your business insights under
-                        one roof. Revenue metrics, social, integrations - everything.</p><a href="#"
-                        class="introduce-sing-up-button">Sign Up</a><a href="#"
-                        class="introduce-more-button hollow">Learn More</a>
+                    <h1 class="introduce-main-heading">다양한 목소리를 경험해보세요</h1>
+                    <p class="introduce-main-subtitle">각 노래마다 자신이 좋아하는 노래를 다른 목소리로 들어보거나 좋아하는 가수의 다른 노래 커버를 들어 볼 수 있습니다.</p><a href="#"
+                         id="openModalBtn3" class="introduce-sing-up-button">Sign Up</a>
                 </div>
                 <div class="introduce-column-2 w-col w-col-6"></div>
             </div>
@@ -177,8 +175,8 @@
                 <input type="submit" value="" class="music-search-submit-button w-button" onclick="searchLoad()"/></form>
             </div>
             <div class="w-layout-blockcontainer main-top-music-container w-container">
-                <h2 class="main-top-music-heading">Current Top 10</h2>
-                <div class="main-top-music-subtitle">The most recommended songs on TrendAI in real time</div>
+                <h2 class="main-top-music-heading">추천 수 Top 10</h2>
+                <div class="main-top-music-subtitle">TrendAI에서 실시간 추천 수가 가장 높은 노래 순위입니다.</div>
                 
                 <div th:each="music : ${topLikeMusics}">
 	                <div  class="main-top-music-row w-row" >
@@ -219,8 +217,8 @@
                 
             </div>
             <div class="w-layout-blockcontainer main-top-music-container w-container">
-                <h2 class="main-top-music-heading">Recent Upload Music</h2>
-                <div class="main-top-music-subtitle">Show recently uploaded music</div>
+                <h2 class="main-top-music-heading">최신 음악</h2>
+                <div class="main-top-music-subtitle">최근에 새롭게 올라온 음악입니다.</div>
                 
                 
                 <div th:each="music : ${recentMusics}">
@@ -258,7 +256,7 @@
                 </div>
                 
             </div>
-            <h2 class="genre-heading">By Genre</h2>
+            <h2 class="genre-heading">장르</h2>
             <div class="main-genre-first-column w-row">
                 <div class="main-genre-column-1 w-col w-col-2">
                 	<img
