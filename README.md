@@ -24,4 +24,4 @@
 
 
 ## 주요기능 
-![SignUp](https://github.com/Evon99/CapStone/assets/116507716/d3e62b69-9aa7-4255-ba72-54ea730ac8af)
+![SignUp](https://github.com/Evon99/CapStone/assets/116507716/29161c81-9366-41e1-abaa-619a4435b229)
