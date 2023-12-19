@@ -1,7 +1,9 @@
 package com.inhatc.web.entity;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -67,6 +69,9 @@ public class Member extends BaseTimeEntity{
     
     @OneToMany(mappedBy = "member")
     private Set<MemberMusicStorage> memberMusicStorage;
+    
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<RequestComment> requestComment;
     
     @Builder
     public Member(String name, String loginId, String email, String provider, String providerId, Role role, String pictureUrl) {

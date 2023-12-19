@@ -48,20 +48,6 @@
 	    }
 
 		function initializeLikeMusic(likedMusicIds){
-			/*$('.main-top-music-function-like').click(function() {
-		            var musicId = $(this).data('music-id');
-		            
-		            console.log("musicId:", musicId);
-					// 이미 추천한 경우 이미지 변경하지 않음
-		            if (likedMusicIds.includes(musicId)) {
-		                alert('이미 추천한 음악입니다.');
-		                return;
-		            }
-
-		            $(this).attr('src', '/static/images/like_on.png');
-		            // likedMusicIds에 추가
-		            likedMusicIds.push(musicId);
-		        });*/
 
 		        likedMusicIds.forEach(function(musicId) {
 		            $('img[data-like-music-id="' + musicId + '"]').attr('src', '/static/images/like_on.png');
@@ -70,54 +56,6 @@
 		}
 		
 		function initializeAddMusic(addMusicIds){
-			
-			/*$('.main-top-music-function-addsong').click(function() {
-		            var musicId = $(this).data('music-add-id');
-		            
-		            console.log("musicId:", musicId);
-					// 보관함에 추가되있는 경우 삭제
-		            if (addMusicIds.includes(musicId)) {
-			
-						$.ajax({
-						        type: 'POST',
-						        url: '/addMusicCancel/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
-						        success: function(response) {
-						            // 서버로부터 받은 데이터를 변수에 할당
-									$(this).attr('src', '/static/images/add_song.png');
-		                			alert('보관함에서 삭제되었습니다.');
-						            
-						        },
-						        error: function(error, xhr) {
-						            if (xhr.status === 401) {
-							            alert('로그인 후 이용해주십시오');
-							        }
-						        }
-						    });
-		                return;
-
-		            }
-
-						$.ajax({
-						        type: 'POST',
-						        url: '/addMusic/' + musicId, // 서버에서 데이터를 얻기 위한 적절한 엔드포인트 사용
-						        success: function(response) {
-						            // 서버로부터 받은 데이터를 변수에 할당
-									$(this).attr('src', '/static/images/addSong_on.png');
-		                			alert('보관함에서 추가되었습니다.');
-						            
-						        },
-						        error: function(error, xhr) {
-						            if (xhr.status === 401) {
-							            alert('로그인 후 이용해주십시오');
-							        }
-						        }
-						    });
-		
-
-		            $(this).attr('src', '/static/images/addSong_on.png');
-		            // likedMusicIds에 추가
-		            addMusicIds.push(musicId);
-		        });*/
 
 		        addMusicIds.forEach(function(musicId) {
 		            $('img[data-add-music-id="' + musicId + '"]').attr('src', '/static/images/addSong_on.png');
@@ -434,14 +372,12 @@
 		                            url: '/getLikedMusicIds',
 		                            success: function(response) {
 		                                // 서버로부터 받은 데이터를 변수에 할당
-		                                console.log("responseLike:", response);
-		                                initializeLikeMusic(response);
-		
 		                                console.log("responseLike:", response.likedMusicIds);
 		                                initializeLikeMusic(response.likedMusicIds);
 		
 		                                console.log("responseAdd:", response.addMusicIds);
 		                                initializeAddMusic(response.addMusicIds);
+
 		                            },
 		                            error: function(error) {
 		                                console.error(error);

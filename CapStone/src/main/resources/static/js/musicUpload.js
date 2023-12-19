@@ -13,28 +13,7 @@
 			     	}
 
                     $("#originalTitle").val(fileName);
-			        // 서버에 이미지 파일 여부 확인 요청
-			       /* var formData = new FormData();
-			        formData.append('file', this.files[0]);
-
-			        $.ajax({
-			            url: '/checkMusic',
-			            type: 'POST',
-			            data: formData,
-			            processData: false,
-			            contentType: false,
-			            success: function (response) {
-			                if (response.isAudio) {
-			                    var fileName = response.musicTitle;
-			                	$("#originalTitle").val(fileName);
-			                } else {
-			                    alert("음악 파일만 등록이 가능합니다.");
-			                }
-			            },
-			            error: function () {
-			                alert("server error");
-			            }
-			        });*/
+		
 			    });
 			}
 		  

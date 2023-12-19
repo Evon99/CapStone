@@ -21,14 +21,6 @@
 	let musicIndex = JSON.parse(localStorage.getItem('musicIndex')) || 1; // 현재 재생되고 있는 음악 구분
 	var showFooterExecuted = false;
 	let lastMusic = []; // 사용자가 마지막으로 재생한 음악 
-	
-	/*var globalId;
-	var globalMusicUrl;
-	var globalImgUrl;
-	var globalAiSinger;
-	var globalTitle;
-	var globalOriSinger;
-	var globalNickname;*/
 
 	if(document.getElementById('likedMusicIds').value) {
    		var likedMusicIdsStr = document.getElementById('likedMusicIds').value;
@@ -81,14 +73,6 @@
 
 	// 음악 재생 기능
 	function playMusic(id, musicUrl, imgUrl, aiSinger, title, oriSinger, nickname) {
-	
-		/*globalId = id;
-	    globalMusicUrl = musicUrl;
-	    globalImgUrl = imgUrl;
-	    globalAiSinger = aiSinger;
-	    globalTitle = title;
-	    globalOriSinger = oriSinger;
-	    globalNickname = nickname;*/
 
         musicAudio.src = musicUrl;  // 음악의 URL을 설정
         musicAudio.play();  // 음악을 재생
@@ -164,10 +148,12 @@
 // 로컬 스토리지에 allMusic 저장
         localStorage.setItem('allMusic', JSON.stringify(allMusic));
 
+		musicIndex = allMusic.length - 1;
 		// 음악 리스트 배열 최신화
 		localStorage.setItem('musicIndex', allMusic.length);
 		
 		console.log(allMusic);
+		console.log("음악 재생 시 musicIndex:", allMusic.length);
 		displayMusicList();
 		}
     }
@@ -475,9 +461,11 @@
 	        return;
 	    }
 	
+		console.log("musicIndex:", musicIndex);
 	    // 마지막 음악 정보 가져오기
-	    var lastMusic = allMusic[musicIndex - 1];
+	    var lastMusic = allMusic[allMusic.length - 1];
 	
+        console.log("listMusic:", lastMusic);
 	    // music-list 엘리먼트 복제
 	    var newMusicColumn = musicList.cloneNode(true);
 	
@@ -622,9 +610,9 @@
     });
 
 	musicPrevBtn.addEventListener('click', () => {
-		console.log("musicIndex:", musicIndex);
 		if (musicIndex > 0) {
 			musicIndex --;
+			console.log("이전 음악 재생 musicIndex:", musicIndex);
 			var prevMusic = allMusic[musicIndex];
 			musicAudio.src = prevMusic.musicUrl;
 			musicAudio.play();
@@ -637,10 +625,10 @@
 	});
 	
 	musicNextBtn.addEventListener('click', () => {
-		console.log("musicIndex:", musicIndex);
-		console.log("length:", allMusic.length);
+		//console.log("length:", allMusic.length);
 		if (musicIndex <= allMusic.length - 1) {
 			musicIndex ++;
+			console.log("다음 음악 재생 musicIndex:", musicIndex);
 			var nextMusic = allMusic[musicIndex];
 			musicAudio.src = nextMusic.musicUrl;
 			musicAudio.play();
